@@ -1,6 +1,7 @@
 .mat-toolbar {
   background-color: var(--primary-color); /* Vert moyen */
   color: white;
+  height: 8vh;
 }
 
 .mat-badge-content {

@@ -1,18 +1,29 @@
-<div class="produits-container">
-    @for (produit of produitList; track $index) {
-        <mat-card class="produit-card">
-            <img mat-card-image [src]="produit.imageUrl" [alt]="produit.nom">
+<div class="produits-main-container">
+    <div class="produits-container">
+        @for (produit of produitList; track $index) {
+            <mat-card class="produit-card">
+                <img mat-card-image [src]="produit.imageUrl" [alt]="produit.nom">
 
-            <mat-card-content>
-                <h2>{{ produit.nom }}</h2>
-                <p>{{ produit.description }}</p>
-                <p class="prix">{{ produit.prix | currency:'EUR' }}</p>
-            </mat-card-content>
+                <mat-card-content>
+                    <h2>{{ produit.nom }}</h2>
+                    <p>{{ produit.description }}</p>
+                    <p class="prix">{{ produit.prix | currency:'EUR' }}</p>
+                </mat-card-content>
 
-            <mat-card-actions>
-                <button mat-raised-button class="boutton" color="primary">Ajouter au panier</button>
-            </mat-card-actions>
-        </mat-card>
+                <mat-card-actions>
+                    <button mat-raised-button class="boutton" color="primary">Ajouter au panier</button>
+                </mat-card-actions>
+            </mat-card>
+        }
+    
+    </div>
+
+    @if (panierService.showPanier$ | async) {
+        <div class="panier-container">
+            <app-panier></app-panier>
+        </div>
     }
-  
 </div>
+
+
+

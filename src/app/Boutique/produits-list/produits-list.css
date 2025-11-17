@@ -1,14 +1,22 @@
+.produits-main-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .produits-container {
   display: grid;
+  flex-basis: 80%;
   gap: 16px;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   padding: 16px;
-  
+  height: 88.5vh;
+  overflow-y:auto;
 }
 
 .produit-card {
     display: flex;
     flex-direction: column;
+    height: 320px;
     box-shadow:-1px 2px 5px 1px #504f4f85;
 }
 
@@ -38,4 +46,14 @@
 
 .boutton:hover {
   background-color: var(--accent-color); /* un peu plus foncé au survol */
+}
+
+/* class panier container */
+.panier-container {
+  flex-basis: 20%;
+  border-left: 2px solid #ccc;
+  padding: 16px;
+  height: 88.5vh;
+  overflow-y: auto;
+  background-color: #f9f9f9;
 }

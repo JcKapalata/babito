@@ -1,0 +1,65 @@
+.panier-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 16px;
+}
+
+.titre-panier {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.panier-item {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  background: #f3f3f3;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.item-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.quantite-control button {
+  width: 32px;
+  height: 32px;
+}
+
+.quantite-control span {
+  padding: 0 10px;
+  font-weight: bold;
+}
+
+.supprimer {
+  background: red;
+  color: white;
+  border: none;
+  padding: 6px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.panier-total {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.btn-valider {
+  padding: 10px 20px;
+  background: #2d8fdd;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}

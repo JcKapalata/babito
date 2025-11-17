@@ -1,0 +1,30 @@
+.mat-toolbar {
+  background-color: var(--primary-color); /* Vert moyen */
+  color: white;
+}
+
+.mat-badge-content {
+  background-color: var(--warn-color); /* Corail moyen */
+  color: white;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.boutton {
+  background: var(--accent-color);  /* Bleu moyen */
+  color: white;               /* texte */
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  margin: 5px;
+}

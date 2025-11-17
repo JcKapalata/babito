@@ -1,0 +1,18 @@
+<mat-toolbar color="primary" class="navbar">
+
+  <!-- Logo -->
+  <span class="logo" routerLink="/">BaByTo</span>
+
+  <!-- Espacement pour pousser le menu à droite -->
+  <span class="spacer"></span>
+
+  <!-- Menu -->
+  <button mat-button routerLink="/" class="boutton">Accueil</button>
+  <button mat-button routerLink="/shop" class="boutton">Boutique</button>
+
+  <!-- Icône panier avec compteur -->
+  <button mat-icon-button routerLink="/cart" matBadge="3" matBadgeColor="accent">
+    <mat-icon class="btn-icon">shopping_cart</mat-icon>
+  </button>
+
+</mat-toolbar>

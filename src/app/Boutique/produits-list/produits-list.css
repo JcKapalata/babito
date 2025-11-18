@@ -55,7 +55,7 @@
   left: 0;
   width: 100vw;
   height: 92vh;
-  background: rgba(0, 0, 0, 0.4); /* fond assombri */
+  background: rgba(0, 0, 0, 0.7); /* fond assombri */
   display: flex;
   justify-content: flex-end;
   z-index: 999;

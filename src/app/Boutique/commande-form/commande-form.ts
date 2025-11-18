@@ -80,10 +80,12 @@ export class CommandeFormComponent implements OnInit {
   }
 
   ajouterAuPanier() {
-    if (this.produit) {
-      const itemCommande = new CommandeItem(this.produit, this.quantite);
+    if (this.produit && this.produitForm.valid) {
+      // Récupère la valeur du FormControl "quantite"
+      const quantite = this.produitForm.get('quantite')?.value;
+
+      const itemCommande = new CommandeItem(this.produit, quantite);
       this.panierService.ajouterProduit(itemCommande);
-      alert(`${this.produit.nom} ajouté au panier !`);
     }
   }
 

@@ -1,11 +1,11 @@
 .produits-main-container {
-  display: flex;
-  flex-direction: row;
+  position: relative;
+  /* display: flex;
+  flex-direction: row; */
 }
 
 .produits-container {
   display: grid;
-  flex-basis: 80%;
   gap: 16px;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   padding: 16px;
@@ -50,10 +50,13 @@
 
 /* class panier container */
 .panier-container {
-  flex-basis: 20%;
-  border-left: 2px solid #ccc;
-  padding: 16px;
-  height: 88.5vh;
-  overflow-y: auto;
-  background-color: #f9f9f9;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 92vh;
+  background: rgba(0, 0, 0, 0.4); /* fond assombri */
+  display: flex;
+  justify-content: flex-end;
+  z-index: 999;
 }

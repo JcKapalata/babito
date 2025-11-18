@@ -19,4 +19,14 @@ export class BoutiqueService {
       })
     )
   }
+
+  getProduitById(produitId: number): Observable<Produit | undefined>{
+    return this.http.get<Produit>(`api/produits/${produitId}`).pipe(
+      tap( (produit) => console.log(produit)),
+      catchError( error =>{
+        console.log(error)
+        return of(undefined)
+      })
+    )
+  }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Produit } from '../../Models/produits';
-import { Route } from '@angular/router';
+import { Route, Router } from '@angular/router';
 import { BoutiqueService } from '../boutique-service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,7 +21,8 @@ export class ProduitsList implements OnInit{
 
   constructor(
     private boutiqueService: BoutiqueService,
-    public panierService: PanierService
+    public panierService: PanierService,
+    private router: Router
   ){}
 
   ngOnInit() {
@@ -31,6 +32,10 @@ export class ProduitsList implements OnInit{
         console.table(this.produitList)
       }
     )
+  }
+
+  goToCommande(produit: Produit) {
+    this.router.navigate(['boutique/commande', produit.id]);
   }
 
 }

@@ -4,12 +4,14 @@ import { Produit } from '../../Models/produits';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BoutiqueService } from '../boutique-service';
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
   selector: 'app-commande-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, MatIconModule, MatButtonModule],
   templateUrl: './commande-form.html',
   styleUrls: ['./commande-form.css'],
   providers: [BoutiqueService]
@@ -46,7 +48,6 @@ export class CommandeFormComponent implements OnInit {
         if (prod) {
           this.produit = prod;
           this.updateTotal(this.produitForm.value.quantite);
-          // this.remplirFormulaire(prod);
         }
       });
     }
@@ -67,19 +68,14 @@ export class CommandeFormComponent implements OnInit {
     return null;
   }
 
-  // private remplirFormulaire(p: Produit) {
-  //   this.produitForm.patchValue({
-  //     nom: p.nom,
-  //     description: p.description,
-  //     prix: p.prix,
-  //     imageUrl: p.imageUrl
-  //   });
-  // }
-
   onSubmit() {
     if (this.produitForm.valid) {
       this.router.navigate(['boutique/produits-list']);
     }
+  }
+
+  goBack(){
+    this.router.navigate(['boutique/produits-list']);
   }
 }
 

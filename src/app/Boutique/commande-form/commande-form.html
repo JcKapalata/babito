@@ -1,9 +1,16 @@
 <form [formGroup]="produitForm" (ngSubmit)="onSubmit()" class="form-container">
 
   <div class="form-header">
+    <div class="back-button">
+      <button mat-icon-button color="warn" (click)="goBack()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
     <div>
       <h2>Formulaire pour votre commande</h2>
     </div>
+
     <div>
       <img [src]="produit?.imageUrl" alt="">
     </div>

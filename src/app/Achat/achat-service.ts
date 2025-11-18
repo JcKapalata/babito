@@ -1,17 +1,25 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CommandeItem } from '../Models/commande';
+import { BoutiqueService } from '../Boutique/boutique-service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class PanierService {
+export class AchatService {
 
-  private showPanierSubject = new BehaviorSubject<boolean>(false);
-  showPanier$ = this.showPanierSubject.asObservable();
+  // private showPanierSubject = new BehaviorSubject<boolean>(false);
+  // showPanier$ = this.showPanierSubject.asObservable();
 
   private itemsSubject = new BehaviorSubject<CommandeItem[]>([]);
   items$ = this.itemsSubject.asObservable();
+
+  constructor(private boutiqueService: BoutiqueService) { }
+
+  //go To commande
+  getProduitById(produitId: number) {
+    return this.boutiqueService.getProduitById(produitId);
+  }
 
   // Ajouter un produit
   ajouterProduit(item: CommandeItem) {
@@ -33,9 +41,5 @@ export class PanierService {
 
   viderPanier() {
     this.itemsSubject.next([]);
-  }
-
-  togglePanier() {
-    this.showPanierSubject.next(!this.showPanierSubject.value);   
   }
 }

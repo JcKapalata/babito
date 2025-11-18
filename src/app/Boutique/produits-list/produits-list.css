@@ -48,15 +48,3 @@
   background-color: var(--accent-color); /* un peu plus foncé au survol */
 }
 
-/* class panier container */
-.panier-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 92vh;
-  background: rgba(0, 0, 0, 0.7); /* fond assombri */
-  display: flex;
-  justify-content: flex-end;
-  z-index: 999;
-}

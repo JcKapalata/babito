@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Produit } from '../Models/produits';
 import { catchError, Observable, of, tap } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class BoutiqueService {
   
   constructor(

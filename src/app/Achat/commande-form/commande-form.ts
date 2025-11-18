@@ -3,10 +3,9 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, ValidationErro
 import { Produit } from '../../Models/produits';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { BoutiqueService } from '../boutique-service';
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from '@angular/material/button';
-import { PanierService } from '../panier-service';
+import { AchatService} from '../achat-service';
 import { CommandeItem } from '../../Models/commande';
 
 
@@ -16,7 +15,6 @@ import { CommandeItem } from '../../Models/commande';
   imports: [ReactiveFormsModule, CommonModule, MatIconModule, MatButtonModule],
   templateUrl: './commande-form.html',
   styleUrls: ['./commande-form.css'],
-  providers: [BoutiqueService]
 })
 export class CommandeFormComponent implements OnInit {
 
@@ -28,9 +26,8 @@ export class CommandeFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private boutiqueService: BoutiqueService,
     private router: Router,
-    private panierService: PanierService
+    private achatService: AchatService
   ) {
     this.produitForm = this.fb.group({
       // nom: ['', Validators.required],
@@ -48,7 +45,7 @@ export class CommandeFormComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     if (id) {
-      this.boutiqueService.getProduitById(id).subscribe(prod => {
+      this.achatService.getProduitById(id).subscribe(prod => {
         if (prod) {
           this.produit = prod;
           this.updateTotal(this.produitForm.value.quantite);
@@ -85,7 +82,7 @@ export class CommandeFormComponent implements OnInit {
       const quantite = this.produitForm.get('quantite')?.value;
 
       const itemCommande = new CommandeItem(this.produit, quantite);
-      this.panierService.ajouterProduit(itemCommande);
+      this.achatService.ajouterProduit(itemCommande);
     }
   }
 

@@ -1,0 +1,52 @@
+
+<div class="panier-container">
+    
+    <h2>Mon Panier</h2>
+
+    <div class="back-button">
+      <button mat-icon-button color="warn" (click)="goBack()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    @if (items.length > 0) {
+        <div class="panier-liste">
+            @for (item of items; track $index) {
+                <div class="panier-item">
+        
+                    <!-- Image du produit -->
+                    <img [src]="item.imageUrl" alt="{{item.nom}}" class="item-image">
+            
+                    <!-- Infos produit -->
+                    <div class="item-info">
+                        <h3>{{ item.nom }}</h3>
+                        <p>Prix unitaire : {{ item.prix | currency:'USD' }}</p>
+                
+                        <div class="quantite-control">
+                            <button (click)="decrement(item)">-</button>
+                            <span>{{ item.quantity }}</span>
+                            <button (click)="increment(item)">+</button>
+                    </div>
+                    </div>
+            
+                    <!-- Total et suppression -->
+                    <div class="item-total">
+                        <p>Total : {{ item.getTotal() | currency:'USD' }}</p>
+                        <button class="supprimer" (click)="supprimer(item)">Supprimer</button>
+                    </div>
+                </div>
+            }
+        </div>
+    
+        <!-- Total général -->
+        <div class="panier-total">
+            <h3>Total général : {{ getTotal() | currency:'USD' }}</h3>
+            <button class="btn-valider">Valider la commande</button>
+        </div>
+    } @else {
+        <div class="panier-vide">
+            <p>Votre panier est vide.</p>
+        </div>
+    }
+</div>
+

@@ -4,7 +4,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterModule } from '@angular/router';
-import { PanierService } from '../Boutique/panier-service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,8 +19,7 @@ import { PanierService } from '../Boutique/panier-service';
 export class Navbar {
 
   constructor(
-    private route: Router,
-    private panierService: PanierService
+    private route: Router
   ){}
 
   goToProduitList(){
@@ -33,6 +31,6 @@ export class Navbar {
   }
 
   goToPannier(){
-    this.panierService.togglePanier(); //togglePanier
+    this.route.navigate(['achat/panier']);
   }
 }

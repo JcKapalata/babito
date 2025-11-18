@@ -37,12 +37,38 @@
                 </div>
             }
         </div>
+
+        <!-- Livraison address -->
+        <div>
+            <h2>Adresse de livraison</h2>
+            <form #livraisonForm="ngForm" >
+                <div class="address-form">
+                    <label for="address">Lieu de rencontre:</label>
+                    <textarea
+                        id="address"
+                        name="address"
+                        ngModel
+                        required
+                        placeholder="123 Rue Exemple"
+                        rows="3"
+                        cols="50"
+                    ></textarea>
+                </div>
+            </form>
+        </div>
     
         <!-- Total général -->
         <div class="panier-total">
             <h3>Total général : {{ getTotal() | currency:'USD' }}</h3>
-            <button class="btn-valider">Valider la commande</button>
+            <button (click)="togglePaiement()" class="btn-valider">Paiement</button>
         </div>
+
+        <!-- Paiement -->
+        @if (showPaiement) {
+            <div>
+                <app-paiement></app-paiement>
+            </div>
+        }
     } @else {
         <div class="panier-vide">
             <p>Votre panier est vide.</p>

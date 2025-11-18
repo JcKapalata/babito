@@ -68,6 +68,43 @@
   border-radius: 4px;
 }
 
+/* adresse */
+/* Conteneur du champ */
+.address-form {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label */
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Textarea */
+textarea {
+  padding: 10px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;       /* Empêche le redimensionnement */
+  width: 100%;        /* Occupe toute la largeur du parent */
+  box-sizing: border-box; /* Inclut le padding dans la largeur */
+  min-height: 50px;   /* Hauteur minimale */
+  outline: none;
+  transition: border 0.2s;
+}
+
+/* Focus */
+textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.3);
+}
+
 .panier-total {
   margin-top: 20px;
   text-align: right;
@@ -75,11 +112,17 @@
 
 .btn-valider {
   padding: 10px 20px;
-  background: #2d8fdd;
+  background: var(--primary-color);
   border: none;
   color: white;
   border-radius: 6px;
   cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+.btn-valider:hover{
+  background: var(--accent-color);
 }
 
 .panier-vide{

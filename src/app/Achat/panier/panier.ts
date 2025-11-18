@@ -4,16 +4,19 @@ import { CommonModule, CurrencyPipe, Location } from '@angular/common';
 import { AchatService} from '../achat-service';
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { Paiement } from "../paiement/paiement";
 
 
 @Component({
   selector: 'app-panier',
-  imports: [CommonModule, CurrencyPipe, MatIconModule, MatButtonModule],
+  imports: [CommonModule, CurrencyPipe, MatIconModule, MatButtonModule, FormsModule, Paiement],
   templateUrl: './panier.html',
   styleUrls: ['./panier.css']
 })
 export class Panier implements OnInit {
   items: CommandeItem[] = [];
+  showPaiement: boolean = false
 
   constructor(
     private achatService: AchatService,
@@ -49,5 +52,10 @@ export class Panier implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  // afficher paiement
+  togglePaiement() {
+    this.showPaiement = !this.showPaiement;
   }
 }

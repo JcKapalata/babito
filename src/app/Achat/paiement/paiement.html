@@ -1,0 +1,63 @@
+<div class="payment-container">
+  <h2>Paiement à domicile</h2>
+
+  <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+
+    <!-- Mode de paiement -->
+    <div class="payment-method">
+      <label>
+        <input type="radio" formControlName="method" value="visa">
+        Carte Visa
+      </label>
+      <label>
+        <input type="radio" formControlName="method" value="mobile">
+        Mobile Money
+      </label>
+
+      @if (paymentForm.get('method')?.touched && paymentForm.get('method')?.invalid) {
+        <span class="error">Veuillez choisir un mode de paiement.</span>
+      }
+    </div>
+
+    <!-- Paiement Visa -->
+     @if (paymentForm.get('method')?.value === 'visa') {
+        <div>
+          <input type="text" formControlName="cardNumber" placeholder="Numéro de carte">
+          @if (paymentForm.get('cardNumber')?.touched && paymentForm.get('cardNumber')?.invalid) {
+            <span class="error">Numéro de carte invalide.</span>
+          }     
+          
+          <input type="text" formControlName="cardName" placeholder="Nom sur la carte">
+          @if (paymentForm.get('cardName')?.touched && paymentForm.get('cardName')?.invalid) {
+            <span class="error">Nom requis.</span>
+          }
+
+          <div class="expiry-cvv">
+            <input type="text" formControlName="expiry" placeholder="MM/AA">
+            <input type="text" formControlName="cvv" placeholder="CVV">
+          </div>
+
+          @if ((paymentForm.get('expiry')?.touched && paymentForm.get('expiry')?.invalid) ||
+              (paymentForm.get('cvv')?.touched && paymentForm.get('cvv')?.invalid)) {
+                <span class="error">Expiration ou CVV invalide.</span>
+          }
+        </div>
+     }
+
+    <!-- Paiement Mobile Money -->
+    @if (paymentForm.get('method')?.value === 'mobile') {
+      <input type="text" formControlName="mobileNumber" placeholder="Numéro Mobile">
+      @if (paymentForm.get('mobileNumber')?.touched && paymentForm.get('mobileNumber')?.invalid) {
+        <span class="error">Numéro Mobile requis.</span>
+      }
+
+      <input type="text" formControlName="operator" placeholder="Opérateur (MTN, Orange...)">
+      @if (paymentForm.get('operator')?.touched && paymentForm.get('operator')?.invalid) {
+        <span class="error">pérateur requis.</span>
+      }
+    }
+
+    <button type="submit" [disabled]="paymentForm.invalid">Payer</button>
+
+  </form>
+</div>

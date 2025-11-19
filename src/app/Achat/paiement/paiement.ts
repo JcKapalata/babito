@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-paiement',
-  imports: [ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './paiement.html',
   styleUrls: ['./paiement.css']
 })
@@ -35,7 +36,7 @@ export class Paiement implements OnInit {
         this.paymentForm.get('mobileNumber')?.clearValidators();
         this.paymentForm.get('operator')?.clearValidators();
       } else if (method === 'mobile') {
-        this.paymentForm.get('mobileNumber')?.setValidators([Validators.required, Validators.minLength(8)]);
+        this.paymentForm.get('mobileNumber')?.setValidators([Validators.required, Validators.minLength(10)]);
         this.paymentForm.get('operator')?.setValidators([Validators.required]);
         // Désactive Visa
         this.paymentForm.get('cardNumber')?.clearValidators();
@@ -56,7 +57,6 @@ export class Paiement implements OnInit {
   onSubmit() {
     if (this.paymentForm.valid) {
       console.log('Paiement valide :', this.paymentForm.value);
-      alert('Paiement effectué !');
     } else {
       this.paymentForm.markAllAsTouched();
     }

@@ -12,6 +12,10 @@ export class Paiement implements OnInit {
 
   paymentForm!: FormGroup;
   
+  // propriete a place dans le formulaire
+    operatorSelect: string[] = ['Airtel', 'Vodacom', 'Orange'];
+
+
   // propriete pour visa
   method: string;
   cardNumber: string;
@@ -69,6 +73,7 @@ export class Paiement implements OnInit {
     if (this.paymentForm.valid) {
       const paymentMethod = this.paymentForm.get('method')?.value
 
+      // Si la transaction ce faite avec visa
       if (paymentMethod === 'visa') {
         this.cardName = this.paymentForm.get('cardName')?.value;
         this.cardNumber = this.paymentForm.get('cardNumber')?.value;
@@ -76,11 +81,11 @@ export class Paiement implements OnInit {
         this.expiry = this.paymentForm.get('expiry')?.value;
       }
 
+      // si la transaction ce faite par mobile money
       if(paymentMethod === 'mobile' ){
         this.operator = this.paymentForm.get('operator')?.value;
         this.mobileNumber = this.paymentForm.get('mobileNumber')?.value
         console.log(`le numero qui a payer est ${this.mobileNumber} sur l'operateur ${this.operator}`);
-        
       }
     } else {
       this.paymentForm.markAllAsTouched();

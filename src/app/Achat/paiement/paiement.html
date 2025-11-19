@@ -48,9 +48,9 @@
     @if (paymentForm.get('method')?.value === 'mobile') {
       <select formControlName="operator">
         <option value="">Sélectionnez votre opérateur</option>
-        <option value="MTN">MTN</option>
-        <option value="Orange">Orange</option>
-        <option value="Airtel">Airtel</option>
+        @for (operatorSelectItem of operatorSelect; track $index) {
+          <option [value]="operatorSelectItem">{{operatorSelectItem}}</option>
+        }
       </select>
       @if (paymentForm.get('operator')?.touched && paymentForm.get('operator')?.invalid) {
         <span class="error">pérateur requis.</span>

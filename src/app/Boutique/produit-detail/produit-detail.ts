@@ -5,10 +5,11 @@ import { Produit } from '../../Models/produits';
 import { CurrencyPipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { Loading } from "../../loading/loading";
 
 @Component({
   selector: 'app-produit-detail',
-  imports: [ CurrencyPipe, MatIconModule, MatButtonModule],
+  imports: [CurrencyPipe, MatIconModule, MatButtonModule, Loading],
   templateUrl: './produit-detail.html',
   styleUrl: './produit-detail.css',
 })

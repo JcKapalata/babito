@@ -8,11 +8,13 @@
   display: flex;
   position: relative;
   gap: 2rem;
+  min-width: 400px;
   max-width: 900px;
   background: #fff;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+  justify-content: center;
 }
 
 /* button go back */
@@ -85,11 +87,6 @@
   background: var(--accent-color);
 }
 
-.error-msg{
-  color: var(--warn-color);
-  font-size: 1.5rem;
-  font-weight: 700;
-}
 
 /* ----- Responsive mobile ----- */
 @media (max-width: 768px) {

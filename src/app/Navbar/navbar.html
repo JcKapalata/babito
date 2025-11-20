@@ -12,8 +12,11 @@
   <button mat-button (click)="goToConnexion()" class="boutton">Connexion</button>
 
   <!-- Icône panier avec compteur -->
-  <button mat-icon-button (click)="goToPannier()" matBadge="3" matBadgeColor="accent">
-    <mat-icon class="btn-icon">shopping_cart</mat-icon>
+  <button mat-icon-button 
+    (click)="goToPannier()"  
+    [matBadge]="nombreProduits$ | async"
+    matBadgeColor="accent">
+      <mat-icon class="btn-icon">shopping_cart</mat-icon>
   </button>
 
 </mat-toolbar>

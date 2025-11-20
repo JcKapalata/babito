@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { CommandeItem } from '../Models/commande';
 import { BoutiqueService } from '../Boutique/boutique-service';
 
@@ -35,11 +35,18 @@ export class AchatService {
     this.itemsSubject.next([...currentItems]);
   }
 
+  // mise en jour du panier
   updateItems(items: CommandeItem[]) {
     this.itemsSubject.next([...items]);
   }
 
+  // vide le panier
   viderPanier() {
     this.itemsSubject.next([]);
   }
+
+  // recupere la nombre produit
+  nombreProduits$ = this.items$.pipe(
+    map(items => items.length)
+  );
 }

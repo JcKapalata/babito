@@ -32,7 +32,7 @@ export class Navbar {
   }
 
   goToAcceuil(){
-    this.route.navigate(['acceuil']);
+    this.route.navigate(['accueil']);
   }
 
   goToProduitList(){

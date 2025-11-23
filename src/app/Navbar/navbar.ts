@@ -31,6 +31,10 @@ export class Navbar {
     this.nombreProduits$ = this.achatService.nombreProduits$;
   }
 
+  goToAcceuil(){
+    this.route.navigate(['acceuil']);
+  }
+
   goToProduitList(){
     this.route.navigate(['boutique/produits-list']);
   }

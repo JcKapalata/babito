@@ -1,6 +1,8 @@
 /* ----- CARDS ----- */
 .card {
-  background: var(--card-bg);
+  background: white;
+  margin: 60px auto 0 auto;
+  width: 50%;
   border-radius: 14px;
   padding: 1.5rem;
   margin-bottom: 2rem;

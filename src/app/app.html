@@ -2,6 +2,27 @@
 
 <div class="main-container">
     <router-outlet></router-outlet>
+
+    @if(showLegalesBloc$ | async){
+        <div class="legal-info">
+            @if (showInfoLegales.cgv$ | async) {
+                <conditions-generales-ventes></conditions-generales-ventes>
+            }
+
+            @if(showInfoLegales.politiqueRetour$ | async) {
+                <politique-retour></politique-retour>
+            }
+
+            @if (showInfoLegales.confidentialite$ | async) {
+                <politique-confidentialite></politique-confidentialite>
+            }
+
+            @if (showInfoLegales.apropos$ | async) {
+                <apropos></apropos>
+            }
+        </div>
+    }
+    
 </div>
 
 <app-footer></app-footer>

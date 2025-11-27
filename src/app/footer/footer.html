@@ -5,20 +5,21 @@
     <div class="footer-section">
       <h3>Informations légales</h3>
       <div class="footer-buttons">
-          <div class="footer-buttons">
-          <button mat-button class="footer-btn">
+        <div class="footer-buttons">
+
+          <button mat-button class="footer-btn" (click)="toggleCGV()">
             Conditions Générales de Vente (CGV)
           </button>
 
-          <button mat-button class="footer-btn" >
+          <button mat-button class="footer-btn"  (click)="togglePolitiqueRetour()">
             Politique de Retour
           </button>
 
-          <button mat-button class="footer-btn">
+          <button mat-button class="footer-btn" (click)="toggleConfidentialite()">
             Politique de Confidentialité
           </button>
 
-          <button mat-button class="footer-btn">
+          <button mat-button class="footer-btn" (click)="toggleApropos()">
             À propos
           </button>
         </div>

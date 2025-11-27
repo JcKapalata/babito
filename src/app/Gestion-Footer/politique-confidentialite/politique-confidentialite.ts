@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-politique-confidentialite',
+  selector: 'politique-confidentialite',
   imports: [],
   templateUrl: './politique-confidentialite.html',
   styleUrl: './politique-confidentialite.css',

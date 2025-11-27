@@ -26,7 +26,7 @@ export class Navbar {
 
   constructor(
     private route: Router,
-    private achatService: AchatService
+    private achatService: AchatService,
   ){
     this.nombreProduits$ = this.achatService.nombreProduits$;
   }

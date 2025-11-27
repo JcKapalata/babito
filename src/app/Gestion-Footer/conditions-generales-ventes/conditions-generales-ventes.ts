@@ -15,7 +15,7 @@ export class ConditionsGeneralesVentes {
     private showInfoLegales : ShowInfoLegales
   ){}
 
-  closeApropos() {
+  closeCgv() {
     this.showInfoLegales.cgv$.next(false);
   }
 

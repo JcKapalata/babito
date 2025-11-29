@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ShowInfoLegales } from '../../show-info-legales';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'conditions-generales-ventes',
@@ -12,11 +12,11 @@ import { ShowInfoLegales } from '../../show-info-legales';
 export class ConditionsGeneralesVentes {
 
   constructor(
-    private showInfoLegales : ShowInfoLegales
+    private location: Location
   ){}
 
   closeCgv() {
-    this.showInfoLegales.cgv$.next(false);
+    this.location.back()
   }
 
 }

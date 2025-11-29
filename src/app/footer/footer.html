@@ -7,20 +7,16 @@
       <div class="footer-buttons">
         <div class="footer-buttons">
 
-          <button mat-button class="footer-btn" (click)="toggleCGV()">
+          <button mat-button class="footer-btn" (click)="goToCGV()">
             Conditions Générales de Vente (CGV)
           </button>
 
-          <button mat-button class="footer-btn"  (click)="togglePolitiqueRetour()">
+          <button mat-button class="footer-btn"  (click)="goToPolitiqueRetour()">
             Politique de Retour
           </button>
 
-          <button mat-button class="footer-btn" (click)="toggleConfidentialite()">
+          <button mat-button class="footer-btn" (click)="goToConfidentialite()">
             Politique de Confidentialité
-          </button>
-
-          <button mat-button class="footer-btn" (click)="toggleApropos()">
-            À propos
           </button>
         </div>
       </div>
@@ -32,10 +28,13 @@
       <p>📍 Goma, République Démocratique du Congo</p>
       <p>📞 +243 XXX XXX XXX</p>
       <p>✉️ contact@bebito.com</p>
+      <button mat-button class="footer-btn" (click)="goToApropos()">
+        À propos
+      </button>
     </div>
 
     <!-- Section 3 : Réseaux sociaux -->
-    <!-- <div class="footer-section">
+    <div class="footer-section">
       <h3>Suivez-nous</h3>
       <div class="socials">
         <button mat-icon-button 
@@ -53,7 +52,7 @@
             <mat-icon class="btn-icon">instagram</mat-icon>
         </button>
       </div>
-    </div> -->
+    </div>
   </div>
 
   <div class="footer-bottom">

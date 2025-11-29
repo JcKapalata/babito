@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ShowInfoLegales } from '../../show-info-legales';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'politique-retour',
   imports: [MatIconModule, MatButtonModule],
@@ -12,11 +11,11 @@ import { ShowInfoLegales } from '../../show-info-legales';
 export class PolitiqueRetour {
 
   constructor(
-    private showInfoLegales : ShowInfoLegales
+    private location: Location
   ){}
 
   closePolitiqueRetour(){
-    this.showInfoLegales.politiqueRetour$.next(false);
+    this.location.back()
   }
 
 }

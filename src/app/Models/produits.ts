@@ -1,15 +1,36 @@
 export class Produit {
     id: number;
     nom: string;
-    description: string;
     prix: number;
-    imageUrl: string;
+    devise: 'USD' | 'CDF';
+    categorie: string;
+    type: string;
+    taille: string[];
+    couleur: string[];
+    description: string;
+    imageUrl: string[];
 
-    constructor(id: number, nom: string, description: string, prix: number, imageUrl: string) {
+    constructor(
+        id: number, 
+        nom: string,
+        prix: number,
+        devise: 'USD' | 'CDF',
+        categorie: string,
+        type: string,
+        taille: string[],
+        couleur: string[], 
+        description: string, 
+        imageUrl: string[]
+    ) {
         this.id = id;
         this.nom = nom;
-        this.description = description;
         this.prix = prix;
+        this.devise = devise;
+        this.categorie = categorie;
+        this.type = type;
+        this.taille = taille;
+        this.couleur = couleur;
+        this.description = description;
         this.imageUrl = imageUrl;
     }
 }

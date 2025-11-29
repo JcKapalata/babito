@@ -37,6 +37,12 @@
   margin-bottom: 1rem;
 }
 
+.container {
+  padding: 0 1rem;
+  height: 50vh;
+  overflow-y: scroll;
+}
+
 /* ----- BOXES ----- */
 .box {
   background: var(--primary-color);
@@ -101,14 +107,12 @@
 /* ----- Responsive ----- */
 @media(max-width: 700px) {
   .card {
-    width: 70%;
-    margin: auto;
+    width: 80%;
+    margin: 40px auto;
     padding: 1rem;
   }
 
-  .container {
-    padding: 0 1rem;
-    height: 50vh;
-    overflow-y: auto;
+  .card h2 {
+    font-size: 1.2rem;
   }
 }

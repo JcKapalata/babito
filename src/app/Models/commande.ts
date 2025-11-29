@@ -4,7 +4,18 @@ export class CommandeItem extends Produit {
   quantity: number; // quantité commandée
 
   constructor(produit: Produit, quantity: number = 1) {
-    super(produit.id, produit.nom, produit.description, produit.prix, produit.imageUrl);
+    super(
+      produit.id, 
+      produit.nom, 
+      produit.prix, 
+      produit.devise, 
+      produit.categorie, 
+      produit.type, 
+      produit.taille, 
+      produit.couleur,
+      produit.description,  
+      produit.imageUrl
+    );
     this.quantity = quantity;
   }
 

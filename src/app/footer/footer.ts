@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { MatIconModule} from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { ShowInfoLegales } from '../show-info-legales';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-footer',
   standalone: true,
@@ -13,23 +12,23 @@ import { ShowInfoLegales } from '../show-info-legales';
 export class Footer {
 
   constructor(
-    private showInfoLegales : ShowInfoLegales
+    private router: Router
   ){}
 
-  toggleCGV() {
-    this.showInfoLegales.toggleExclusive('cgv');
+  goToCGV() {
+    this.router.navigate(['conditions-generales-ventes'])
   }
 
-  togglePolitiqueRetour() {
-    this.showInfoLegales.toggleExclusive('retour');
+  goToPolitiqueRetour() {
+    this.router.navigate(['politique-retour'])
   }
 
-  toggleConfidentialite() {
-    this.showInfoLegales.toggleExclusive('confidentialite');
+  goToConfidentialite() {
+    this.router.navigate(['politique-confidentialite'])
   }
 
-  toggleApropos() {
-    this.showInfoLegales.toggleExclusive('apropos');
+  goToApropos() {
+    this.router.navigate(['a-propos'])
   }
 
 

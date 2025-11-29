@@ -32,6 +32,19 @@ export class ProduitsList implements OnInit{
     )
   }
 
+  // Fonction pour tronquer n'importe quelle chaîne
+  truncate(text: string, limit: number): string {
+    if (!text) {
+      return '';
+    }
+    // Si la description est plus longue que la limite, on la coupe et on ajoute "..."
+    if (text.length > limit) {
+      return text.substring(0, limit) + ' ...';
+    }
+    // Sinon, on retourne le texte complet
+    return text;
+  }
+
   goToCommande(produit: Produit) {
     this.router.navigate(['achat/commande', produit.id]);
   }

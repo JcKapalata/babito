@@ -6,12 +6,12 @@
 
                 <mat-card-content>
                     <h2>{{ produit.nom }}</h2>
-                    <p>{{ produit.description }}</p>
-                    <p class="prix">{{ produit.prix | currency:'EUR' }}</p>
+                    <p >{{ truncate(produit.description, 35)}}</p>
+                    <p class="prix">{{ produit.prix }} {{ produit.devise}}</p>
                 </mat-card-content>
 
                 <mat-card-actions>
-                    <button mat-raised-button (click)="goToCommande(produit)" class="boutton" color="primary">Passer commande</button>
+                    <button mat-raised-button (click)="goToCommande(produit)" class="boutton" color="primary">Commande rapide</button>
                 </mat-card-actions>
             </mat-card>
         }

@@ -1,18 +1,20 @@
 import {
-  _animationsDisabled
-} from "./chunk-UMBCEF2T.js";
-import {
   A11yModule,
   AriaDescriber,
   InteractivityChecker,
-  MatCommonModule,
-  _CdkPrivateStyleLoader,
   _IdGenerator,
+  _animationsDisabled
+} from "./chunk-3PUCSRIM.js";
+import {
+  _CdkPrivateStyleLoader,
   _VisuallyHiddenLoader
-} from "./chunk-ML4JOXJS.js";
-import "./chunk-HDHRM5SR.js";
+} from "./chunk-HKJD4ERT.js";
+import "./chunk-RUNKXAH4.js";
 import "./chunk-SOXOVYQB.js";
 import "./chunk-OQP7OUDA.js";
+import {
+  BidiModule
+} from "./chunk-XOOIT6O6.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -73,13 +75,6 @@ var MatBadge = class _MatBadge {
   _renderer = inject(Renderer2);
   _animationsDisabled = _animationsDisabled();
   _idGenerator = inject(_IdGenerator);
-  /**
-   * Theme color of the badge. This API is supported in M2 themes only, it
-   * has no effect in M3 themes. For color customization in M3, see https://material.angular.dev/components/badge/styling.
-   *
-   * For information on applying color variants in M3, see
-   * https://material.angular.dev/guide/material-2-theming#optional-add-backwards-compatibility-styles-for-color-variants
-   */
   get color() {
     return this._color;
   }
@@ -88,16 +83,9 @@ var MatBadge = class _MatBadge {
     this._color = value;
   }
   _color = "primary";
-  /** Whether the badge should overlap its contents or not */
   overlap = true;
-  /** Whether the badge is disabled. */
   disabled;
-  /**
-   * Position the badge should reside.
-   * Accepts any combination of 'above'|'below' and 'before'|'after'
-   */
   position = "above after";
-  /** The content for the badge */
   get content() {
     return this._content;
   }
@@ -105,7 +93,6 @@ var MatBadge = class _MatBadge {
     this._updateRenderedContent(newContent);
   }
   _content;
-  /** Message used to describe the decorated element via aria-describedby */
   get description() {
     return this._description;
   }
@@ -113,17 +100,11 @@ var MatBadge = class _MatBadge {
     this._updateDescription(newDescription);
   }
   _description;
-  /** Size of the badge. Can be 'small', 'medium', or 'large'. */
   size = "medium";
-  /** Whether the badge is hidden. */
   hidden;
-  /** Visible badge element. */
   _badgeElement;
-  /** Inline badge description. Used when the badge is applied to non-interactive host elements. */
   _inlineBadgeDescription;
-  /** Whether the OnInit lifecycle hook has run yet */
   _isInitialized = false;
-  /** InteractivityChecker to determine if the badge host is focusable. */
   _interactivityChecker = inject(InteractivityChecker);
   _document = inject(DOCUMENT);
   constructor() {
@@ -142,18 +123,12 @@ ${nativeElement.outerHTML}`);
       }
     }
   }
-  /** Whether the badge is above the host or not */
   isAbove() {
     return this.position.indexOf("below") === -1;
   }
-  /** Whether the badge is after the host or not */
   isAfter() {
     return this.position.indexOf("before") === -1;
   }
-  /**
-   * Gets the element into which the badge's content is being rendered. Undefined if the element
-   * hasn't been created (e.g. if the badge doesn't have content).
-   */
   getBadgeElement() {
     return this._badgeElement;
   }
@@ -172,13 +147,11 @@ ${nativeElement.outerHTML}`);
     }
     this._ariaDescriber.removeDescription(this._elementRef.nativeElement, this.description);
   }
-  /** Gets whether the badge's host element is interactive. */
   _isHostInteractive() {
     return this._interactivityChecker.isFocusable(this._elementRef.nativeElement, {
       ignoreVisibility: true
     });
   }
-  /** Creates the badge element */
   _createBadgeElement() {
     const badgeElement = this._renderer.createElement("span");
     const activeClass = "mat-badge-active";
@@ -200,7 +173,6 @@ ${nativeElement.outerHTML}`);
     }
     return badgeElement;
   }
-  /** Update the text content of the badge element in the DOM, creating the element if necessary. */
   _updateRenderedContent(newContent) {
     const newContentNormalized = `${newContent ?? ""}`.trim();
     if (this._isInitialized && newContentNormalized && !this._badgeElement) {
@@ -211,7 +183,6 @@ ${nativeElement.outerHTML}`);
     }
     this._content = newContentNormalized;
   }
-  /** Updates the host element's aria description via AriaDescriber. */
   _updateDescription(newDescription) {
     this._ariaDescriber.removeDescription(this._elementRef.nativeElement, this.description);
     if (!newDescription || this._isHostInteractive()) {
@@ -236,7 +207,6 @@ ${nativeElement.outerHTML}`);
     this._inlineBadgeDescription?.remove();
     this._inlineBadgeDescription = void 0;
   }
-  /** Adds css theme class given the color to the component host */
   _setColor(colorPalette) {
     const classList = this._elementRef.nativeElement.classList;
     classList.remove(`mat-badge-${this._color}`);
@@ -244,7 +214,6 @@ ${nativeElement.outerHTML}`);
       classList.add(`mat-badge-${colorPalette}`);
     }
   }
-  /** Clears any existing badges that might be left over from server-side rendering. */
   _clearExistingBadges() {
     const badges = this._elementRef.nativeElement.querySelectorAll(`:scope > .${BADGE_CONTENT_CLASS}`);
     for (const badgeElement of Array.from(badges)) {
@@ -347,21 +316,19 @@ var MatBadgeModule = class _MatBadgeModule {
   };
   static ɵmod = ɵɵdefineNgModule({
     type: _MatBadgeModule,
-    imports: [A11yModule, MatCommonModule, MatBadge, _MatBadgeStyleLoader],
-    exports: [MatBadge, MatCommonModule]
+    imports: [A11yModule, MatBadge, _MatBadgeStyleLoader],
+    exports: [MatBadge, BidiModule]
   });
   static ɵinj = ɵɵdefineInjector({
-    imports: [A11yModule, MatCommonModule, MatCommonModule]
+    imports: [A11yModule, BidiModule]
   });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatBadgeModule, [{
     type: NgModule,
     args: [{
-      // Note: we _shouldn't_ have to import `_MatBadgeStyleLoader`,
-      // but it seems to be necessary for tests.
-      imports: [A11yModule, MatCommonModule, MatBadge, _MatBadgeStyleLoader],
-      exports: [MatBadge, MatCommonModule]
+      imports: [A11yModule, MatBadge, _MatBadgeStyleLoader],
+      exports: [MatBadge, BidiModule]
     }]
   }], null, null);
 })();

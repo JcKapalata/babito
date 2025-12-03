@@ -1,9 +1,6 @@
 import {
-  MatCommonModule
-} from "./chunk-ML4JOXJS.js";
-import "./chunk-HDHRM5SR.js";
-import "./chunk-SOXOVYQB.js";
-import "./chunk-OQP7OUDA.js";
+  BidiModule
+} from "./chunk-XOOIT6O6.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -200,9 +197,6 @@ var MatCardSubtitle = class _MatCardSubtitle {
   }], null, null);
 })();
 var MatCardActions = class _MatCardActions {
-  // TODO(jelbourn): deprecate `align` in favor of `actionPosition` or `actionAlignment`
-  // as to not conflict with the native `align` attribute.
-  /** Position of the actions inside the card. */
   align = "start";
   static ɵfac = function MatCardActions_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _MatCardActions)();
@@ -434,19 +428,19 @@ var MatCardModule = class _MatCardModule {
   };
   static ɵmod = ɵɵdefineNgModule({
     type: _MatCardModule,
-    imports: [MatCommonModule, MatCard, MatCardActions, MatCardAvatar, MatCardContent, MatCardFooter, MatCardHeader, MatCardImage, MatCardLgImage, MatCardMdImage, MatCardSmImage, MatCardSubtitle, MatCardTitle, MatCardTitleGroup, MatCardXlImage],
-    exports: [MatCard, MatCardActions, MatCardAvatar, MatCardContent, MatCardFooter, MatCardHeader, MatCardImage, MatCardLgImage, MatCardMdImage, MatCardSmImage, MatCardSubtitle, MatCardTitle, MatCardTitleGroup, MatCardXlImage, MatCommonModule]
+    imports: [MatCard, MatCardActions, MatCardAvatar, MatCardContent, MatCardFooter, MatCardHeader, MatCardImage, MatCardLgImage, MatCardMdImage, MatCardSmImage, MatCardSubtitle, MatCardTitle, MatCardTitleGroup, MatCardXlImage],
+    exports: [MatCard, MatCardActions, MatCardAvatar, MatCardContent, MatCardFooter, MatCardHeader, MatCardImage, MatCardLgImage, MatCardMdImage, MatCardSmImage, MatCardSubtitle, MatCardTitle, MatCardTitleGroup, MatCardXlImage, BidiModule]
   });
   static ɵinj = ɵɵdefineInjector({
-    imports: [MatCommonModule, MatCommonModule]
+    imports: [BidiModule]
   });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatCardModule, [{
     type: NgModule,
     args: [{
-      imports: [MatCommonModule, ...CARD_DIRECTIVES],
-      exports: [CARD_DIRECTIVES, MatCommonModule]
+      imports: CARD_DIRECTIVES,
+      exports: [CARD_DIRECTIVES, BidiModule]
     }]
   }], null, null);
 })();

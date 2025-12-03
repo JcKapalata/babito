@@ -1,23 +1,40 @@
 .main-container{
-    min-height: 70vh;
+  position: relative;
+  min-height: 70vh;
+  padding-top: 8vh;
   }
 
-/* Animation d'apparition */
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 20px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
+
+.boutton {
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 1000; 
+    height: 60px; 
+    width: 60px;
+    border-radius: 50%;
+    padding: 0;
+    background: var(--primary-color);
+}
+
+/* Optionnel: Ajuster la taille de l'icône Font Awesome */
+.boutton fa-icon {
+    font-size: 28px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+  .boutton{
+    height: 40px; 
+    width: 40px;
+  }
 
-  .legal-info {
-    padding: 15px;
+  .boutton fa-icon{
+    font-size: 20px;
   }
 }

@@ -1,9 +1,3 @@
-/* :root {
-  --primary-color: #94D8B5;
-  --accent-color: #66A9BD;
-  --text-dark: #1a1a1a;
-  --bg-light: #f7f9fa;
-} */
 
 /* HERO */
 .hero {
@@ -114,6 +108,19 @@
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
+  .hero {
+    padding: 10px 10px;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+  }
+
   .section,
   .section.reverse {
     flex-direction: column;

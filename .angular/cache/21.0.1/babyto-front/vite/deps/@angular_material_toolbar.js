@@ -1,11 +1,12 @@
-import "./chunk-ZS454LP3.js";
+import "./chunk-O2KZ2UPL.js";
 import {
-  MatCommonModule,
   Platform
-} from "./chunk-ML4JOXJS.js";
-import "./chunk-HDHRM5SR.js";
+} from "./chunk-RUNKXAH4.js";
 import "./chunk-SOXOVYQB.js";
 import "./chunk-OQP7OUDA.js";
+import {
+  BidiModule
+} from "./chunk-XOOIT6O6.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -63,16 +64,7 @@ var MatToolbar = class _MatToolbar {
   _elementRef = inject(ElementRef);
   _platform = inject(Platform);
   _document = inject(DOCUMENT);
-  // TODO: should be typed as `ThemePalette` but internal apps pass in arbitrary strings.
-  /**
-   * Theme color of the toolbar. This API is supported in M2 themes only, it has
-   * no effect in M3 themes. For color customization in M3, see https://material.angular.dev/components/toolbar/styling.
-   *
-   * For information on applying color variants in M3, see
-   * https://material.angular.dev/guide/material-2-theming#optional-add-backwards-compatibility-styles-for-color-variants
-   */
   color;
-  /** Reference to all toolbar row elements that have been projected. */
   _toolbarRows;
   constructor() {
   }
@@ -82,9 +74,6 @@ var MatToolbar = class _MatToolbar {
       this._toolbarRows.changes.subscribe(() => this._checkToolbarMixedModes());
     }
   }
-  /**
-   * Throws an exception when developers are attempting to combine the different toolbar row modes.
-   */
   _checkToolbarMixedModes() {
     if (this._toolbarRows.length && (typeof ngDevMode === "undefined" || ngDevMode)) {
       const isCombinedUsage = Array.from(this._elementRef.nativeElement.childNodes).filter((node) => !(node.classList && node.classList.contains("mat-toolbar-row"))).filter((node) => node.nodeType !== (this._document ? this._document.COMMENT_NODE : 8)).some((node) => !!(node.textContent && node.textContent.trim()));
@@ -173,19 +162,19 @@ var MatToolbarModule = class _MatToolbarModule {
   };
   static ɵmod = ɵɵdefineNgModule({
     type: _MatToolbarModule,
-    imports: [MatCommonModule, MatToolbar, MatToolbarRow],
-    exports: [MatToolbar, MatToolbarRow, MatCommonModule]
+    imports: [MatToolbar, MatToolbarRow],
+    exports: [MatToolbar, MatToolbarRow, BidiModule]
   });
   static ɵinj = ɵɵdefineInjector({
-    imports: [MatCommonModule, MatCommonModule]
+    imports: [BidiModule]
   });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatToolbarModule, [{
     type: NgModule,
     args: [{
-      imports: [MatCommonModule, MatToolbar, MatToolbarRow],
-      exports: [MatToolbar, MatToolbarRow, MatCommonModule]
+      imports: [MatToolbar, MatToolbarRow],
+      exports: [MatToolbar, MatToolbarRow, BidiModule]
     }]
   }], null, null);
 })();

@@ -1,7 +1,7 @@
+import "./chunk-ZS454LP3.js";
 import {
   _animationsDisabled
 } from "./chunk-UMBCEF2T.js";
-import "./chunk-ZS454LP3.js";
 import {
   FocusMonitor,
   MatCommonModule,

@@ -14,6 +14,7 @@ import {
   Injectable,
   NgModule,
   Optional,
+  inject,
   setClassMetadata,
   ɵɵdefineInjectable,
   ɵɵdefineInjector,
@@ -516,84 +517,34 @@ function isSuccess(status) {
 var InMemoryDbService = class {
 };
 var InMemoryBackendConfigArgs = class {
-  /**
-   * The base path to the api, e.g, 'api/'.
-   * If not specified than `parseRequestUrl` assumes it is the first path segment in the request.
-   */
   apiBase;
-  /**
-   * false (default) if search match should be case insensitive
-   */
   caseSensitiveSearch;
-  /**
-   * false (default) put content directly inside the response body.
-   * true: encapsulate content in a `data` property inside the response body, `{ data: ... }`.
-   */
   dataEncapsulation;
-  /**
-   * delay (in ms) to simulate latency
-   */
   delay;
-  /**
-   * false (default) should 204 when object-to-delete not found; true: 404
-   */
   delete404;
-  /**
-   * host for this service, e.g., 'localhost'
-   */
   host;
-  /**
-   * true, should pass unrecognized request URL through to original backend; false (default): 404
-   */
   passThruUnknownUrl;
-  /**
-   * true (default) should NOT return the item (204) after a POST. false: return the item (200).
-   */
   post204;
-  /**
-   * false (default) should NOT update existing item with POST. false: OK to update.
-   */
   post409;
-  /**
-   * true (default) should NOT return the item (204) after a POST. false: return the item (200).
-   */
   put204;
-  /**
-   * false (default) if item not found, create as new item; false: should 404.
-   */
   put404;
-  /**
-   * root path _before_ any API call, e.g., ''
-   */
   rootPath;
 };
 var InMemoryBackendConfig = class _InMemoryBackendConfig {
   constructor(config = {}) {
     Object.assign(this, {
-      // default config:
       caseSensitiveSearch: false,
       dataEncapsulation: false,
-      // do NOT wrap content within an object with a `data` property
       delay: 500,
-      // simulate latency by delaying response
       delete404: false,
-      // don't complain if can't find entity to delete
       passThruUnknownUrl: false,
-      // 404 if can't process URL
       post204: true,
-      // don't return the item after a POST
       post409: false,
-      // don't update existing item with that ID
       put204: true,
-      // don't return the item after a PUT
       put404: false,
-      // create new item if PUT item with that ID not found
       apiBase: void 0,
-      // assumed to be the first path segment
       host: void 0,
-      // default value is actually set in InMemoryBackendService ctor
       rootPath: void 0
-      // default value is actually set in InMemoryBackendService ctor
     }, config);
   }
   static ɵfac = function InMemoryBackendConfig_Factory(__ngFactoryType__) {
@@ -661,29 +612,6 @@ var BackendService = class {
     }
     return this.dbReadySubject.asObservable().pipe(first((r) => r));
   }
-  /**
-   * Process Request and return an Observable of Http Response object
-   * in the manner of a RESTy web api.
-   *
-   * Expect URI pattern in the form :base/:collectionName/:id?
-   * Examples:
-   *   // for store with a 'customers' collection
-   *   GET api/customers          // all customers
-   *   GET api/customers/42       // the character with id=42
-   *   GET api/customers?name=^j  // 'j' is a regex; returns customers whose name starts with 'j' or
-   * 'J' GET api/customers.json/42  // ignores the ".json"
-   *
-   * Also accepts direct commands to the service in which the last segment of the apiBase is the
-   * word "commands" Examples: POST commands/resetDb, GET/POST commands/config - get or (re)set the
-   * config
-   *
-   *   HTTP overrides:
-   *     If the injected inMemDbService defines an HTTP method (lowercase)
-   *     The request is forwarded to that method as in
-   *     `inMemDbService.get(requestInfo)`
-   *     which must return either an Observable of the response type
-   *     for this http library or null|undefined (which means "keep processing").
-   */
   handleRequest(req) {
     return this.dbReady.pipe(concatMap(() => this.handleRequest_(req)));
   }
@@ -728,18 +656,10 @@ var BackendService = class {
     resOptions = this.createErrorResponseOptions(url, STATUS.NOT_FOUND, `Collection '${collectionName}' not found`);
     return this.createResponse$(() => resOptions);
   }
-  /**
-   * Add configured delay to response observable unless delay === 0
-   */
   addDelay(response) {
     const d = this.config.delay;
     return d === 0 ? response : delayResponse(response, d || 500);
   }
-  /**
-   * Apply query/search parameters as a filter over the collection
-   * This impl only supports RegExp queries on string properties of the collection
-   * ANDs the conditions together
-   */
   applyQuery(collection, query) {
     const conditions = [];
     const caseSensitive = this.config.caseSensitiveSearch ? void 0 : "i";
@@ -764,9 +684,6 @@ var BackendService = class {
       return ok;
     });
   }
-  /**
-   * Get a method from the `InMemoryDbService` (if it exists), bound to that service
-   */
   bind(methodName) {
     const fn = this.inMemDbService[methodName];
     return fn ? fn.bind(this.inMemDbService) : void 0;
@@ -801,23 +718,6 @@ var BackendService = class {
     const interceptor = this.bind("responseInterceptor");
     return interceptor ? interceptor(resOptions, reqInfo) : resOptions;
   }
-  /**
-   * Commands reconfigure the in-memory web api service or extract information from it.
-   * Commands ignore the latency delay and respond ASAP.
-   *
-   * When the last segment of the `apiBase` path is "commands",
-   * the `collectionName` is the command.
-   *
-   * Example URLs:
-   *   commands/resetdb (POST) // Reset the "database" to its original state
-   *   commands/config (GET)   // Return this service's config object
-   *   commands/config (POST)  // Update the config (e.g. the delay)
-   *
-   * Usage:
-   *   http.post('commands/resetdb', undefined);
-   *   http.get('commands/config');
-   *   http.post('commands/config', '{"delay":1000}');
-   */
   commands(reqInfo) {
     const command = reqInfo.collectionName.toLowerCase();
     const method = reqInfo.method;
@@ -827,11 +727,7 @@ var BackendService = class {
     switch (command) {
       case "resetdb":
         resOptions.status = STATUS.NO_CONTENT;
-        return this.resetDb(reqInfo).pipe(concatMap(() => this.createResponse$(
-          () => resOptions,
-          false
-          /* no latency delay */
-        )));
+        return this.resetDb(reqInfo).pipe(concatMap(() => this.createResponse$(() => resOptions, false)));
       case "config":
         if (method === "get") {
           resOptions.status = STATUS.OK;
@@ -846,11 +742,7 @@ var BackendService = class {
       default:
         resOptions = this.createErrorResponseOptions(reqInfo.url, STATUS.INTERNAL_SERVER_ERROR, `Unknown command "${command}"`);
     }
-    return this.createResponse$(
-      () => resOptions,
-      false
-      /* no latency delay */
-    );
+    return this.createResponse$(() => resOptions, false);
   }
   createErrorResponseOptions(url, status, message) {
     return {
@@ -864,20 +756,11 @@ var BackendService = class {
       status
     };
   }
-  /**
-   * Create a cold response Observable from a factory for ResponseOptions
-   * @param resOptionsFactory - creates ResponseOptions when observable is subscribed
-   * @param withDelay - if true (default), add simulated latency delay from configuration
-   */
   createResponse$(resOptionsFactory, withDelay = true) {
     const resOptions$ = this.createResponseOptions$(resOptionsFactory);
     let resp$ = this.createResponse$fromResponseOptions$(resOptions$);
     return withDelay ? this.addDelay(resp$) : resp$;
   }
-  /**
-   * Create a cold Observable of ResponseOptions.
-   * @param resOptionsFactory - creates ResponseOptions when observable is subscribed
-   */
   createResponseOptions$(resOptionsFactory) {
     return new Observable((responseObserver) => {
       let resOptions;
@@ -918,20 +801,9 @@ var BackendService = class {
       status: exists || !this.config.delete404 ? STATUS.NO_CONTENT : STATUS.NOT_FOUND
     };
   }
-  /**
-   * Find first instance of item in collection by `item.id`
-   * @param collection
-   * @param id
-   */
   findById(collection, id) {
     return collection.find((item) => item.id === id);
   }
-  /**
-   * Generate the next available id for item in this collection
-   * Use method from `inMemDbService` if it exists and returns a value,
-   * else delegates to `genIdDefault`.
-   * @param collection - collection of items with `id` key property
-   */
   genId(collection, collectionName) {
     const genId = this.bind("genId");
     if (genId) {
@@ -942,12 +814,6 @@ var BackendService = class {
     }
     return this.genIdDefault(collection, collectionName);
   }
-  /**
-   * Default generator of the next available id for item in this collection
-   * This default implementation works only for numeric ids.
-   * @param collection - collection of items with `id` key property
-   * @param collectionName - name of the collection
-   */
   genIdDefault(collection, collectionName) {
     if (!this.isCollectionIdNumeric(collection, collectionName)) {
       throw new Error(`Collection '${collectionName}' id type is non-numeric or unknown. Can only generate numeric ids.`);
@@ -981,9 +847,6 @@ var BackendService = class {
       status: STATUS.OK
     };
   }
-  /**
-   * Get location info from a url, even on server where `document` is not defined
-   */
   getLocation(url) {
     if (!url.startsWith("http")) {
       const doc = typeof document === "undefined" ? void 0 : document;
@@ -992,17 +855,9 @@ var BackendService = class {
     }
     return parseUri(url);
   }
-  /**
-   * get or create the function that passes unhandled requests
-   * through to the "real" backend.
-   */
   getPassThruBackend() {
     return this.passThruBackend ? this.passThruBackend : this.passThruBackend = this.createPassThruBackend();
   }
-  /**
-   * Get utility methods from this service instance.
-   * Useful within an HTTP method override
-   */
   getRequestInfoUtils() {
     return {
       createResponse$: this.createResponse$.bind(this),
@@ -1019,7 +874,6 @@ var BackendService = class {
   indexOf(collection, id) {
     return collection.findIndex((item) => item.id === id);
   }
-  /** Parse the id as a number. Return original value if not a number. */
   parseId(collection, collectionName, id) {
     if (!this.isCollectionIdNumeric(collection, collectionName)) {
       return id;
@@ -1027,31 +881,9 @@ var BackendService = class {
     const idNum = parseFloat(id);
     return isNaN(idNum) ? id : idNum;
   }
-  /**
-   * return true if can determine that the collection's `item.id` is a number
-   * This implementation can't tell if the collection is empty so it assumes NO
-   * */
   isCollectionIdNumeric(collection, collectionName) {
     return !!(collection && collection[0]) && typeof collection[0].id === "number";
   }
-  /**
-   * Parses the request URL into a `ParsedRequestUrl` object.
-   * Parsing depends upon certain values of `config`: `apiBase`, `host`, and `urlRoot`.
-   *
-   * Configuring the `apiBase` yields the most interesting changes to `parseRequestUrl` behavior:
-   *   When apiBase=undefined and url='http://localhost/api/collection/42'
-   *     {base: 'api/', collectionName: 'collection', id: '42', ...}
-   *   When apiBase='some/api/root/' and url='http://localhost/some/api/root/collection'
-   *     {base: 'some/api/root/', collectionName: 'collection', id: undefined, ...}
-   *   When apiBase='/' and url='http://localhost/collection'
-   *     {base: '/', collectionName: 'collection', id: undefined, ...}
-   *
-   * The actual api base segment values are ignored. Only the number of segments matters.
-   * The following api base strings are considered identical: 'a/b' ~ 'some/api/' ~ `two/segments'
-   *
-   * To replace this default method, assign your alternative to your
-   * InMemDbService['parseRequestUrl']
-   */
   parseRequestUrl(url) {
     try {
       const loc = this.getLocation(url);
@@ -1093,8 +925,6 @@ var BackendService = class {
       throw new Error(msg);
     }
   }
-  // Create entity
-  // Can update an existing entity too if post409 is false.
   post({
     collection,
     collectionName,
@@ -1146,8 +976,6 @@ var BackendService = class {
       };
     }
   }
-  // Update existing entity
-  // Can create an entity too if put404 is false.
   put({
     collection,
     collectionName,
@@ -1196,10 +1024,6 @@ var BackendService = class {
     }
     return false;
   }
-  /**
-   * Tell your in-mem "database" to reset.
-   * returns Observable of the database because resetting it could be async
-   */
   resetDb(reqInfo) {
     this.dbReadySubject && this.dbReadySubject.next(false);
     const db = this.inMemDbService.createDb(reqInfo);
@@ -1281,28 +1105,10 @@ var HttpClientBackendService = class _HttpClientBackendService extends BackendSe
     type: XhrFactory
   }], null);
 })();
-function httpClientInMemBackendServiceFactory(dbService, options, xhrFactory) {
-  return new HttpClientBackendService(dbService, options, xhrFactory);
+function httpClientInMemBackendServiceFactory() {
+  return new HttpClientBackendService(inject(InMemoryDbService), inject(InMemoryBackendConfig), inject(XhrFactory));
 }
 var HttpClientInMemoryWebApiModule = class _HttpClientInMemoryWebApiModule {
-  /**
-   *  Redirect the Angular `HttpClient` XHR calls
-   *  to in-memory data store that implements `InMemoryDbService`.
-   *  with class that implements InMemoryDbService and creates an in-memory database.
-   *
-   *  Usually imported in the root application module.
-   *  Can import in a lazy feature module too, which will shadow modules loaded earlier
-   *
-   *  Note: If you use the `FetchBackend`, make sure forRoot is invoked after in the providers list
-   *
-   * @param dbCreator - Class that creates seed data for in-memory database. Must implement
-   *     InMemoryDbService.
-   * @param [options]
-   *
-   * @example
-   * HttpInMemoryWebApiModule.forRoot(dbCreator);
-   * HttpInMemoryWebApiModule.forRoot(dbCreator, {useValue: {delay:600}});
-   */
   static forRoot(dbCreator, options) {
     return {
       ngModule: _HttpClientInMemoryWebApiModule,
@@ -1314,17 +1120,10 @@ var HttpClientInMemoryWebApiModule = class _HttpClientInMemoryWebApiModule {
         useValue: options
       }, {
         provide: HttpBackend,
-        useFactory: httpClientInMemBackendServiceFactory,
-        deps: [InMemoryDbService, InMemoryBackendConfig, XhrFactory]
+        useFactory: httpClientInMemBackendServiceFactory
       }]
     };
   }
-  /**
-   *
-   * Enable and configure the in-memory web api in a lazy-loaded feature module.
-   * Same as `forRoot`.
-   * This is a feel-good method so you can follow the Angular style guide for lazy-loaded modules.
-   */
   static forFeature(dbCreator, options) {
     return _HttpClientInMemoryWebApiModule.forRoot(dbCreator, options);
   }
@@ -1342,24 +1141,6 @@ var HttpClientInMemoryWebApiModule = class _HttpClientInMemoryWebApiModule {
   }], null, null);
 })();
 var InMemoryWebApiModule = class _InMemoryWebApiModule {
-  /**
-   *  Redirect BOTH Angular `Http` and `HttpClient` XHR calls
-   *  to in-memory data store that implements `InMemoryDbService`.
-   *  with class that implements InMemoryDbService and creates an in-memory database.
-   *
-   *  Usually imported in the root application module.
-   *  Can import in a lazy feature module too, which will shadow modules loaded earlier
-   *
-   *  Note: If you use the `FetchBackend`, make sure forRoot is invoked after in the providers list
-   *
-   * @param dbCreator - Class that creates seed data for in-memory database. Must implement
-   *     InMemoryDbService.
-   * @param [options]
-   *
-   * @example
-   * InMemoryWebApiModule.forRoot(dbCreator);
-   * InMemoryWebApiModule.forRoot(dbCreator, {useValue: {delay:600}});
-   */
   static forRoot(dbCreator, options) {
     return {
       ngModule: _InMemoryWebApiModule,
@@ -1371,17 +1152,10 @@ var InMemoryWebApiModule = class _InMemoryWebApiModule {
         useValue: options
       }, {
         provide: HttpBackend,
-        useFactory: httpClientInMemBackendServiceFactory,
-        deps: [InMemoryDbService, InMemoryBackendConfig, XhrFactory]
+        useFactory: httpClientInMemBackendServiceFactory
       }]
     };
   }
-  /**
-   *
-   * Enable and configure the in-memory web api in a lazy-loaded feature module.
-   * Same as `forRoot`.
-   * This is a feel-good method so you can follow the Angular style guide for lazy-loaded modules.
-   */
   static forFeature(dbCreator, options) {
     return _InMemoryWebApiModule.forRoot(dbCreator, options);
   }

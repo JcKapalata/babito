@@ -13,8 +13,16 @@
   margin-bottom: 20px;
 }
 
-.form-group {
-  margin-bottom: 15px;
-  display: flex;
-  flex-direction: column;
+.back-button {
+  position: absolute;
+  top: -35px;
+  right: -13px;
+  button{
+    background: var(--warn-color);
+    color: white;
+  }
+  button:hover{
+    background: var(--accent-color);
+  }
+  
 }

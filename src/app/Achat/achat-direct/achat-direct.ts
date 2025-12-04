@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Produit } from '../../Models/produits';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AchatService } from '../achat-service';
-import { MatIcon, MatIconModule,  } from "@angular/material/icon";
+import { MatIconModule,  } from "@angular/material/icon";
 import { AchatForm } from "../achat-form/achat-form";
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';

@@ -34,17 +34,26 @@
   margin: 0 auto;      /* centre l’image */
 }
 
+mat-card-actions{
+  display: flex;
+  justify-content: center;
+  margin-top: auto;    /* pousse les actions vers le bas */
+  position: static;
+  padding-bottom: 10px;
+}
+
 .boutton {
   background: var(--primary-color); /* couleur primaire enfant */
   color: white;               /* texte */
   border: none;
   border-radius: 8px;
   padding: 8px 16px;
+  margin-left: 4px;
   cursor: pointer;
   font-weight: bold;
   transition: 0.3s;
-  position: absolute;
-  bottom: 10px;
+  position: static;
+  /* bottom: 10px; */
 }
 
 .boutton:hover {

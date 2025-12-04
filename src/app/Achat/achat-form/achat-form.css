@@ -39,20 +39,6 @@ textarea {
   background: var(--accent-color);
 }
 
-.back-button {
-  position: absolute;
-  top: -35px;
-  right: -13px;
-  button{
-    background: var(--warn-color);
-    color: white;
-  }
-  button:hover{
-    background: var(--accent-color);
-  }
-  
-}
-
 /* css pour erreur */
 .error-message {
   color: red;           /* Texte rouge */

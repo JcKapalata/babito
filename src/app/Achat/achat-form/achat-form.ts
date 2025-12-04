@@ -24,6 +24,7 @@ export class AchatForm implements OnInit {
   quantite: number = 1;
   taille: string = '';
   couleur: string = '';
+  isAchatDirect: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -44,6 +45,7 @@ export class AchatForm implements OnInit {
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.isAchatDirect = this.router.url.includes('achat-direct');
 
     if (this.produit){
       const tailleControl = this.produitForm.get('taille');
@@ -85,10 +87,11 @@ export class AchatForm implements OnInit {
 
   onSubmit() {
     if (this.produitForm.valid) {
+      if (this.isAchatDirect) {
+        console.log('Achat direct reussir')
+      }
       this.router.navigate(['boutique/produits-list']);
       console.log('le submit a reussit');
-      
-      // this.ajouterAuPanier()
     }
   }
 

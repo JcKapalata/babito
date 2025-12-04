@@ -11,12 +11,22 @@
                 </mat-card-content>
                 
                 <mat-card-actions>
+                    <!-- Achat direct -->
                     <button mat-raised-button 
                     class="boutton" color="primary" 
                     (click)="goToAchatDirect(produit); $event.stopPropagation()">
-                        <mat-icon>add_shopping_cart</mat-icon>
+                        <mat-icon>payment</mat-icon>
                         Achat Direct
                     </button>
+
+                    <!-- Ajout au panier-->
+                    <button mat-raised-button 
+                    class="boutton" color="primary" 
+                    >
+                        <mat-icon>add_shopping_cart</mat-icon>
+                        Ajouter au panier
+                    </button>
+
                 </mat-card-actions>
             </mat-card>
         }

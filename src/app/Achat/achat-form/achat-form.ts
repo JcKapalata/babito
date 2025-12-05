@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, ValidationErrors, AbstractControl } from '@angular/forms';
 import { Produit } from '../../Models/produits';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,19 +16,18 @@ import { CommandeItem } from '../../Models/commande';
   templateUrl: './achat-form.html',
   styleUrls: ['./achat-form.css'],
 })
-export class AchatForm implements OnInit {
+export class AchatForm implements OnInit, OnChanges {
 
   @Input() produit: Produit;
   produitForm: FormGroup;
   prixTotal: number;
   quantite: number = 1;
-  taille: string = '';
-  couleur: string = '';
+  taille: string;
+  couleur: string;
   isAchatDirect: boolean;
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private achatService: AchatService
   ) {
@@ -44,29 +43,30 @@ export class AchatForm implements OnInit {
   }
 
   ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
     this.isAchatDirect = this.router.url.includes('achat-direct');
+  }
 
-    if (this.produit){
+  ngOnChanges() {
+        if (this.produit){
+      // this.prixTotal = this.produitForm.value.quantite * this.produit.prix;
       const tailleControl = this.produitForm.get('taille');
-          const couleurControl = this.produitForm.get('couleur');
+      const couleurControl = this.produitForm.get('couleur');
 
-          // Si des tailles sont disponibles, présélectionner la première option
-          if (this.produit.taille && this.produit.taille.length > 0 && tailleControl) {
-            tailleControl.setValue(this.produit.taille[0]); 
-          } else if (tailleControl) {
-            // Si aucune taille n'est disponible, le désactiver et/ou retirer le validateur
-            tailleControl.disable(); 
-          }
+      // Si des tailles sont disponibles, présélectionner la première option
+      if (this.produit.taille && this.produit.taille.length > 0 && tailleControl) {
+        tailleControl.setValue(this.produit.taille[0]);     
+      } else if (tailleControl) {
+      // Si aucune taille n'est disponible, le désactiver et/ou retirer le validateur
+        tailleControl.disable(); 
+      }
 
-          // Si des couleurs sont disponibles, présélectionner la première option
-          if (this.produit.couleur && this.produit.couleur.length > 0 && couleurControl) {
-            couleurControl.setValue(this.produit.couleur[0]);
-          } else if (couleurControl) {
-            couleurControl.disable();
-          }
-
-          this.updateTotal(this.produitForm.value.quantite);
+      // Si des couleurs sont disponibles, présélectionner la première option
+      if (this.produit.couleur && this.produit.couleur.length > 0 && couleurControl) {
+        couleurControl.setValue(this.produit.couleur[0]);
+      } else if (couleurControl) {
+        couleurControl.disable();
+      }
+      this.updateTotal(this.produitForm.value.quantite);
     }
   }
 
@@ -85,13 +85,25 @@ export class AchatForm implements OnInit {
     return null;
   }
 
+  articleAchete(){
+    return {
+      ...this.produitForm.value,
+      produitId: this.produit.id,
+      prixUnitaire: this.produit.prix,
+      prixTotal: this.prixTotal
+    }
+  }
+
   onSubmit() {
     if (this.produitForm.valid) {
+
       if (this.isAchatDirect) {
         console.log('Achat direct reussir')
+        console.table(this.articleAchete())
+      }else{
+        this.router.navigate(['boutique/produits-list']);
+        console.log('le submit a reussit');
       }
-      this.router.navigate(['boutique/produits-list']);
-      console.log('le submit a reussit');
     }
   }
 

@@ -10,7 +10,7 @@ export const PRODUITS: Produit[] = [
     categorie: 'Vêtement',
     type: 'Body',
     taille: ['6-9 mois'],
-    couleur: ['Blanc'],
+    couleur: ['Blanc', 'bleu'],
     imageUrl: ['/assets/imagesProduits/001.jpeg']
   },
   { 

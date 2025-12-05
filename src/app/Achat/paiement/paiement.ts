@@ -1,11 +1,10 @@
-
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommandeItem } from '../../Models/commande';
 
 @Component({
   selector: 'app-paiement',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule], 
   templateUrl: './paiement.html',
   styleUrls: ['./paiement.css']
 })
@@ -14,18 +13,17 @@ export class Paiement implements OnInit{
   @Input() articleAchete: CommandeItem| undefined;
   paymentForm!: FormGroup;
   
-  // propriete a place dans le formulaire
-  operatorSelect: string[] = ['Airtel', 'Vodacom', 'Orange'];
+  // Cette liste est utilisée dans le HTML pour les boutons radio
+  operatorSelect: string[] = ['Airtel Money', 'M-pesa', 'Orange money'];
 
-  // propriete pour visa
-  method: string;
-  cardNumber: string;
-  cardName: string;
-  expiry: string;
-  cvv: string;
-// propriete pour mobile money
-  mobileNumber: string;
-  operator: string;
+  // Propriétés du composant (ne sont pas utilisées directement pour la liaison, mais pour le submit)
+  method!: string;
+  cardNumber!: string;
+  cardName!: string;
+  expiry!: string;
+  cvv!: string;
+  mobileNumber!: string;
+  operator!: string; // Maintenu pour stocker l'opérateur après soumission
 
   constructor(private fb: FormBuilder) {}
 
@@ -37,26 +35,28 @@ export class Paiement implements OnInit{
       expiry: ['', []],
       cvv: ['', []],
       mobileNumber: ['', []],
-      operator: ['', []]
+      operator: ['', []] 
     });
 
-    // Récupération de tous les contrôles une seule fois pour la mise à jour finale
     const visaControls = [
         this.paymentForm.get('cardNumber'),
         this.paymentForm.get('cardName'),
         this.paymentForm.get('expiry'),
         this.paymentForm.get('cvv')
     ];
-    const mobileControls = [
-        this.paymentForm.get('mobileNumber'),
-        this.paymentForm.get('operator')
-    ];
+    // Le contrôle 'method' gère déjà le choix de l'opérateur.
+    const mobileNumberControl = this.paymentForm.get('mobileNumber');
+
 
     // Gestion des validations dynamiques selon la méthode choisie
     this.paymentForm.get('method')?.valueChanges.subscribe(method => {
+      
+      // Assurez-vous que les valeurs des contrôles non-actifs sont effacées
+      this.clearFormValues(method);
 
       // --- LOGIQUE VISA ---
       if (method === 'visa') {
+        
         // 1. Définir les validateurs Visa
         this.paymentForm.get('cardNumber')?.setValidators([Validators.required, Validators.minLength(16), Validators.maxLength(16)]);
         this.paymentForm.get('cardName')?.setValidators([Validators.required]);
@@ -64,45 +64,62 @@ export class Paiement implements OnInit{
         this.paymentForm.get('cvv')?.setValidators([Validators.required, Validators.minLength(3), Validators.maxLength(3)]);
         
         // 2. Supprimer les validateurs Mobile Money
-        mobileControls.forEach(control => {
-            control?.clearValidators();
-        });
+        mobileNumberControl?.clearValidators();
 
-      // --- LOGIQUE MOBILE MONEY ---
+      // --- LOGIQUE MOBILE MONEY (Un des opérateurs) ---
       } else if (this.operatorSelect.includes(method)) {
-        // 1. Définir les validateurs Mobile Money
-        this.paymentForm.get('mobileNumber')?.setValidators([
+        
+        // 1. Définir les validateurs Mobile Money (seul le numéro est nécessaire)
+        mobileNumberControl?.setValidators([
             Validators.required, 
-            Validators.minLength(10), 
-            Validators.maxLength(10)
+            Validators.minLength(10), // Adaptez la taille si nécessaire
+            Validators.maxLength(10) // Adaptez la taille si nécessaire
         ]);
-        this.paymentForm.get('operator')?.setValidators([Validators.required]);
 
         // 2. Supprimer les validateurs Visa
         visaControls.forEach(control => {
             control?.clearValidators();
         });
-      } 
+        
+      } else {
+         // Si aucune méthode valide n'est sélectionnée (cas initial ou étrange)
+         visaControls.forEach(control => control?.clearValidators());
+         mobileNumberControl?.clearValidators();
+      }
       
       // --- MISE À JOUR FINALE DE LA VALIDITÉ ---
-      // ⚠️ C'est ici qu'on appelle updateValueAndValidity, une seule fois pour tout !
-      
-      // Mettre à jour les contrôles Visa
-      visaControls.forEach(control => {
-          control?.updateValueAndValidity();
-      });
-      
-      // Mettre à jour les contrôles Mobile
-      mobileControls.forEach(control => {
-          control?.updateValueAndValidity();
-      });
+      // Mise à jour de tous les contrôles affectés
+      visaControls.forEach(control => control?.updateValueAndValidity());
+      mobileNumberControl?.updateValueAndValidity();
     });
   }
-  
+
+  // Ajout d'une fonction pour effacer les valeurs des champs non utilisés
+  private clearFormValues(currentMethod: string): void {
+      const visaFields = ['cardNumber', 'cardName', 'expiry', 'cvv'];
+      const mobileFields = ['mobileNumber']; // 'operator' n'est plus pertinent
+
+      if (currentMethod === 'visa') {
+          mobileFields.forEach(field => this.paymentForm.get(field)?.setValue(null));
+      } else if (this.operatorSelect.includes(currentMethod)) {
+          visaFields.forEach(field => this.paymentForm.get(field)?.setValue(null));
+      } else {
+          // Tout effacer si la méthode est réinitialisée ou invalide
+          [...visaFields, ...mobileFields].forEach(field => this.paymentForm.get(field)?.setValue(null));
+      }
+  }
+
+  // L'opérateur "method" est-il un opérateur Mobile Money valide?
+  isMobileMoneySelected(): boolean {
+    const method = this.paymentForm.get('method')?.value;
+    // Vérifie si la méthode sélectionnée est présente dans la liste operatorSelect
+    return !!method && this.operatorSelect.includes(method); 
+  }
+
   // submit le paiement
   onSubmit() {
     if (this.paymentForm.valid) {
-      const paymentMethod = this.paymentForm.get('method')?.value
+      const paymentMethod = this.paymentForm.get('method')?.value;
 
       // Si la transaction ce faite avec visa
       if (paymentMethod === 'visa') {
@@ -110,17 +127,23 @@ export class Paiement implements OnInit{
         this.cardNumber = this.paymentForm.get('cardNumber')?.value;
         this.cvv = this.paymentForm.get('cvv')?.value;
         this.expiry = this.paymentForm.get('expiry')?.value;
+        
+        console.log(`Paiement Visa soumis pour la carte se terminant par: ${this.cardNumber.slice(-4)}`);
+        console.table(this.articleAchete);
       }
 
-      // si la transaction ce faite par mobile money
-      if(paymentMethod === 'mobile' ){
-        this.operator = this.paymentForm.get('operator')?.value;
-        this.mobileNumber = this.paymentForm.get('mobileNumber')?.value
-        console.log(`le numero qui a payer est ${this.mobileNumber} sur l'operateur ${this.operator}`);
-        console.table(this.articleAchete)
+      // Si la transaction se faite par mobile money (la méthode est un nom d'opérateur)
+      if(this.operatorSelect.includes(paymentMethod) ){
+        // L'opérateur est la valeur de la méthode elle-même
+        this.operator = paymentMethod; 
+        this.mobileNumber = this.paymentForm.get('mobileNumber')?.value;
+        
+        console.log(`Paiement Mobile Money soumis : Numéro ${this.mobileNumber} sur l'opérateur ${this.operator}`);
+        console.table(this.articleAchete);
       }
     } else {
       this.paymentForm.markAllAsTouched();
+      console.error('Formulaire invalide. Veuillez vérifier les champs requis.');
     }
   }
 }

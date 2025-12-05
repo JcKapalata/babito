@@ -3,22 +3,21 @@
 
   <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
 
-    <!-- Mode de paiement -->
+    <!-- Choix du formulaire -->
     <div class="payment-method">
-      <label>
+      <h3>Choisir le mode de paiement</h3>
+        
+      <label class="radio-option">
         <input type="radio" formControlName="method" value="visa">
         Carte Visa
       </label>
-      <!-- <label>
-        <input type="radio" formControlName="method" value="mobile">
-        Mobile Money
-      </label> -->
 
-      <div>
+      <div class="operator-group">
         @for (operatorSelectItem of operatorSelect; track $index) {
-          <label>
-            <input type="radio" formControlName="method" value="{{operatorSelectItem}}">
-            {{operatorSelectItem}}
+          <label class="radio-option">
+            <input type="radio" 
+                  formControlName="method" 
+                  [value]="operatorSelectItem"> {{operatorSelectItem}}
           </label>
         }
       </div>
@@ -28,14 +27,18 @@
       }
     </div>
 
-    <!-- Paiement Visa -->
+    <hr>
+
+    <!-- Pour visa -->
     @if (paymentForm.get('method')?.value === 'visa') {
-      <div>
+      <div class="payment-details visa-details">
+        <h4>Détails de la Carte</h4>
+          
         <input type="text" formControlName="cardNumber" placeholder="Numéro de carte">
         @if (paymentForm.get('cardNumber')?.touched && paymentForm.get('cardNumber')?.invalid) {
           <span class="error">Numéro de carte invalide.</span>
         }     
-          
+            
         <input type="text" formControlName="cardName" placeholder="Nom sur la carte">
         @if (paymentForm.get('cardName')?.touched && paymentForm.get('cardName')?.invalid) {
           <span class="error">Nom requis.</span>
@@ -51,24 +54,18 @@
               <span class="error">Expiration ou CVV invalide.</span>
         }
       </div>
-     }
+    }
 
-    <!-- Paiement Mobile Money -->
-    @if (paymentForm.get('method')?.value != 'visa') {
-      <!-- <div formControlName="operator">
-        @for (operatorSelectItem of operatorSelect; track $index) {
-          <input type="radio" name="" id="">
+    <!-- pour mobile money -->
+    @if (isMobileMoneySelected()) {
+      <div class="payment-details mobile-details">
+        <h4>Paiement sur {{ paymentForm.get('method')?.value }}</h4>
+          
+        <input type="text" formControlName="mobileNumber" placeholder="Numéro Mobile">
+        @if (paymentForm.get('mobileNumber')?.touched && paymentForm.get('mobileNumber')?.invalid) {
+          <span class="error">Numéro Mobile requis.</span>
         }
       </div>
-      @if (paymentForm.get('operator')?.touched && paymentForm.get('operator')?.invalid) {
-        <span class="error">opérateur requis.</span>
-      } -->
-      
-      <!-- numero du client -->
-      <input type="text" formControlName="mobileNumber" placeholder="Numéro Mobile">
-      @if (paymentForm.get('mobileNumber')?.touched && paymentForm.get('mobileNumber')?.invalid) {
-        <span class="error">Numéro Mobile requis.</span>
-      }
     }
 
     <button type="submit" [disabled]="paymentForm.invalid">Payer</button>

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, ValidationErrors, AbstractControl } from '@angular/forms';
 import { Produit } from '../../Models/produits';
 import { Router } from '@angular/router';
@@ -20,6 +20,8 @@ import { Paiement } from "../paiement/paiement";
 export class AchatForm implements OnInit, OnChanges {
 
   @Input() produit: Produit;
+  @Output() validationMiseAJour = new EventEmitter<any>();
+
   produitForm: FormGroup;
   prixTotal: number;
   quantite: number = 1;
@@ -108,7 +110,8 @@ export class AchatForm implements OnInit, OnChanges {
         console.log('Achat direct reussir')
         console.table(this.articleAchete())
       }else{
-        this.router.navigate(['boutique/produits-list']);
+        // this.router.navigate(['boutique/produits-list']);
+        this.validationMiseAJour.emit(this.articleAchete())
         console.log('le submit a reussit');
       }
     }

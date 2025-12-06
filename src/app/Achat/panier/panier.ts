@@ -51,7 +51,8 @@ export class Panier implements OnInit {
     this.items = this.items.filter(i => i !== item);
     this.achatService.updateItems(this.items);
   }
-
+  
+  // button pour active mise a jour du produit
   goToUpdateProduit(item: CommandeItem){
     const itemId = item.id
     const index = this.idProduitUpdate.indexOf(itemId)
@@ -61,6 +62,14 @@ export class Panier implements OnInit {
     } else{
       this.idProduitUpdate.push(itemId)
     }
+  }
+
+  // methode pour recupere le produit du achat-form
+  articleMiseAJour(articleAchete: CommandeItem){
+    this.achatService.updateProduitDetails(articleAchete)
+    console.log('baadbd')
+    console.table(articleAchete)
+    this.idProduitUpdate.splice(articleAchete.id, 1) 
   }
 
   goBack() {

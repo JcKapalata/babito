@@ -7,12 +7,14 @@
       </div>
 
       <div>
-        <h3>Nom du produit : {{produit.nom}}</h3>
+        <h3>Nom : {{produit.nom}}</h3>
         <h3>Prix : {{produit.prix }} {{ produit.devise}}</h3>
         <p>Description: {{produit.description}}</p>
       </div>
     }
-    <p>Description: {{produit.description}}</p>
+    @if(!isAchatDirect){
+      <p>Description: {{produit.description}}</p>
+    }
   
     <div class="form-group">
 
@@ -100,7 +102,12 @@
             {{ showPayementComponent ? 'Masquer Paiement' : 'Procéder au Paiement' }}
           </button>
       } @else {
-        <button type="submit" class="btn" [disabled]="produitForm.invalid">Valider</button>
+        <button type="submit" 
+        class="btn" 
+        [disabled]="produitForm.invalid"
+        >
+          Valider
+        </button>
       }
     </div>
     

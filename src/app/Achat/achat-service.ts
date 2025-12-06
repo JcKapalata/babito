@@ -15,18 +15,13 @@ export class AchatService {
 
   constructor(private boutiqueService: BoutiqueService) { }
 
-  // --- LOGIQUE DE PERSISTANCE ---
-
   // --- MÉTHODES DU SERVICE ---
 
   getProduitById(produitId: number) {
     return this.boutiqueService.getProduitById(produitId);
   }
 
-  /**
-   * LOGIQUE : Ajoute un article ou incrémente sa quantité.
-   * Assure l'immutabilité et la persistance.
-   */
+  //LOGIQUE : Ajoute un produit  
   ajouterProduit(item: CommandeItem) {
     const currentItems = this.itemsSubject.value;
     const existingIndex = currentItems.findIndex(p => p.id === item.id);
@@ -44,22 +39,48 @@ export class AchatService {
 
     // Publier le nouvel état
     this.itemsSubject.next(updatedItems);
-    
-    // Persister la nouvelle liste
   }
+
+
+  // LOGIQUE : Mise a jour de produit
+  updateProduitDetails(updatedItemData: CommandeItem): void {
+    const itemId = updatedItemData.id;
+    const newQuantity = updatedItemData.quantity;
+
+    // 1. Récupérer l'état actuel du panier
+    const currentItems = this.itemsSubject.getValue();
+
+    // 2. Créer le nouveau tableau (immutabilité)
+    const newItems = currentItems.map(item => {
+        
+        // La propriété 'id' est héritée de Produit
+        if (item.id === itemId) { 
+            
+            // 2a. Créer l'objet 'Produit' mis à jour
+            const updatedProduct = {
+                ...item, 
+                couleur: updatedItemData.couleur,
+                taille: updatedItemData.taille,
+            } as Produit; 
+            
+            // 2b. Créer la nouvelle instance de CommandeItem
+            return new CommandeItem(updatedProduct, newQuantity); 
+        }
+        return item; // Retourner les autres articles sans changement
+    });
+
+    // 3. Publier le nouveau tableau
+    this.updateItems(newItems);
+  }
+  
 
   // mise en jour du panier (utilisé dans la vue panier pour changer la quantité directement)
   updateItems(items: CommandeItem[]) {
-    // Si la liste complète est mise à jour, on publie et on persiste
+    // Si la liste complète est mise à jour, on publie
     this.itemsSubject.next([...items]);
   }
 
-  // vide le panier
-  viderPanier() {
-    this.itemsSubject.next([]);
-  }
-
-  // recupere la nombre produit
+  // recupere le nombre de produit
   nombreProduits$ = this.items$.pipe(
     map(items => items.length)
   );

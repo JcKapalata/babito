@@ -35,12 +35,15 @@
 
                             <div class="btn-actions">
                                 <button class="supprimer" (click)="supprimer(item)">Supprimer</button>
-                                <button class="updater" (click)="goToUpdateProduit(item)">Mise en jour</button>
+                                <button class="updater" (click)="goToUpdateProduit(item)">Mises a jour</button>
                             </div>
                         </div>
                     </div>
                     @if (idProduitUpdate.includes(item.id)) {
-                        <app-achat-form [produit]="item"></app-achat-form>
+                        <app-achat-form 
+                            [produit]="item"
+                            (validationMiseAJour)="articleMiseAJour($event)"
+                        ></app-achat-form>
                     }
                 </div>
             }

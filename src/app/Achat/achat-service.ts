@@ -10,52 +10,12 @@ import { BoutiqueService } from '../Boutique/boutique-service';
 export class AchatService {
 
   // BehaviorSubject est initialisé avec la fonction qui charge le panier depuis le local storage
-  private itemsSubject = new BehaviorSubject<CommandeItem[]>(this.getInitialCart());
+  private itemsSubject = new BehaviorSubject<CommandeItem[]>([]);
   items$: Observable<CommandeItem[]> = this.itemsSubject.asObservable();
 
   constructor(private boutiqueService: BoutiqueService) { }
 
   // --- LOGIQUE DE PERSISTANCE ---
-  
-  /**
-   * Charge le panier depuis localStorage et reconstruit les instances de CommandeItem.
-   */
-  private getInitialCart(): CommandeItem[] {
-    const storedCart = localStorage.getItem('shopping_add_cart_items_produit');
-    if (!storedCart) {
-      return [];
-    }
-    
-    const rawItems: any[] = JSON.parse(storedCart);
-
-    // VITAL : On reconstruit chaque CommandeItem pour que les méthodes (comme getTotal) fonctionnent.
-    return rawItems.map(rawItem => {
-      // 1. Reconstruire la partie Produit (doit correspondre à la structure de Produit)
-      const produit: Produit = { 
-          id: rawItem.id, 
-          nom: rawItem.nom, 
-          prix: rawItem.prix, 
-          devise: rawItem.devise, 
-          categorie: rawItem.categorie, 
-          type: rawItem.type, 
-          taille: rawItem.taille, 
-          couleur: rawItem.couleur,
-          description: rawItem.description,  
-          imageUrl: rawItem.imageUrl
-      } as Produit; 
-      
-      // 2. Créer une nouvelle instance de CommandeItem
-      return new CommandeItem(produit, rawItem.quantity);
-    });
-  }
-
-  /**
-   * Sauvegarde l'état actuel du panier dans localStorage.
-   */
-  private persistCart(items: CommandeItem[]): void {
-    // Le JSON.stringify sauvegarde la structure de données
-    localStorage.setItem('shopping_add_cart_items_produit', JSON.stringify(items));
-  }
 
   // --- MÉTHODES DU SERVICE ---
 
@@ -86,21 +46,17 @@ export class AchatService {
     this.itemsSubject.next(updatedItems);
     
     // Persister la nouvelle liste
-    this.persistCart(updatedItems); 
   }
 
   // mise en jour du panier (utilisé dans la vue panier pour changer la quantité directement)
   updateItems(items: CommandeItem[]) {
     // Si la liste complète est mise à jour, on publie et on persiste
     this.itemsSubject.next([...items]);
-    this.persistCart(items);
   }
 
   // vide le panier
   viderPanier() {
     this.itemsSubject.next([]);
-    // Vider aussi le stockage local
-    this.persistCart([]);
   }
 
   // recupere la nombre produit

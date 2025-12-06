@@ -68,7 +68,7 @@ export class ProduitsList implements OnInit{
     this.achatService.ajouterProduit(itemToAdd);
     console.table(itemToAdd)
     
-    // 3. ✅ Affichage du SnackBar (la notification)
+    // 3. Affichage du SnackBar (la notification)
     const message = `✅ ${product.nom} ajouté au panier !`;
     const action = 'Voir Panier';
     

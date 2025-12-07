@@ -24,7 +24,7 @@ export class AchatForm implements OnInit, OnChanges {
 
   produitForm: FormGroup;
   prixTotal: number;
-  quantite: number = 1;
+  // quantity: number = 1;
   taille: string;
   couleur: string;
   isAchatDirect: boolean;
@@ -36,12 +36,12 @@ export class AchatForm implements OnInit, OnChanges {
     private achatService: AchatService
   ) {
     this.produitForm = this.fb.group({
-      quantite: [1, [Validators.required, Validators.min(1), this.integerValidator]],
+      quantity: [1, [Validators.required, Validators.min(1), this.integerValidator]],
       taille: ['', Validators.required],
       couleur: ['', Validators.required]
     });
 
-    this.produitForm.get('quantite')?.valueChanges.subscribe(qty => {
+    this.produitForm.get('quantity')?.valueChanges.subscribe(qty => {
       this.updateTotal(qty);
     });
   }
@@ -112,7 +112,6 @@ export class AchatForm implements OnInit, OnChanges {
         console.log('Achat direct reussir')
         console.table(this.articleAchete())
       }else{
-        // this.router.navigate(['boutique/produits-list']);
         this.validationMiseAJour.emit(this.articleAchete())
         console.log('le submit a reussit');
       }

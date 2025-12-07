@@ -32,19 +32,19 @@ export class Panier implements OnInit {
   }
 
   increment(item: CommandeItem) {
-    item.quantity++;
-    this.achatService.updateItems(this.items);
+    // item.quantity++;
+    // this.achatService.updateItems(this.items);
   }
 
   decrement(item: CommandeItem) {
-    if (item.quantity > 1) {
-      item.quantity--;
-      this.achatService.updateItems(this.items);
-    }
+    // if (item.quantity > 1) {
+    //   item.quantity--;
+      // this.achatService.updateItems(this.items);
+    // }
   }
 
   getTotal(): number {
-    return this.items.reduce((sum, item) => sum + item.getTotal(), 0);
+    return this.items.reduce((sum, item) => sum + item.prixTotal, 0);
   }
 
   supprimer(item: CommandeItem) {

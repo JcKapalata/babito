@@ -21,14 +21,14 @@
       <!-- gere la quantite -->
       <div class="form-quantite">
         <div class="input-group">
-          <label for="quantite">Quantite</label>
-          <input id="quantite" formControlName="quantite" type="number" min="1" step="1" />
+          <label for="quantity">Quantite</label>
+          <input id="quantity" formControlName="quantity" type="number" min="1" step="1" />
         </div>
 
         <div class="error-messages">
-          @if (produitForm.get('quantite')?.errors?.['required']
-          || produitForm.get('quantite')?.errors?.['min']
-          || produitForm.get('quantite')?.errors?.['notInteger']
+          @if (produitForm.get('quantity')?.errors?.['required']
+          || produitForm.get('quantity')?.errors?.['min']
+          || produitForm.get('quantity')?.errors?.['notInteger']
           ) {
             <span class="error-message">La quantité est obligatoire, doit être au moins 1 et doit être un entier</span>
           }
@@ -80,9 +80,9 @@
 
     </div>
 
-    @if(!(produitForm.get('quantite')?.errors?.['required']
-    || produitForm.get('quantite')?.errors?.['min']
-    || produitForm.get('quantite')?.errors?.['notInteger']
+    @if(!(produitForm.get('quantity')?.errors?.['required']
+    || produitForm.get('quantity')?.errors?.['min']
+    || produitForm.get('quantity')?.errors?.['notInteger']
     )){
        <div>
         <h3>Prix total : {{prixTotal}} {{ produit.devise}}</h3>

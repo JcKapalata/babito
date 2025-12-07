@@ -49,26 +49,24 @@ export class AchatService {
 
     // 1. Récupérer l'état actuel du panier
     const currentItems = this.itemsSubject.getValue();
-    console.table(currentItems)
-    console.table(updatedItemData.id)
-
+    
     // 2. Créer le nouveau tableau (immutabilité)
     const newItems = currentItems.map(item => {
         
-        // La propriété 'id' est héritée de Produit
-        if (item.id === itemId) { 
-            
-            // 2a. Créer l'objet 'Produit' mis à jour
-            const updatedProduct = {
-                ...item, 
-                couleur: updatedItemData.couleur,
-                taille: updatedItemData.taille,
-            } as Produit; 
+      const { quantity, ...productDetails } = item;
 
-            // 2b. Créer la nouvelle instance de CommandeItem
-            return new CommandeItem(updatedProduct, newQuantity); 
-        }
-        return item; // Retourner les autres articles sans changement
+      if (item.id === itemId) { 
+        const updatedProductDetails = {
+          ...productDetails, 
+          couleur: Array.isArray(updatedItemData.couleur) ? updatedItemData.couleur : [updatedItemData.couleur],
+          taille: Array.isArray(updatedItemData.taille) ? updatedItemData.taille : [updatedItemData.taille],
+        } as Produit; 
+
+        // Création et retour direct
+        console.table(new CommandeItem(updatedProductDetails, updatedItemData.quantity))
+        return new CommandeItem(updatedProductDetails, updatedItemData.quantity); // Retour direct
+      }
+      return item;
     });
 
     // 3. Publier le nouveau tableau
@@ -89,6 +87,6 @@ export class AchatService {
 
   // Observable pour le total du panier (optionnel mais utile)
   totalPanier$ = this.items$.pipe(
-    map(items => items.reduce((total, item) => total + item.getTotal(), 0))
+    map(items => items.reduce((total, item) => total + item.prixTotal, 0))
   );
 }

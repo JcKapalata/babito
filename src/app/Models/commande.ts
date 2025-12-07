@@ -2,6 +2,7 @@ import { Produit } from "./produits";
 
 export class CommandeItem extends Produit {
   quantity: number; // quantité commandée
+  prixTotal: number;
 
   constructor(produit: Produit, quantity: number = 1) {
     super(
@@ -17,9 +18,6 @@ export class CommandeItem extends Produit {
       produit.imageUrl
     );
     this.quantity = quantity;
-  }
-
-  getTotal(): number {
-    return this.prix * this.quantity;
+    this.prixTotal = this.quantity * this.prix
   }
 }

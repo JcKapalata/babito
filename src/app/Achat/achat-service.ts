@@ -65,9 +65,6 @@ export class AchatService {
           taille: Array.isArray(updatedItemData.taille) ? updatedItemData.taille : [updatedItemData.taille],
         } as Produit; 
 
-        // Création et retour direct
-        console.table(new CommandeItem(updatedProductDetails, updatedItemData.quantity))
-
         // 4. CRÉATION DU NOUVEL ARTICLE : Création de la nouvelle instance de CommandeItem
         const newItem = new CommandeItem(updatedProductDetails, updatedItemData.quantity);
             

@@ -28,6 +28,7 @@ export class Panier implements OnInit {
   ngOnInit() {
     this.achatService.items$.subscribe(items => {
       this.items = items;
+      console.table(this.items)
     });
   }
 
@@ -66,10 +67,21 @@ export class Panier implements OnInit {
 
   // methode pour recupere le produit du achat-form
   articleMiseAJour(articleAchete: CommandeItem){
+    // 1. Mise à jour des détails dans le service (déclenche la mise à jour de this.items via subscribe)
     this.achatService.updateProduitDetails(articleAchete)
+
     console.log('valider mise a jour')
     console.table(articleAchete)
-    this.idProduitUpdate.splice(articleAchete.id, 1) 
+
+    // 2. CORRECTION : Retirer l'ID du tableau idProduitUpdate (pour fermer le formulaire)
+    const itemId = articleAchete.id;
+    const index = this.idProduitUpdate.indexOf(itemId);
+    
+    // Vérifie si l'ID est bien présent dans la liste
+    if (index > -1) {
+        // Retire l'ID à l'index trouvé (ferme l'édition)
+        this.idProduitUpdate.splice(index, 1); 
+    }
   }
 
   goBack() {

@@ -69,7 +69,7 @@ export class AchatForm implements OnInit, OnChanges {
       } else if (couleurControl) {
         couleurControl.disable();
       }
-      this.updateTotal(this.produitForm.value.quantite);
+      this.updateTotal(this.produitForm.value.quantity);
     }
   }
 

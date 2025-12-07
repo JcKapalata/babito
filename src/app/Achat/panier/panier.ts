@@ -67,7 +67,7 @@ export class Panier implements OnInit {
   // methode pour recupere le produit du achat-form
   articleMiseAJour(articleAchete: CommandeItem){
     this.achatService.updateProduitDetails(articleAchete)
-    console.log('baadbd')
+    console.log('valider mise a jour')
     console.table(articleAchete)
     this.idProduitUpdate.splice(articleAchete.id, 1) 
   }

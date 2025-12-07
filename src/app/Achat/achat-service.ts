@@ -49,6 +49,8 @@ export class AchatService {
 
     // 1. Récupérer l'état actuel du panier
     const currentItems = this.itemsSubject.getValue();
+    console.table(currentItems)
+    console.table(updatedItemData.id)
 
     // 2. Créer le nouveau tableau (immutabilité)
     const newItems = currentItems.map(item => {
@@ -62,7 +64,7 @@ export class AchatService {
                 couleur: updatedItemData.couleur,
                 taille: updatedItemData.taille,
             } as Produit; 
-            
+
             // 2b. Créer la nouvelle instance de CommandeItem
             return new CommandeItem(updatedProduct, newQuantity); 
         }
@@ -72,7 +74,7 @@ export class AchatService {
     // 3. Publier le nouveau tableau
     this.updateItems(newItems);
   }
-  
+
 
   // mise en jour du panier (utilisé dans la vue panier pour changer la quantité directement)
   updateItems(items: CommandeItem[]) {

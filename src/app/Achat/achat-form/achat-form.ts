@@ -93,8 +93,10 @@ export class AchatForm implements OnInit, OnChanges {
     if (this.produitForm.valid) {
       return {
         ...this.produitForm.value,
-        produitId: this.produit.id,
-        prixUnitaire: this.produit.prix,
+        id: this.produit.id,
+        nom: this.produit.nom,
+        prix: this.produit.prix,
+        devise: this.produit.devise,
         prixTotal: this.prixTotal
       }
     }else{

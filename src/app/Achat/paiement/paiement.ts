@@ -130,17 +130,70 @@ export class Paiement implements OnInit{
     return this.paymentForm.valid && this.articleAchete
   }
 
-  //Recupere le prix global
-  prixGloblalArticle(): number|undefined{
-
+  // Récupère le prix global des articles en USD
+  getPrixGlobalUSD(): number| undefined {
     if (Array.isArray(this.articleAchete)) {
-      // Cas 2 : Panier (le cas qui fonctionne dans vos logs)
-      return this.articleAchete.reduce((sum, item) => sum + item.prixTotal, 0);
+      return this.articleAchete
+      .filter(item => item.devise === 'USD') // Filtre uniquement les articles en USD
+      .reduce((sum, item) => sum + item.prixTotal, 0);
     } else if (this.articleAchete) {
       // Cas 1 : Achat direct (CommandeItem unique)
       return this.articleAchete.prixTotal; // <-- Ceci manquait !
     } else{
       return undefined
+    }
+  }
+
+  // Récupère le prix global des articles en CDF
+  getPrixGlobalCDF(): number| undefined {
+    if (Array.isArray(this.articleAchete)) {
+      return this.articleAchete
+      .filter(item => item.devise === 'CDF') // Filtre uniquement les articles en USD
+      .reduce((sum, item) => sum + item.prixTotal, 0);
+    } else if (this.articleAchete) {
+      // Cas 1 : Achat direct (CommandeItem unique)
+      return this.articleAchete.prixTotal; // <-- Ceci manquait !
+    } else{
+      return undefined
+    }
+  }
+
+  //Log du prix global
+  logPrixGlobal(): void {
+
+    // 1. --- LOGIQUE ACHAT DIRECT (articleAchete est un CommandeItem unique) ---
+    // Cas 1.1 : Article unique en USD
+    if (!Array.isArray(this.articleAchete) && this.articleAchete?.devise === 'USD') {
+        const prixUSD = this.getPrixGlobalUSD(); // Récupère le prix de l'article unique en USD
+        
+        console.log("--- Achat Direct (USD) ---");
+        console.log(`Paiement effectué au Prix Global en USD : ${prixUSD}`);
+        console.log(`Paiement effectué au Prix Global en CDF : 0`); // Zéro car c'est un article en USD
+
+    } 
+    // Cas 1.2 : Article unique en CDF
+    else if (!Array.isArray(this.articleAchete) && this.articleAchete?.devise === 'CDF') {
+        const prixCDF = this.getPrixGlobalCDF(); // Récupère le prix de l'article unique en CDF
+        
+        console.log("--- Achat Direct (CDF) ---");
+        console.log(`Paiement effectué au Prix Global en USD : 0`); // Zéro car c'est un article en CDF
+        console.log(`Paiement effectué au Prix Global en CDF : ${prixCDF}`);
+    } 
+    
+    // 2. --- LOGIQUE PANIER (articleAchete est un tableau CommandeItem[]) ---   
+    // Cas 2 : Panier (peut contenir les deux devises)
+    else if (Array.isArray(this.articleAchete)) {
+        const prixUSD = this.getPrixGlobalUSD(); // Calcule la somme des articles en USD
+        const prixCDF = this.getPrixGlobalCDF(); // Calcule la somme des articles en CDF
+        
+        console.log("--- Achat Panier (Multi-Devises) ---");
+        console.log(`Paiement effectué au Prix Global en USD : ${prixUSD}`);
+        console.log(`Paiement effectué au Prix Global en CDF : ${prixCDF}`);
+    } 
+    
+    // 3. --- AUCUN ARTICLE ---
+    else {
+        console.log("Aucun article trouvé pour la journalisation.");
     }
   }
 
@@ -168,9 +221,10 @@ export class Paiement implements OnInit{
         //log infoPayement
         console.table(this.getInfoPayement())
       }
-
-      // log du produit
-      console.log(`payement effectuer Prix Global : ${this.prixGloblalArticle()}`)
+      
+      //log le prix global
+      this.logPrixGlobal()
+      //log les article
       console.table(this.articleAchete);
     } else {
       this.paymentForm.markAllAsTouched();

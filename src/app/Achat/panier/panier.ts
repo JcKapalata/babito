@@ -33,8 +33,18 @@ export class Panier implements OnInit {
     });
   }
 
-  getTotal(): number {
-    return this.items.reduce((sum, item) => sum + item.prixTotal, 0);
+  // Récupère le total des articles en USD
+  getTotalUSD(): number {
+    return this.items
+      .filter(item => item.devise === 'USD') // Filtre uniquement les articles en USD
+      .reduce((sum, item) => sum + item.prixTotal, 0);
+  }
+
+  // Récupère le total des articles en CDF
+  getTotalCDF(): number {
+    return this.items
+      .filter(item => item.devise === 'CDF') // Filtre uniquement les articles en CDF
+      .reduce((sum, item) => sum + item.prixTotal, 0);
   }
 
   supprimer(item: CommandeItem) {

@@ -17,6 +17,7 @@ export class AchatService {
 
   // --- MÉTHODES DU SERVICE ---
 
+  //recuperation d'un produit par id
   getProduitById(produitId: number) {
     return this.boutiqueService.getProduitById(produitId);
   }
@@ -41,7 +42,7 @@ export class AchatService {
     this.itemsSubject.next(updatedItems);
   }
 
-
+  //LOGIQUE : Mise ajourdu produit
   updateProduitDetails(updatedItemData: CommandeItem): void {
     const itemId = updatedItemData.id;
     const currentItems = this.itemsSubject.getValue();

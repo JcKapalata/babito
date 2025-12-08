@@ -33,24 +33,16 @@ export class Panier implements OnInit {
     });
   }
 
-  increment(item: CommandeItem) {
-    // item.quantity++;
-    // this.achatService.updateItems(this.items);
-  }
-
-  decrement(item: CommandeItem) {
-    // if (item.quantity > 1) {
-    //   item.quantity--;
-      // this.achatService.updateItems(this.items);
-    // }
-  }
-
   getTotal(): number {
     return this.items.reduce((sum, item) => sum + item.prixTotal, 0);
   }
 
   supprimer(item: CommandeItem) {
-    this.items = this.items.filter(i => i !== item);
+    this.items = this.items.filter(i => {
+      i !== item;
+      console.log(`supression d'in element dans le panier`);
+      console.table(i)
+    });
     this.achatService.updateItems(this.items);
   }
   

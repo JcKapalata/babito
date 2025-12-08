@@ -123,14 +123,11 @@ export class AchatForm implements OnInit, OnChanges {
     }
   }
 
-  // Gestion du submit
+  // Gestion du submit pour valider mise a jour
   onSubmit() {
     if (this.produitForm.valid) {
 
-      if (this.isAchatDirect) {
-        console.log('Achat direct reussir')
-        console.table(this.articleAchete())
-      }else{
+      if (!this.isAchatDirect) {
         console.log('Valide la mise a jour au panier');
         this.validationMiseAJour.emit(this.articleAchete())
       }
@@ -141,7 +138,7 @@ export class AchatForm implements OnInit, OnChanges {
   goToActivePayement() {
     if(this.produitForm.valid){
       this.showPayementComponent = !this.showPayementComponent;
-      console.log('clic buttton payement');
+      console.log('clic buttton payement dans achat direct');
     } else{
       this.produitForm.markAllAsTouched();
       console.log("Formulaire invalide. Impossible d'activer le paiement.");

@@ -54,16 +54,6 @@
   flex: 1;
 }
 
-.quantite-control button {
-  width: 32px;
-  height: 32px;
-}
-
-.quantite-control span {
-  padding: 0 10px;
-  font-weight: bold;
-}
-
 .btn-actions{
   display: flex;
   flex-direction: column;

@@ -21,12 +21,9 @@
                         <div class="item-info">
                             <h3>{{ item.nom }}</h3>
                             <p>Prix unitaire : {{ item.prix }} {{ item.devise}}</p>
-                    
-                            <div class="quantite-control">
-                                <button (click)="decrement(item)">-</button>
-                                <span>{{ item.quantity }}</span>
-                                <button (click)="increment(item)">+</button>
-                            </div>
+                            <p>Quantite : {{ item.quantity }}</p>
+                            <p>Taille : {{ item.tailleSelectionnee }}</p>
+                            <p>Couleur: {{ item.couleurSelectionnee }}</p>
                         </div>
                 
                         <!-- Total, suppression et mise en jour -->

@@ -11,7 +11,7 @@ import { MobileMoney } from '../../Models/mobileMoney';
 })
 export class Paiement implements OnInit{
 
-  @Input() articleAchete: CommandeItem| undefined;
+  @Input() articleAchete: CommandeItem | CommandeItem[] |undefined;
   paymentForm!: FormGroup;
   
   // Cette liste est utilisée dans le HTML pour les boutons radio
@@ -130,6 +130,20 @@ export class Paiement implements OnInit{
     return this.paymentForm.valid && this.articleAchete
   }
 
+  //Recupere le prix global
+  prixGloblalArticle(): number|undefined{
+
+    if (Array.isArray(this.articleAchete)) {
+      // Cas 2 : Panier (le cas qui fonctionne dans vos logs)
+      return this.articleAchete.reduce((sum, item) => sum + item.prixTotal, 0);
+    } else if (this.articleAchete) {
+      // Cas 1 : Achat direct (CommandeItem unique)
+      return this.articleAchete.prixTotal; // <-- Ceci manquait !
+    } else{
+      return undefined
+    }
+  }
+
   // submit le paiement
   onSubmit() {
     if (this.disableButtonPayer()) {
@@ -143,7 +157,6 @@ export class Paiement implements OnInit{
         this.expiry = this.paymentForm.get('expiry')?.value;
         
         console.log(`Paiement Visa soumis pour la carte se terminant par: ${this.cardNumber.slice(-4)}`);
-        console.table(this.articleAchete);
       }
 
       // Si la transaction se faite par mobile money (la méthode est un nom d'opérateur)
@@ -152,9 +165,13 @@ export class Paiement implements OnInit{
         this.operator = paymentMethod; 
         this.mobileNumber = this.paymentForm.get('mobileNumber')?.value;
         
-        console.table(this.articleAchete);
+        //log infoPayement
         console.table(this.getInfoPayement())
       }
+
+      // log du produit
+      console.log(`payement effectuer Prix Global : ${this.prixGloblalArticle()}`)
+      console.table(this.articleAchete);
     } else {
       this.paymentForm.markAllAsTouched();
       console.error(`Formulaire invalide ou de l'article. Veuillez vérifier les champs requis.`);

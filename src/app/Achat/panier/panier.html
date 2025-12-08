@@ -74,7 +74,7 @@
         <!-- Paiement -->
         @if (showPaiement) {
             <div>
-                <app-paiement></app-paiement>
+                <app-paiement [articleAchete]="items"></app-paiement>
             </div>
         }
     } @else {

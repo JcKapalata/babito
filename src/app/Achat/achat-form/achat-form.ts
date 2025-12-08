@@ -62,13 +62,13 @@ export class AchatForm implements OnInit, OnChanges {
         const selectedTaille = (this.produit as CommandeItem).tailleSelectionnee || '';
         
         if (tailleControl) {
-            if (selectedTaille) {
-              tailleControl.enable();
-              tailleControl.setValue(selectedTaille); // Précoche la taille actuelle
-            } else {
-              tailleControl.enable(); 
-              tailleControl.setValue('');
-            }
+          if (selectedTaille) {
+            tailleControl.enable();
+            tailleControl.setValue(selectedTaille); // Précoche la taille actuelle
+          } else {
+            tailleControl.enable(); 
+            tailleControl.setValue('');
+          }
         }
         
         // 3. MISE À JOUR DE LA COULEUR
@@ -110,18 +110,43 @@ export class AchatForm implements OnInit, OnChanges {
   // Récupère les informations de l'article acheté
   articleAchete(): CommandeItem | undefined {
     if (this.produitForm.valid) {
-      return {
-        ...this.produitForm.value,
-        id: this.produit.id,
-        nom: this.produit.nom,
-        prix: this.produit.prix,
-        devise: this.produit.devise,
-        prixTotal: this.prixTotal
-      }
-    }else{
-      return undefined
+        
+        const formValues = this.produitForm.value;
+        const produitItem = this.produit as CommandeItem; 
+
+        // Déterminez les options à injecter dans les champs dédiés de la CommandeItem
+        const selectedTaille = formValues.taille;
+        const selectedCouleur = formValues.couleur;
+
+        // Assurez-vous d'avoir accès au prix total calculé
+        const prixTotalCalcul = this.prixTotal;
+
+        return {
+            // 1. Récupère les valeurs du formulaire (quantity, taille, couleur)
+            ...formValues,
+            
+            // 2. Champs dédiés à la SÉLECTION UNIQUE (essentiel pour la mise à jour)
+            tailleSelectionnee: selectedTaille,
+            couleurSelectionnee: selectedCouleur,
+            
+            // 3. Champs du Produit non modifiés par le formulaire
+            id: produitItem.id,
+            nom: produitItem.nom,
+            prix: produitItem.prix,
+            devise: produitItem.devise,
+            
+            // 4. Les OPTIONS complètes (si elles existent sur l'input) doivent être transmises
+            taille: produitItem.taille,
+            couleur: produitItem.couleur,
+            
+            // 5. Total
+            prixTotal: prixTotalCalcul
+            
+        } as CommandeItem; // Castez l'objet retourné vers le type CommandeItem pour la sécurité
+    } else {
+        return undefined;
     }
-  }
+}
 
   // Gestion du submit pour valider mise a jour
   onSubmit() {

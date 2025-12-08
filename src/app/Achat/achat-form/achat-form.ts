@@ -19,7 +19,7 @@ import { Paiement } from "../paiement/paiement";
 })
 export class AchatForm implements OnInit, OnChanges {
 
-  @Input() produit!: any;
+  @Input() produit!: Produit;
   @Output() validationMiseAJour = new EventEmitter<any>();
 
   produitForm: FormGroup;
@@ -52,49 +52,39 @@ export class AchatForm implements OnInit, OnChanges {
 
       // 1. MISE À JOUR DE LA QUANTITÉ
       // Initialise le champ quantité avec la quantité actuelle de l'article (si présente, sinon 1)
-      const currentQuantity = this.produit.quantity || 1;
+      const currentQuantity = (this.produit as CommandeItem).quantity || 1;
       if (quantityControl && quantityControl.value !== currentQuantity) {
           quantityControl.setValue(currentQuantity, { emitEvent: false }); // Pas d'événement pour éviter un double appel à updateTotal
       }
 
       // 2. MISE À JOUR DE LA TAILLE
-
-      // Logique pour l'édition dans le panier : utiliser la valeur taille de l'article si elle existe
-      const selectedTaille = Array.isArray(this.produit.taille) 
-          ? (this.produit.taille[0] || '') // Utilise la taille sélectionnée dans l'article
-          : (this.produit.taille || ''); 
-      
-      if (tailleControl) {
-        if (selectedTaille) {
-          tailleControl.enable();
-          tailleControl.setValue(selectedTaille); // Précoche la taille actuelle
-        } else {
-          // Si le produit n'a pas de taille sélectionnée (nouvel article ou détail manquant)
-          tailleControl.disable();
-          tailleControl.setValue('');
+        // Utilisation du champ dédié et fiable (la sélection unique)
+        const selectedTaille = (this.produit as CommandeItem).tailleSelectionnee || '';
+        
+        if (tailleControl) {
+            if (selectedTaille) {
+              tailleControl.enable();
+              tailleControl.setValue(selectedTaille); // Précoche la taille actuelle
+            } else {
+              tailleControl.enable(); 
+              tailleControl.setValue('');
+            }
         }
-      }
-
-      // 3. MISE À JOUR DE LA COULEUR
-      
-      // Logique pour l'édition dans le panier : utiliser la valeur couleur de l'article si elle existe
-      const selectedCouleur = Array.isArray(this.produit.couleur) 
-          ? (this.produit.couleur[0] || '') // Utilise la couleur sélectionnée dans l'article
-          : (this.produit.couleur || '');
-      
-      if (couleurControl) {
-        if (selectedCouleur) {
-          couleurControl.enable();
-          couleurControl.setValue(selectedCouleur); // Précoche la couleur actuelle
-        } else {
-          // Si le produit n'a pas de couleur sélectionnée
-          couleurControl.disable();
-          couleurControl.setValue('');
+        
+        // 3. MISE À JOUR DE LA COULEUR
+        // Utilisation du champ dédié et fiable (la sélection unique)
+        const selectedCouleur = (this.produit as CommandeItem).couleurSelectionnee || '';
+        
+        if (couleurControl) {
+            if (selectedCouleur) {
+              couleurControl.enable();
+              couleurControl.setValue(selectedCouleur); 
+            } else {
+              couleurControl.enable(); 
+              couleurControl.setValue('');
+            }
         }
-      }
-
-      // 4. MISE À JOUR DU TOTAL
-      this.updateTotal(currentQuantity);
+        this.updateTotal(currentQuantity);
     }
   }
 
@@ -141,8 +131,8 @@ export class AchatForm implements OnInit, OnChanges {
         console.log('Achat direct reussir')
         console.table(this.articleAchete())
       }else{
+        console.log('Valide la mise a jour au panier');
         this.validationMiseAJour.emit(this.articleAchete())
-        console.log('le submit a reussit');
       }
     }
   }
@@ -157,18 +147,6 @@ export class AchatForm implements OnInit, OnChanges {
       console.log("Formulaire invalide. Impossible d'activer le paiement.");
     }
   }
-
-
-  // 
-  // ajouterAuPanier() {
-  //   if (this.produit && this.produitForm.valid) {
-  //     // Récupère la valeur du FormControl "quantite"
-  //     const quantite = this.produitForm.get('quantite')?.value;
-
-  //     const itemCommande = new CommandeItem(this.produit, quantite);
-  //     this.achatService.ajouterProduit(itemCommande);
-  //   }
-  // }
 
 }
 

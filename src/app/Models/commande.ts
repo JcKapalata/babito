@@ -3,6 +3,8 @@ import { Produit } from "./produits";
 export class CommandeItem extends Produit {
   quantity: number; // quantité commandée
   prixTotal: number;
+  tailleSelectionnee: string | string[]; 
+  couleurSelectionnee: string | string[];
 
   constructor(produit: Produit, quantity: number = 1) {
     super(
@@ -19,5 +21,7 @@ export class CommandeItem extends Produit {
     );
     this.quantity = quantity;
     this.prixTotal = this.quantity * this.prix
+    this.tailleSelectionnee = Array.isArray(produit.taille) ? produit.taille[0] : produit.taille;
+    this.couleurSelectionnee = Array.isArray(produit.couleur) ? produit.couleur[0] : produit.couleur;
   }
 }

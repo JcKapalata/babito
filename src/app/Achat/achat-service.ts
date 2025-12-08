@@ -42,44 +42,81 @@ export class AchatService {
   }
 
 
-  // LOGIQUE : Mise a jour de produit
   updateProduitDetails(updatedItemData: CommandeItem): void {
     const itemId = updatedItemData.id;
-
-    // 1. Récupérer l'état actuel du panier
     const currentItems = this.itemsSubject.getValue();
     
-    // 2. Créer le nouveau tableau (immutabilité)
     const newItems = currentItems.map(item => {
 
-      const { quantity, ...productDetails } = item;
-
-      if (item.id === itemId) { 
-        // 1. SAUVEGARDE : Récupérer les options complètes de l'article existant
-        const originalTailleOptions = item.taille;
-        const originalCouleurOptions = item.couleur;
-
-        const updatedProductDetails = {
-          ...productDetails, 
-          couleur: Array.isArray(updatedItemData.couleur) ? updatedItemData.couleur : [updatedItemData.couleur],
-          taille: Array.isArray(updatedItemData.taille) ? updatedItemData.taille : [updatedItemData.taille],
-        } as Produit; 
-
-        // 4. CRÉATION DU NOUVEL ARTICLE : Création de la nouvelle instance de CommandeItem
-        const newItem = new CommandeItem(updatedProductDetails, updatedItemData.quantity);
+        if (item.id === itemId) { 
             
-        // 5. RÉINJECTION : Réinjecter les options complètes sauvegardées (étape 1)
-        newItem.taille = originalTailleOptions;
-        newItem.couleur = originalCouleurOptions;
+            // 1. Récupérer la nouvelle sélection unique du formulaire
+            const newCouleurSelection = Array.isArray(updatedItemData.couleur) 
+                                        ? updatedItemData.couleur[0] 
+                                        : updatedItemData.couleur; 
 
-        return newItem
-      }
-      return item;
+            const newTailleSelection = Array.isArray(updatedItemData.taille) 
+                                       ? updatedItemData.taille[0]
+                                       : updatedItemData.taille;
+            
+            // 2. Créer une copie de l'article existant et mettre à jour la quantité
+            const newItem = new CommandeItem(item, updatedItemData.quantity);
+            
+            // 3. Mettre à jour les champs de SÉLECTION avec les nouvelles valeurs du formulaire
+            //    Les champs d'options (newItem.taille et newItem.couleur) conservent
+            //    les options complètes grâce à la copie de l'objet 'item' à l'étape 2.
+            newItem.tailleSelectionnee = newTailleSelection;
+            newItem.couleurSelectionnee = newCouleurSelection;
+            
+            // Recalculer le prix total (si non géré dans le setter de quantity ou dans le constructeur)
+            newItem.prixTotal = newItem.quantity * newItem.prix; 
+            
+            return newItem
+        }
+        return item;
     });
 
-    // 3. Publier le nouveau tableau
-    this.updateItems(newItems);
-  }
+    this.itemsSubject.next(newItems);
+}
+
+  // LOGIQUE : Mise a jour de produit
+  // updateProduitDetails(updatedItemData: CommandeItem): void {
+  //   const itemId = updatedItemData.id;
+
+  //   // 1. Récupérer l'état actuel du panier
+  //   const currentItems = this.itemsSubject.getValue();
+    
+  //   // 2. Créer le nouveau tableau (immutabilité)
+  //   const newItems = currentItems.map(item => {
+
+  //     const { quantity, ...productDetails } = item;
+
+  //     if (item.id === itemId) { 
+  //       // 1. SAUVEGARDE : Récupérer les options complètes de l'article existant
+  //       const originalTailleOptions = item.taille;
+  //       const originalCouleurOptions = item.couleur;
+
+  //       const updatedProductDetails = {
+  //         ...productDetails, 
+  //         couleur: Array.isArray(updatedItemData.couleur) ? updatedItemData.couleur : [updatedItemData.couleur],
+  //         taille: Array.isArray(updatedItemData.taille) ? updatedItemData.taille : [updatedItemData.taille],
+  //       } as Produit; 
+
+  //       // 4. CRÉATION DU NOUVEL ARTICLE : Création de la nouvelle instance de CommandeItem
+  //       const newItem = new CommandeItem(updatedProductDetails, updatedItemData.quantity);
+            
+  //       // 5. RÉINJECTION : Réinjecter les options complètes sauvegardées (étape 1)
+  //       newItem.taille = originalTailleOptions;
+  //       newItem.couleur = originalCouleurOptions;
+
+  //       return newItem
+  //     }
+  //     return item;
+  //   });
+
+  //   // 3. Publier le nouveau tableau
+  //   this.updateItems(newItems);
+  // }
 
 
   // mise en jour du panier (utilisé dans la vue panier pour changer la quantité directement)

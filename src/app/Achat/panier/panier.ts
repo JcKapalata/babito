@@ -28,6 +28,7 @@ export class Panier implements OnInit {
   ngOnInit() {
     this.achatService.items$.subscribe(items => {
       this.items = items;
+      console.log('initialisation du produit dans le panier')
       console.table(this.items)
     });
   }

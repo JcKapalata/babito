@@ -29,17 +29,16 @@
 
 .panier-item {
   background: #f3f3f3;
-  padding: 4px 8px;
+  padding: 6px 8px;
   border-radius: 8px;
   margin-bottom: 12px;
 }
 
 .panier-small-item{
   display: flex;
-  gap: 16px;
+  gap: 10px;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
 }
 
 
@@ -52,6 +51,12 @@
 
 .item-info {
   flex: 1;
+  h3{
+    margin: 4px;
+  }
+  p{
+    margin: 4px;
+  }
 }
 
 .btn-actions{
@@ -126,10 +131,33 @@ label {
     max-width: 80%;
   }
 
+  .item-image {
+    width: 60px;
+    height: 60px;
+  }
+
   .item-info{
     h3{
       font-size: 0.9rem;
+      margin: 2px;
     }
+    p{
+      font-size: 0.8rem; 
+      margin: 2px;
+    }
+  }
+
+}
+
+@media (max-width: 450px){
+  .panier-small-item{
+    display: flex;
+    gap: 2px;
+  }
+
+  .item-total{
+    width: 100px;
+
     p{
       font-size: 0.8rem;
     }

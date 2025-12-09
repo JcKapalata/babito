@@ -14,7 +14,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 340px;
+  height: 290px;
   box-shadow:-1px 2px 5px 1px #504f4f85;
   transition: 0.3s;
 }
@@ -56,6 +56,7 @@ mat-card-actions{
   transition: 0.3s;
   position: static;
   display: flex;
+  align-items: center;
 
   span,mat-icon{
     font-size: 20px;
@@ -74,7 +75,7 @@ mat-card-actions{
   } 
 
   .produit-card {
-    height: 280px;
+    height: 230px;
   }
   .produit-card img{
     width: 120px;        
@@ -85,10 +86,6 @@ mat-card-actions{
     margin: 4px 0;
     h2{
       font-size: 1rem;
-      margin: 4px 0;
-    }
-    .description{
-      font-size: 0.9rem;
       margin: 4px 0;
     }
     .prix {
@@ -118,22 +115,18 @@ mat-card-actions{
   }
 
   .produit-card {
-    height: 270px;
+    height: 220px;
   }
 
   .produit-card img{
-    width: 120px;        
-    height: 120px;
+    width: 110px;        
+    height: 110px;
   }
 
   mat-card-content{
     margin: 4px 0;
     h2{
       font-size: 0.9rem;
-      margin: 4px 0;
-    }
-    .description{
-      font-size: 0.8rem;
       margin: 4px 0;
     }
     .prix {
@@ -162,22 +155,18 @@ mat-card-actions{
   }
 
   .produit-card {
-    height: 270px;
+    height: 205px;
   }
 
   .produit-card img{
-    width: 120px;        
-    height: 120px;
+    width: 95px;        
+    height: 95px;
   }
 
   mat-card-content{
     margin: 4px 0;
     h2{
       font-size: 0.9rem;
-      margin: 4px 0;
-    }
-    .description{
-      font-size: 0.8rem;
       margin: 4px 0;
     }
     .prix {
@@ -188,7 +177,7 @@ mat-card-actions{
 
   mat-card-actions{
     button {
-      padding: 4px 8px;
+      padding: 4px 5px;
       font-weight: 800;
       font-size: 0.7rem;
       span,mat-icon{
@@ -206,33 +195,29 @@ mat-card-actions{
   }
 
   .produit-card {
-    height: 265px;
+    height: 195px;
   }
 
   .produit-card img{
-    width: 120px;        
-    height: 120px;
+    width: 80px;        
+    height: 80px;
   }
 
   mat-card-content{
     margin: 4px 0;
     h2{
-      font-size: 0.9rem;
-      margin: 4px 0;
-    }
-    .description{
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       margin: 4px 0;
     }
     .prix {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       margin: 4px 0;
     }
   }
 
   mat-card-actions{
     button {
-      padding: 4px 8px;
+      padding: 4px 5px;
       font-weight: 800;
       font-size: 0.7rem;
       span,mat-icon{
@@ -250,22 +235,36 @@ mat-card-actions{
   }
 
   .produit-card {
-    height: 260px;
+    height: 180px;
+  }
+
+  .produit-card:hover{
+    mat-card-content{
+      margin: 3px 0;
+      h2{
+        font-size: 0.75rem;
+        margin: 3px 0;
+      }
+      .description{
+        font-size: 0.7rem;
+        margin: 3px 0;
+      }
+      .prix {
+        font-size: 0.7rem;
+        margin: 3px 0;
+      }
+      }
   }
 
   .produit-card img{
-    width: 100px;        
-    height: 100px;
+    width: 70px;        
+    height: 70px;
   }
 
   mat-card-content{
     margin: 3px 0;
     h2{
-      font-size: 0.9rem;
-      margin: 4px 0;
-    }
-    .description{
-      font-size: 0.7rem;
+      font-size: 0.8rem;
       margin: 4px 0;
     }
     .prix {
@@ -277,7 +276,7 @@ mat-card-actions{
   mat-card-actions{
     bottom: 2px;
     button {
-      padding: 4px 6px;
+      padding: 4px 5px;
       font-weight: 800;
       font-size: 0.6rem;
       span,mat-icon{
@@ -295,7 +294,7 @@ mat-card-actions{
   }
 
   .produit-card {
-    height: 230px;
+    height: 175px;
   }
 
   .produit-card:hover{
@@ -317,18 +316,14 @@ mat-card-actions{
   }
 
   .produit-card img{
-    width: 90px;        
-    height: 90px;
+    width: 70px;        
+    height: 70px;
   }
 
   mat-card-content{
     margin: 2px 0;
     h2{
       font-size: 0.75rem;
-      margin: 3px 0;
-    }
-    .description{
-      font-size: 0.7rem;
       margin: 3px 0;
     }
     .prix {
@@ -340,7 +335,7 @@ mat-card-actions{
   mat-card-actions{
     bottom: 2px;
     button {
-      padding: 4px 5px;
+      padding: 4px;
       font-weight: 800;
       font-size: 0.6rem;
       span,mat-icon{
@@ -358,7 +353,7 @@ mat-card-actions{
   }
 
   .produit-card {
-    height: 230px;
+    height: 165px;
   }
 
   .produit-card:hover{
@@ -380,17 +375,13 @@ mat-card-actions{
   }
 
   .produit-card img{
-    width: 80px;        
-    height: 80px;
+    width: 70px;        
+    height: 70px;
   }
 
   mat-card-content{
     margin: 2px 0;
     h2{
-      font-size: 0.7rem;
-      margin: 3px 0;
-    }
-    .description{
       font-size: 0.7rem;
       margin: 3px 0;
     }
@@ -403,9 +394,9 @@ mat-card-actions{
   mat-card-actions{
     bottom: 2px;
     button {
-      padding: 4px 5px;
+      padding: 4px 2px;
       font-weight: 800;
-      font-size: 0.55rem;
+      font-size: 0.54rem;
       span,mat-icon{
         font-size: 12px;
         display: flex;
@@ -421,7 +412,7 @@ mat-card-actions{
   }
 
   .produit-card {
-    height: 220px;
+    height: 165px;
   }
 
   .produit-card:hover{
@@ -443,8 +434,8 @@ mat-card-actions{
   }
 
   .produit-card img{
-    width: 80px;        
-    height: 80px;
+    width: 70px;        
+    height: 70px;
   }
 
   mat-card-content{
@@ -466,7 +457,7 @@ mat-card-actions{
   mat-card-actions{
     bottom: 2px;
     button {
-      padding: 3px 2px;
+      padding: 3px;
       font-weight: 800;
       font-size: 0.55rem;
       span,mat-icon{
@@ -478,7 +469,196 @@ mat-card-actions{
   }
 }
 
-@media (470px <= width < 509px) {
+@media (514px <= width < 550px) {
+  .produits-container {
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+  }
+
+  .produit-card {
+    height: 165px;
+  }
+
+  .produit-card:hover{
+    mat-card-content{
+      margin: 2px 0;
+      h2{
+        font-size: 0.65rem;
+        margin: 2px 0;
+      }
+      .description{
+        font-size: 0.6rem;
+        margin: 2px 0;
+      }
+      .prix {
+        font-size: 0.6rem;
+        margin: 2px 0;
+      }
+      }
+  }
+
+  .produit-card img{
+    width: 70px;        
+    height: 70px;
+  }
+
+  mat-card-content{
+    margin: 2px 0;
+    h2{
+      font-size: 0.7rem;
+      margin: 3px 0;
+    }
+    .description{
+      font-size: 0.7rem;
+      margin: 3px 0;
+    }
+    .prix {
+      font-size: 0.7rem;
+      margin: 3px 0;
+    }
+  }
+
+  mat-card-actions{
+    bottom: 0px;
+    button {
+      padding: 4px;
+      font-weight: 800;
+      font-size: 0.5rem;
+      span,mat-icon{
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
+
+@media (500px <= width < 514px) {
+  .produits-container {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  .produit-card {
+    height: 165px;
+  }
+
+  .produit-card:hover{
+    mat-card-content{
+      margin: 2px 0;
+      h2{
+        font-size: 0.65rem;
+        margin: 2px 0;
+      }
+      .description{
+        font-size: 0.6rem;
+        margin: 2px 0;
+      }
+      .prix {
+        font-size: 0.6rem;
+        margin: 2px 0;
+      }
+      }
+  }
+
+  .produit-card img{
+    width: 70px;        
+    height: 70px;
+  }
+
+  mat-card-content{
+    margin: 2px 0;
+    h2{
+      font-size: 0.7rem;
+      margin: 3px 0;
+    }
+    .description{
+      font-size: 0.7rem;
+      margin: 3px 0;
+    }
+    .prix {
+      font-size: 0.7rem;
+      margin: 3px 0;
+    }
+  }
+
+  mat-card-actions{
+    bottom: 0px;
+    button {
+      padding: 3px;
+      font-weight: 800;
+      font-size: 0.5rem;
+      span,mat-icon{
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
+
+@media (485px <= width < 500px) {
+  .produits-container {
+    grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+  }
+
+  .produit-card {
+    height: 165px;
+  }
+
+  .produit-card:hover{
+    mat-card-content{
+      margin: 2px 0;
+      h2{
+        font-size: 0.65rem;
+        margin: 2px 0;
+      }
+      .description{
+        font-size: 0.6rem;
+        margin: 2px 0;
+      }
+      .prix {
+        font-size: 0.6rem;
+        margin: 2px 0;
+      }
+      }
+  }
+
+  .produit-card img{
+    width: 70px;        
+    height: 70px;
+  }
+
+  mat-card-content{
+    margin: 2px 0;
+    h2{
+      font-size: 0.7rem;
+      margin: 3px 0;
+    }
+    .description{
+      font-size: 0.7rem;
+      margin: 3px 0;
+    }
+    .prix {
+      font-size: 0.7rem;
+      margin: 3px 0;
+    }
+  }
+
+  mat-card-actions{
+    bottom: 0px;
+    button {
+      padding: 3px;
+      font-weight: 800;
+      font-size: 0.5rem;
+      span,mat-icon{
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
+
+@media (450px <= width < 485px) {
   .produits-container {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));  
   }

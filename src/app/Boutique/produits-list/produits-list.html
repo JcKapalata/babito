@@ -6,7 +6,7 @@
 
                 <mat-card-content>
                     <h2>{{ produit.nom }}</h2>
-                    <p class="description">{{ truncate(produit.description, 35)}}</p>
+                    <!-- <p class="description">{{ truncate(produit.description, 28)}}</p> -->
                     <p class="prix">{{ produit.prix }} {{ produit.devise}}</p>
                 </mat-card-content>
                 
@@ -15,7 +15,7 @@
                     <button 
                     class="boutton" color="primary" 
                     (click)="goToAchatDirect(produit); $event.stopPropagation()">
-                        <span class="material-icons">flash_on</span>
+                        <mat-icon>flash_on</mat-icon>
                         Achat Rapide
                     </button>
 

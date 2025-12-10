@@ -17,9 +17,7 @@
         <div class="product-info">
             <h1 class="product-title">{{ produit.nom }}</h1>
 
-            <p class="product-description">
-                {{ produit.description }}
-            </p>
+            <p class="product-description">Description: {{ produit.description }}</p>
 
             <div class="product-meta">
                 <p><strong>Prix :</strong> {{ produit.prix | currency:'USD' }}</p>

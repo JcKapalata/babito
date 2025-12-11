@@ -1,5 +1,6 @@
 export class Produit {
     id: number;
+    code: string;
     nom: string;
     prix: number;
     devise: 'USD' | 'CDF';
@@ -14,6 +15,7 @@ export class Produit {
 
     constructor(
         id: number, 
+        code: string,
         nom: string,
         prix: number,
         devise: 'USD' | 'CDF',
@@ -27,6 +29,7 @@ export class Produit {
         imageUrl: string[]
     ) {
         this.id = id;
+        this.code = code;
         this.nom = nom;
         this.prix = prix;
         this.devise = devise;

@@ -4,6 +4,7 @@ export const PRODUITS: Produit[] = [
   // Produit 1
   { 
     id: 1, 
+    code: 'BBI-VET-001', // Bébé-Vêtement-001
     nom: 'Body bébé coton', 
     prix: 9.99, 
     devise: 'USD',
@@ -19,6 +20,7 @@ export const PRODUITS: Produit[] = [
   // Produit 2
   { 
     id: 2, 
+    code: 'BBI-VET-002', 
     nom: 'Pyjama bébé', 
     prix: 12.99, 
     devise: 'USD',
@@ -34,6 +36,7 @@ export const PRODUITS: Produit[] = [
   // Produit 3
   { 
     id: 3, 
+    code: 'BBI-ACC-003', // Bébé-Accessoire-003
     nom: 'Chaussettes colorées', 
     prix: 2000, 
     devise: 'CDF',
@@ -49,6 +52,7 @@ export const PRODUITS: Produit[] = [
   // Produit 4
   { 
     id: 4, 
+    code: 'BBI-JOU-004', // Bébé-Jouet-004
     nom: 'Jouet en peluche', 
     prix: 15.99, 
     devise: 'USD',
@@ -64,6 +68,7 @@ export const PRODUITS: Produit[] = [
   // Produit 5
   { 
     id: 5, 
+    code: 'BBI-JOU-005', 
     nom: 'Cube d’éveil', 
     prix: 18.99, 
     devise: 'USD',
@@ -79,6 +84,7 @@ export const PRODUITS: Produit[] = [
   // Produit 6
   { 
     id: 6, 
+    code: 'BBI-JOU-006', 
     nom: 'Hochet', 
     prix: 7.99, 
     devise: 'USD',
@@ -94,6 +100,7 @@ export const PRODUITS: Produit[] = [
   // Produit 7
   { 
     id: 7, 
+    code: 'BBI-VET-007', 
     nom: 'T-shirt enfant', 
     prix: 8.99, 
     devise: 'USD',
@@ -109,6 +116,7 @@ export const PRODUITS: Produit[] = [
   // Produit 8
   { 
     id: 8, 
+    code: 'BBI-VET-008', 
     nom: 'Short bébé', 
     prix: 6.99, 
     devise: 'USD',
@@ -124,6 +132,7 @@ export const PRODUITS: Produit[] = [
   // Produit 9
   { 
     id: 9, 
+    code: 'BBI-ALI-009', // Bébé-Alimentation-009
     nom: 'Biberon', 
     prix: 7.99, 
     devise: 'USD',
@@ -139,6 +148,7 @@ export const PRODUITS: Produit[] = [
   // Produit 10
   { 
     id: 10, 
+    code: 'BBI-ALI-010', 
     nom: 'Tasse apprentissage', 
     prix: 4.99, 
     devise: 'USD',
@@ -154,6 +164,7 @@ export const PRODUITS: Produit[] = [
   // Produit 11
   { 
     id: 11, 
+    code: 'BBI-JOU-011', 
     nom: 'Jouet à empiler', 
     prix: 9.99, 
     devise: 'USD',
@@ -169,6 +180,7 @@ export const PRODUITS: Produit[] = [
   // Produit 12
   {
     id: 12, 
+    code: 'BBI-JOU-012', 
     nom: 'Puzzle en bois', 
     prix: 14.99,
     devise: 'USD',
@@ -184,6 +196,7 @@ export const PRODUITS: Produit[] = [
   // Produit 13
   { 
     id: 13, 
+    code: 'BBI-ACC-013', 
     nom: 'Casquette enfant', 
     prix: 15000, 
     devise: 'CDF',
@@ -199,6 +212,7 @@ export const PRODUITS: Produit[] = [
   // Produit 14
   { 
     id: 14, 
+    code: 'BBI-VET-014', 
     nom: 'Veste bébé', 
     prix: 19.99, 
     devise: 'USD',
@@ -214,6 +228,7 @@ export const PRODUITS: Produit[] = [
   // Produit 15
   { 
     id: 15, 
+    code: 'BBI-JOU-015', 
     nom: 'Jouet musical', 
     prix: 16.99, 
     devise: 'USD',
@@ -229,6 +244,7 @@ export const PRODUITS: Produit[] = [
   // Produit 16
   { 
     id: 16, 
+    code: 'BBI-JOU-016', 
     nom: 'Doudou', 
     prix: 12.99,
     devise: 'USD',
@@ -244,6 +260,7 @@ export const PRODUITS: Produit[] = [
   // Produit 17
   { 
     id: 17, 
+    code: 'BBI-JOU-017', 
     nom: 'Balle sensorielle', 
     prix: 8.99,
     devise: 'USD',
@@ -259,6 +276,7 @@ export const PRODUITS: Produit[] = [
   // Produit 18
   { 
     id: 18, 
+    code: 'BBI-EQP-018', // Bébé-Équipement-018
     nom: 'Tapis d’éveil', 
     prix: 24.99,
     devise: 'USD',

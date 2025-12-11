@@ -8,7 +8,8 @@ export class CommandeItem extends Produit {
 
   constructor(produit: Produit, quantity: number = 1) {
     super(
-      produit.id, 
+      produit.id,
+      produit.code, 
       produit.nom, 
       produit.prix, 
       produit.devise, 

@@ -1,220 +1,274 @@
 import { Produit } from "../Models/produits";
 
 export const PRODUITS: Produit[] = [
+  // Produit 1
   { 
     id: 1, 
     nom: 'Body bébé coton', 
-    description: 'Body confortable 100% coton pour bébé.', 
     prix: 9.99, 
     devise: 'USD',
+    region: 'Goma',
+    classement: 'Vêtements & Mode',
     categorie: 'Vêtement',
     type: 'Body',
     taille: ['6-9 mois'],
-    couleur: ['Blanc', 'bleu'],
+    couleur: ['Blanc', 'Bleu'],
+    description: 'Body confortable 100% coton pour bébé.', 
     imageUrl: ['/assets/imagesProduits/001.jpeg']
   },
+  // Produit 2
   { 
     id: 2, 
     nom: 'Pyjama bébé', 
-    description: 'Pyjama doux et chaud en velours.', 
     prix: 12.99, 
     devise: 'USD',
+    region: 'Beni',
+    classement: 'Vêtements & Mode',
     categorie: 'Vêtement',
     type: 'Pyjama',
     taille: ['12-18 mois'],
     couleur: ['Bleu ciel'],
+    description: 'Pyjama doux et chaud en velours.', 
     imageUrl: ['/assets/imagesProduits/002.jpeg']
   },
+  // Produit 3
   { 
     id: 3, 
     nom: 'Chaussettes colorées', 
-    description: 'Lot de 5 paires de chaussettes en coton.', 
     prix: 2000, 
     devise: 'CDF',
+    region: 'Butembo',
+    classement: 'Vêtements & Mode',
     categorie: 'Accessoire',
     type: 'Chaussette',
     taille: ['Taille unique'],
     couleur: ['Multicolore'],
+    description: 'Lot de 5 paires de chaussettes en coton.', 
     imageUrl: ['/assets/imagesProduits/003.png']
   },
+  // Produit 4
   { 
     id: 4, 
     nom: 'Jouet en peluche', 
-    description: 'Peluche douce en forme d\'ours pour câlins.', 
     prix: 15.99, 
     devise: 'USD',
+    region: 'Goma',
+    classement: 'Jouets & Éveil',
     categorie: 'Jouet',
     type: 'Peluche',
-    taille: ['30 cm', '40 cm'], // en cm
+    taille: ['30 cm', '40 cm'],
     couleur: ['Marron'],
+    description: 'Peluche douce en forme d\'ours pour câlins.', 
     imageUrl: ['/assets/imagesProduits/004.jpeg']
   }, 
+  // Produit 5
   { 
     id: 5, 
     nom: 'Cube d’éveil', 
-    description: 'Cube sensoriel avec couleurs, textures et sons.', 
     prix: 18.99, 
     devise: 'USD',
+    region: 'Beni',
+    classement: 'Jouets & Éveil',
     categorie: 'Jouet',
     type: 'Éveil',
-    taille: ['15 cm', '20 cm'], // en cm
+    taille: ['15 cm', '20 cm'],
     couleur: ['Rouge', 'Jaune', 'Bleu'],
+    description: 'Cube sensoriel avec couleurs, textures et sons.', 
     imageUrl: ['/assets/imagesProduits/005.jpeg']
   },
+  // Produit 6
   { 
     id: 6, 
     nom: 'Hochet', 
-    description: 'Hochet facile à tenir, sans BPA.', 
     prix: 7.99, 
     devise: 'USD',
+    region: 'Butembo',
+    classement: 'Jouets & Éveil',
     categorie: 'Jouet',
     type: 'Éveil',
-    taille: ['10 cm'], // en cm
+    taille: ['10 cm'],
     couleur: ['Vert'],
+    description: 'Hochet facile à tenir, sans BPA.', 
     imageUrl: ['/assets/imagesProduits/006.jpeg']
   },
+  // Produit 7
   { 
     id: 7, 
     nom: 'T-shirt enfant', 
-    description: 'T-shirt coton avec motif dinosaure fun.', 
     prix: 8.99, 
     devise: 'USD',
+    region: 'Goma',
+    classement: 'Vêtements & Mode',
     categorie: 'Vêtement',
     type: 'T-shirt',
     taille: ['2 ans'],
     couleur: ['Jaune'],
+    description: 'T-shirt coton avec motif dinosaure fun.', 
     imageUrl: ['/assets/imagesProduits/007.jpeg']
   },
+  // Produit 8
   { 
     id: 8, 
     nom: 'Short bébé', 
-    description: 'Short léger en coton idéal pour l\'été.', 
     prix: 6.99, 
     devise: 'USD',
+    region: 'Beni',
+    classement: 'Vêtements & Mode',
     categorie: 'Vêtement',
     type: 'Short',
     taille: ['6 mois'],
     couleur: ['Gris'],
+    description: 'Short léger en coton idéal pour l\'été.', 
     imageUrl: ['/assets/imagesProduits/008.jpeg']
   },
+  // Produit 9
   { 
     id: 9, 
     nom: 'Biberon', 
-    description: 'Biberon en plastique sans BPA, anti-colique.', 
     prix: 7.99, 
     devise: 'USD',
+    region: 'Butembo',
+    classement: 'Repas & Alimentation',
     categorie: 'Alimentation',
     type: 'Biberon',
-    taille: ['240 ml', '350 ml'], // en ml
+    taille: ['240 ml', '350 ml'],
     couleur: ['Transparent', 'Bleu'],
+    description: 'Biberon en plastique sans BPA, anti-colique.', 
     imageUrl: ['/assets/imagesProduits/009.jpeg']
   },
+  // Produit 10
   { 
     id: 10, 
     nom: 'Tasse apprentissage', 
-    description: 'Tasse avec poignées pour apprendre à boire.', 
     prix: 4.99, 
     devise: 'USD',
+    region: 'Goma',
+    classement: 'Repas & Alimentation',
     categorie: 'Alimentation',
     type: 'Tasse',
-    taille: ['150 ml'], // en ml
+    taille: ['150 ml'],
     couleur: ['Rose'],
+    description: 'Tasse avec poignées pour apprendre à boire.', 
     imageUrl: ['/assets/imagesProduits/010.jpeg']
   },
+  // Produit 11
   { 
     id: 11, 
     nom: 'Jouet à empiler', 
-    description: 'Anneaux colorés en plastique résistant à empiler.', 
     prix: 9.99, 
     devise: 'USD',
+    region: 'Beni',
+    classement: 'Jouets & Éveil',
     categorie: 'Jouet',
     type: 'Construction',
     taille: ['20cm'],
     couleur: ['Multicolore'],
+    description: 'Anneaux colorés en plastique résistant à empiler.', 
     imageUrl: ['/assets/imagesProduits/011.jpeg']
   },
+  // Produit 12
   {
     id: 12, 
     nom: 'Puzzle en bois', 
-    description: 'Puzzle éducatif en bois 12 pièces pour enfant.', 
     prix: 14.99,
     devise: 'USD',
+    region: 'Butembo',
+    classement: 'Jouets & Éveil',
     categorie: 'Jouet',
     type: 'Puzzle',
     taille: ['20x20cm'],
     couleur: ['Bois', 'Couleurs'],
+    description: 'Puzzle éducatif en bois 12 pièces pour enfant.', 
     imageUrl: ['/assets/imagesProduits/012.jpeg']
   },
+  // Produit 13
   { 
     id: 13, 
     nom: 'Casquette enfant', 
-    description: 'Casquette légère et colorée, protection UV.', 
     prix: 15000, 
     devise: 'CDF',
+    region: 'Goma',
+    classement: 'Vêtements & Mode',
     categorie: 'Accessoire',
     type: 'Chapeau',
-    taille: ['48 cm'], // tour de tête
+    taille: ['48 cm'],
     couleur: ['Rouge', 'Blanc'],
+    description: 'Casquette légère et colorée, protection UV.', 
     imageUrl: ['/assets/imagesProduits/013.jpeg']
   },
+  // Produit 14
   { 
     id: 14, 
     nom: 'Veste bébé', 
-    description: 'Veste chaude en polaire, avec capuche.', 
     prix: 19.99, 
     devise: 'USD',
+    region: 'Beni',
+    classement: 'Vêtements & Mode',
     categorie: 'Vêtement',
     type: 'Veste',
     taille: ['9-12 mois'],
     couleur: ['Gris anthracite'],
+    description: 'Veste chaude en polaire, avec capuche.', 
     imageUrl: ['/assets/imagesProduits/014.jpeg']
   },
+  // Produit 15
   { 
     id: 15, 
     nom: 'Jouet musical', 
-    description: 'Petit xylophone en bois pour débuter la musique.', 
     prix: 16.99, 
     devise: 'USD',
+    region: 'Butembo',
+    classement: 'Jouets & Éveil',
     categorie: 'Jouet',
     type: 'Musical',
     taille: ['Taille unique'],
     couleur: ['Bois', 'Métal'],
+    description: 'Petit xylophone en bois pour débuter la musique.', 
     imageUrl: ['/assets/imagesProduits/015.jpeg']
   },
+  // Produit 16
   { 
     id: 16, 
     nom: 'Doudou', 
-    description: 'Doudou plat en forme de lapin, très doux.', 
     prix: 12.99,
     devise: 'USD',
+    region: 'Goma',
+    classement: 'Jouets & Éveil',
     categorie: 'Jouet',
     type: 'Doudou',
     taille: ['25x25cm'],
     couleur: ['Crème'],
+    description: 'Doudou plat en forme de lapin, très doux.', 
     imageUrl: ['/assets/imagesProduits/016.jpeg']
   },
+  // Produit 17
   { 
     id: 17, 
     nom: 'Balle sensorielle', 
-    description: 'Balle colorée avec différentes textures pour la préhension.', 
     prix: 8.99,
     devise: 'USD',
+    region: 'Beni',
+    classement: 'Jouets & Éveil',
     categorie: 'Jouet',
     type: 'Éveil',
-    taille: ['10 cm', '15 cm'], // en cm
+    taille: ['10 cm', '15 cm'],
     couleur: ['Orange' ,'Bleu'],
+    description: 'Balle colorée avec différentes textures pour la préhension.', 
     imageUrl: ['/assets/imagesProduits/017.jpeg']
   },
+  // Produit 18
   { 
     id: 18, 
     nom: 'Tapis d’éveil', 
-    description: 'Tapis d\'éveil rembourré avec arches et jouets amovibles.', 
     prix: 24.99,
     devise: 'USD',
+    region: 'Butembo',
+    classement: 'Chambre & Déco',
     categorie: 'Équipement',
     type: 'Tapis',
     taille: ['80x80cm'],
     couleur: ['Motifs jungle'],
+    description: 'Tapis d\'éveil rembourré avec arches et jouets amovibles.', 
     imageUrl: ['/assets/imagesProduits/018.jpeg']
   }
 ];

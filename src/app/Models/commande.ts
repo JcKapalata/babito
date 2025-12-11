@@ -12,6 +12,8 @@ export class CommandeItem extends Produit {
       produit.nom, 
       produit.prix, 
       produit.devise, 
+      produit.region,
+      produit.classement,
       produit.categorie, 
       produit.type, 
       produit.taille, 

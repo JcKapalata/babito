@@ -3,6 +3,8 @@ export class Produit {
     nom: string;
     prix: number;
     devise: 'USD' | 'CDF';
+    region: string;
+    classement: string;
     categorie: string;
     type: string;
     taille: string[];
@@ -15,6 +17,8 @@ export class Produit {
         nom: string,
         prix: number,
         devise: 'USD' | 'CDF',
+        region: string,
+        classement: string,
         categorie: string,
         type: string,
         taille: string[],
@@ -26,6 +30,8 @@ export class Produit {
         this.nom = nom;
         this.prix = prix;
         this.devise = devise;
+        this.region = region;
+        this.classement = classement;
         this.categorie = categorie;
         this.type = type;
         this.taille = taille;

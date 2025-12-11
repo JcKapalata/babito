@@ -7,9 +7,26 @@
   <span class="spacer"></span>
 
   <!-- Menu -->
-  <button mat-button (click)="goToAcceuil()" class="boutton">Accueil</button>
-  <button mat-button (click)="goToProduitList()" class="boutton">Boutique</button>
-  <button mat-button (click)="goToConnexion()" class="boutton">Connexion</button>
+  <button mat-button 
+    (click)="goToAcceuil()" 
+    class="boutton"
+    >
+      <mat-icon>home</mat-icon> Accueil
+  </button>
+
+  <button mat-button 
+    (click)="goToProduitList()" 
+    class="boutton"
+    >
+      <mat-icon>store</mat-icon> Boutique
+  </button>
+
+  <button mat-button 
+    (click)="goToConnexion()" 
+    class="boutton"
+    >
+      <mat-icon>account_circle</mat-icon> Connexion
+  </button>
 
   <!-- Icône panier avec compteur -->
   <button mat-icon-button 

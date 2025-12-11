@@ -6,14 +6,14 @@ import { BoutiqueService } from '../boutique-service';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatIcon, MatIconModule } from "@angular/material/icon";
+import {  MatIconModule } from "@angular/material/icon";
 import { CommandeItem } from '../../Models/commande';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
   selector: 'app-produits-list',
-  imports: [MatCardModule, MatButtonModule, MatIconModule, MatSnackBarModule],
+  imports: [MatCardModule, MatButtonModule, MatIconModule],
   templateUrl: './produits-list.html',
   styleUrl: './produits-list.css',
   providers: [BoutiqueService]
@@ -38,18 +38,6 @@ export class ProduitsList implements OnInit{
     )
   }
 
-  // Fonction pour tronquer n'importe quelle chaîne
-  truncate(text: string, limit: number): string {
-    if (!text) {
-      return '';
-    }
-    // Si la description est plus longue que la limite, on la coupe et on ajoute "..."
-    if (text.length > limit) {
-      return text.substring(0, limit) + ' ...';
-    }
-    // Sinon, on retourne le texte complet
-    return text;
-  }
 
   goToDetailProduit(produit: Produit){
     this.router.navigate(['boutique/produit-detail', produit.id])

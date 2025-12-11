@@ -1,3 +1,4 @@
+import { AchatService } from './../../Achat/achat-service';
 import { Component, OnInit } from '@angular/core';
 import { BoutiqueService } from '../boutique-service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -5,10 +6,13 @@ import { Produit } from '../../Models/produits';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Loading } from "../../loading/loading";
+import { MatCardActions } from "@angular/material/card";
+import { CommandeItem } from '../../Models/commande';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-produit-detail',
-  imports: [ MatIconModule, MatButtonModule, Loading],
+  imports: [MatIconModule, MatButtonModule, Loading, MatCardActions],
   templateUrl: './produit-detail.html',
   styleUrl: './produit-detail.css',
 })
@@ -20,8 +24,10 @@ export class ProduitDetail implements OnInit{
 
   constructor( 
     private boutiqueService: BoutiqueService,
+    private achatService: AchatService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private matSnackBar: MatSnackBar
   ){}
 
   ngOnInit() {
@@ -55,12 +61,34 @@ export class ProduitDetail implements OnInit{
     // Vous pouvez ajouter ici d'autres logiques (ex: mise à jour du prix ou de l'image)
   }
 
-  goToWhatsApp(produit: Produit) {
-  }
-
-  goToCommande(produit: Produit) {
-    this.router.navigate(['achat/commande', produit.id]);
-  }
+  goToAchatDirect(produit: Produit){
+      this.router.navigate(['achat/achat-direct', produit.id])
+    }
+  
+    // AddToPanier
+    addToPanier( product: Produit, quantity: number = 1): void {
+      
+      // 1. Instancier le CommandeItem avec le produit et la quantité
+      const itemToAdd = new CommandeItem(product, quantity);
+      // 2. Appeler la méthode du service (qui gère l'unicité et la persistance)
+      this.achatService.ajouterProduit(itemToAdd);
+      console.table(itemToAdd)
+      
+      // 3. Affichage du SnackBar (la notification)
+      const message = `✅ ${product.nom} ajouté au panier !`;
+      const action = 'Voir Panier';
+      
+      const snackBarRef = this.matSnackBar.open(message, action, {
+          duration: 4000, 
+          horizontalPosition: 'end', 
+          verticalPosition: 'bottom',    
+          panelClass: ['snackbar-success'] 
+      });
+  
+      snackBarRef.onAction().subscribe(() => {
+          this.router.navigate(['/achat/panier']);
+      });
+    }
 
   goBack(){
     this.router.navigate(['boutique/produits-list']);

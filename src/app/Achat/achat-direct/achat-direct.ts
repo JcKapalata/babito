@@ -6,6 +6,7 @@ import { MatIconModule,  } from "@angular/material/icon";
 import { AchatForm } from "../achat-form/achat-form";
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-achat-direct',
@@ -20,6 +21,7 @@ export class AchatDirect implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private achatService: AchatService,
+    private location: Location,
     private router: Router
   ){}
 
@@ -35,6 +37,7 @@ export class AchatDirect implements OnInit {
   }
 
   goBack(){
-    this.router.navigate(['boutique/produits-list']);
+    // this.router.navigate(['boutique/produits-list']);
+    this.location.back()
   }
 }

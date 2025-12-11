@@ -94,29 +94,38 @@
 
 /* ----- Buttons ----- */
 .actions {
-  margin-top: 1.5rem;
-  display: flex;
-  gap: 1rem;
+    margin-top: 20px; 
 }
 
-.btn {
-  padding: 0.8rem 1.3rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  border: none;
-  transition: 0.3s;
+mat-card-actions {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 15px; 
+    padding: 0; 
 }
 
-.btn.primary {
-  background: var(--primary-color);
-  color: white;
+/* Style de base pour les boutons Angular Material */
+.boutton {
+    padding: 0.8rem 1.3rem;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 8px;
 }
 
-.btn.primary:hover {
+.boutton:hover {
   background: var(--accent-color);
 }
 
+/* Style spécifique pour les icônes à l'intérieur des boutons */
+.boutton mat-icon {
+    margin-right: 8px;
+}
 
 /* ----- Responsive mobile ----- */
 @media (600px <= width < 768px) {
@@ -139,6 +148,20 @@
   .actions {
     justify-content: center;
   }
+}
+
+/* --- Media Query pour les Écrans Mobiles (moins de 600px) --- */
+@media (max-width: 600px) {
+    
+    mat-card-actions {
+        gap: 10px; 
+        justify-content: space-between; 
+    }
+
+    .boutton {
+        flex-basis: 100%; 
+        min-width: auto; 
+    }
 }
 
 @media (550px <= width < 600px) {

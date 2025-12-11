@@ -23,6 +23,12 @@
   flex: 1 1 auto;
 }
 
+.menu-pcp{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .boutton {
   background: var(--accent-color);  /* Bleu moyen */
   color: white;               /* texte */

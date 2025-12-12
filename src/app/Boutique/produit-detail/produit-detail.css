@@ -33,7 +33,7 @@
 /* ----- Image ----- */
 .product-image img {
   width: 350px;
-  height: 250px;
+  height: 350px;
   border-radius: 10px;
   object-fit: cover;
 }
@@ -148,15 +148,19 @@ mat-card-actions {
 /* --- Media Query pour les Écrans Mobiles (moins de 600px) --- */
 @media (max-width: 600px) {
     
-    mat-card-actions {
-        gap: 10px; 
-        justify-content: space-between; 
-    }
+  mat-card-actions {
+    gap: 10px; 
+    justify-content: space-between; 
+  }
 
-    .boutton {
-        flex-basis: 100%; 
-        min-width: auto; 
-    }
+  .product-image img{
+    height: 250px;
+  }
+
+  .boutton {
+    flex-basis: 100%; 
+    min-width: auto; 
+  }
 }
 
 @media (550px <= width < 600px) {

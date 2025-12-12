@@ -102,21 +102,26 @@ export const PRODUITS: Produit[] = [
     }
   },
   // // Produit 6
-  // { 
-  //   id: 6, 
-  //   code: 'BBI-JOU-006', 
-  //   nom: 'Hochet', 
-  //   prix: 7.99, 
-  //   devise: 'USD',
-  //   region: 'Butembo',
-  //   classement: 'Jouets & Éveil',
-  //   categorie: 'Jouet',
-  //   type: 'Éveil',
-  //   taille: ['10 cm'],
-  //   couleur: ['Vert'],
-  //   description: 'Hochet facile à tenir, sans BPA.', 
-  //   imageUrl: ['/assets/imagesProduits/006.jpeg']
-  // },
+  { 
+    id: 6, 
+    code: 'BBI-JOU-006', 
+    nom: 'Hochet', 
+    prix: 7.99, 
+    devise: 'USD',
+    region: 'Butembo',
+    classement: 'Jouets & Éveil',
+    categorie: 'Jouet',
+    type: 'Éveil',
+    taille: ['10 cm'],
+    couleur: ['bisque', 'vert', 'bleu', 'rose'],
+    description: 'Hochet facile à tenir, sans BPA.', 
+    imagesParCouleur: {
+      'bisque' : '/assets/imagesProduits/bbi-jou-006/bisque.jpeg',
+      'vert' : '/assets/imagesProduits/bbi-jou-006/vert.jpeg',
+      'bleu' : '/assets/imagesProduits/bbi-jou-006/bleu.jpeg',
+      'rose' : '/assets/imagesProduits/bbi-jou-006/rose.jpeg',
+    }
+  },
   // // Produit 7
   // { 
   //   id: 7, 

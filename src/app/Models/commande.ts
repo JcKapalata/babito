@@ -20,7 +20,7 @@ export class CommandeItem extends Produit {
       produit.taille, 
       produit.couleur,
       produit.description,  
-      produit.imageUrl
+      produit.imagesParCouleur
     );
     this.quantity = quantity;
     this.prixTotal = this.quantity * this.prix

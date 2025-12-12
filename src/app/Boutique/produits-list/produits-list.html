@@ -2,7 +2,7 @@
     <div class="produits-container">
         @for (produit of produitList; track $index) {
             <mat-card class="produit-card" (click)="goToDetailProduit(produit)">
-                <img mat-card-image [src]="produit.imageUrl" [alt]="produit.nom">
+                <img mat-card-image [src]="produit.imagesParCouleur[produit.couleur[0]]" [alt]="produit.nom">
 
                 <mat-card-content>
                     <h2>{{ produit.nom }}</h2>

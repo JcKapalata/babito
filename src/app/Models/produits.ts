@@ -11,7 +11,7 @@ export class Produit {
     taille: string[];
     couleur: string[];
     description: string;
-    imageUrl: string[];
+    imagesParCouleur: { [couleur: string]: string }
 
     constructor(
         id: number, 
@@ -26,7 +26,7 @@ export class Produit {
         taille: string[],
         couleur: string[], 
         description: string, 
-        imageUrl: string[]
+        imagesParCouleur: { [couleur: string]: string }
     ) {
         this.id = id;
         this.code = code;
@@ -40,6 +40,6 @@ export class Produit {
         this.taille = taille;
         this.couleur = couleur;
         this.description = description;
-        this.imageUrl = imageUrl;
+        this.imagesParCouleur = imagesParCouleur
     }
 }

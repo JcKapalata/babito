@@ -33,6 +33,7 @@
 /* ----- Image ----- */
 .product-image img {
   width: 350px;
+  height: 250px;
   border-radius: 10px;
   object-fit: cover;
 }
@@ -85,12 +86,6 @@
     position: static;
 }
 
-
-
-.product-meta p {
-  margin: 0.2rem 0;
-  font-size: 1rem;
-}
 
 /* ----- Buttons ----- */
 .actions {

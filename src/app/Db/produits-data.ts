@@ -13,45 +13,53 @@ export const PRODUITS: Produit[] = [
     categorie: 'Vêtement',
     type: 'Body',
     taille: ['6-9 mois'],
-    couleur: ['Rose', 'Bleu'],
+    couleur: ['rose', 'bleu'],
     description: 'Body confortable 100% coton pour bébé.', 
     imagesParCouleur: {
-      'Rose':'/assets/imagesProduits/bbi-vet-001/rose.jpeg',
-      'Bleu':'/assets/imagesProduits/bbi-vet-001/bleu.jpeg',
+      'rose':'/assets/imagesProduits/bbi-vet-001/rose.jpeg',
+      'bleu':'/assets/imagesProduits/bbi-vet-001/bleu.jpeg',
     }
   },
   // Produit 2
-  // { 
-  //   id: 2, 
-  //   code: 'BBI-VET-002', 
-  //   nom: 'Pyjama bébé', 
-  //   prix: 12.99, 
-  //   devise: 'USD',
-  //   region: 'Beni',
-  //   classement: 'Vêtements & Mode',
-  //   categorie: 'Vêtement',
-  //   type: 'Pyjama',
-  //   taille: ['12-18 mois'],
-  //   couleur: ['Bleu ciel'],
-  //   description: 'Pyjama doux et chaud en velours.', 
-  //   imageUrl: ['/assets/imagesProduits/002.jpeg']
-  // },
+  { 
+    id: 2, 
+    code: 'BBI-VET-002', 
+    nom: 'Pyjama bébé', 
+    prix: 12.99, 
+    devise: 'USD',
+    region: 'Beni',
+    classement: 'Vêtements & Mode',
+    categorie: 'Vêtement',
+    type: 'Pyjama',
+    taille: ['12-18 mois'],
+    couleur: ['glauque', 'chocolat'],
+    description: 'Pyjama doux et chaud en velours.', 
+    imagesParCouleur: {
+      'glauque': '/assets/imagesProduits/bbi-vet-002/glauque.jpeg',
+      'chocolat': '/assets/imagesProduits/bbi-vet-002/chocolat.jpeg'
+    }
+  },
   // // Produit 3
-  // { 
-  //   id: 3, 
-  //   code: 'BBI-ACC-003', // Bébé-Accessoire-003
-  //   nom: 'Chaussettes colorées', 
-  //   prix: 2000, 
-  //   devise: 'CDF',
-  //   region: 'Butembo',
-  //   classement: 'Vêtements & Mode',
-  //   categorie: 'Accessoire',
-  //   type: 'Chaussette',
-  //   taille: ['Taille unique'],
-  //   couleur: ['Multicolore'],
-  //   description: 'Lot de 5 paires de chaussettes en coton.', 
-  //   imageUrl: ['/assets/imagesProduits/003.png']
-  // },
+  { 
+    id: 3, 
+    code: 'BBI-ACC-003', // Bébé-Accessoire-003
+    nom: 'Chaussettes', 
+    prix: 2000, 
+    devise: 'CDF',
+    region: 'Butembo',
+    classement: 'Vêtements & Mode',
+    categorie: 'Accessoire',
+    type: 'Chaussette',
+    taille: ['Taille unique'],
+    couleur: ['rose','multicolore', 'bleu', 'blanc'],
+    description: 'Lot de 5 paires de chaussettes en coton.', 
+    imagesParCouleur: {
+      'rose' : '/assets/imagesProduits/bbi-acc-003/rose.jpeg',
+      'multicolore' : '/assets/imagesProduits/bbi-acc-003/multicolore.png',
+      'bleu' : '/assets/imagesProduits/bbi-acc-003/bleu.jpeg',
+      'blanc' : '/assets/imagesProduits/bbi-acc-003/blanc.jpeg'
+    }
+  },
   // // Produit 4
   // { 
   //   id: 4, 

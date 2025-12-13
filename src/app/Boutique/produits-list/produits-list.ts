@@ -48,11 +48,11 @@ export class ProduitsList implements OnInit{
   // filtre le classement
   appliquerFiltre(nouveauFiltre: string): void {
     this.filtreActif = nouveauFiltre;
+    this.showAllProduits.clear();
 
     if (nouveauFiltre === 'Tous') {
       // Afficher la liste complète (le dictionnaire entier)
       this.produitsAffiches = this.produitsGroupes;
-      this.showAllProduits.set(nouveauFiltre, false);
 
     } else {
       

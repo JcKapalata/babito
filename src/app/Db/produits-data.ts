@@ -223,115 +223,142 @@ export const PRODUITS: Produit[] = [
     }
   },
   // // Produit 12
-  // {
-  //   id: 12, 
-  //   code: 'BBI-JOU-012', 
-  //   nom: 'Puzzle en bois', 
-  //   prix: 14.99,
-  //   devise: 'USD',
-  //   region: 'Butembo',
-  //   classement: 'Jouets & Éveil',
-  //   categorie: 'Jouet',
-  //   type: 'Puzzle',
-  //   taille: ['20x20cm'],
-  //   couleur: ['Bois', 'Couleurs'],
-  //   description: 'Puzzle éducatif en bois 12 pièces pour enfant.', 
-  //   imageUrl: ['/assets/imagesProduits/012.jpeg']
-  // },
+  {
+    id: 12, 
+    code: 'BBI-JOU-012', 
+    nom: 'Puzzle en bois', 
+    prix: 14.99,
+    devise: 'USD',
+    region: 'Butembo',
+    classement: 'Jouets & Éveil',
+    categorie: 'Jouet',
+    type: 'Puzzle',
+    taille: ['20x20cm'],
+    couleur: ['bois', 'bleu', 'vert'],
+    description: 'Puzzle éducatif en bois 12 pièces pour enfant.', 
+    imagesParCouleur: {
+      'bois' : '/assets/imagesProduits/bbi-jou-012/bois.jpeg',
+      'bleu' : '/assets/imagesProduits/bbi-jou-012/bleu.jpeg',
+      'vert' : '/assets/imagesProduits/bbi-jou-012/vert.jpeg',
+    }
+  },
   // // Produit 13
-  // { 
-  //   id: 13, 
-  //   code: 'BBI-ACC-013', 
-  //   nom: 'Casquette enfant', 
-  //   prix: 15000, 
-  //   devise: 'CDF',
-  //   region: 'Goma',
-  //   classement: 'Vêtements & Mode',
-  //   categorie: 'Accessoire',
-  //   type: 'Chapeau',
-  //   taille: ['48 cm'],
-  //   couleur: ['Rouge', 'Blanc'],
-  //   description: 'Casquette légère et colorée, protection UV.', 
-  //   imageUrl: ['/assets/imagesProduits/013.jpeg']
-  // },
+  { 
+    id: 13, 
+    code: 'BBI-ACC-013', 
+    nom: 'Casquette enfant', 
+    prix: 15000, 
+    devise: 'CDF',
+    region: 'Goma',
+    classement: 'Vêtements & Mode',
+    categorie: 'Accessoire',
+    type: 'Chapeau',
+    taille: ['48 cm'],
+    couleur: ['rouge', 'blanc', 'vert', 'noire'],
+    description: 'Casquette légère et colorée, protection UV.', 
+    imagesParCouleur: {
+      'rouge' : '/assets/imagesProduits/bbi-acc-013/rouge.jpeg',
+      'blanc' : '/assets/imagesProduits/bbi-acc-013/blanc.jpeg',
+      'vert' : '/assets/imagesProduits/bbi-acc-013/vert.jpeg',
+      'noire' : '/assets/imagesProduits/bbi-acc-013/noire.jpeg',
+    }
+  },
   // // Produit 14
-  // { 
-  //   id: 14, 
-  //   code: 'BBI-VET-014', 
-  //   nom: 'Veste bébé', 
-  //   prix: 19.99, 
-  //   devise: 'USD',
-  //   region: 'Beni',
-  //   classement: 'Vêtements & Mode',
-  //   categorie: 'Vêtement',
-  //   type: 'Veste',
-  //   taille: ['9-12 mois'],
-  //   couleur: ['Gris anthracite'],
-  //   description: 'Veste chaude en polaire, avec capuche.', 
-  //   imageUrl: ['/assets/imagesProduits/014.jpeg']
-  // },
+  { 
+    id: 14, 
+    code: 'BBI-VET-014', 
+    nom: 'Veste bébé', 
+    prix: 19.99, 
+    devise: 'USD',
+    region: 'Beni',
+    classement: 'Vêtements & Mode',
+    categorie: 'Vêtement',
+    type: 'Veste',
+    taille: ['9-12 mois'],
+    couleur: ['bleu fonce', 'blanc', 'rose'],
+    description: 'Veste chaude en polaire, avec capuche.', 
+    imagesParCouleur: {
+      'bleu fonce' : '/assets/imagesProduits/bbi-vet-014/bleu-fonce.jpeg',
+      'blanc' : '/assets/imagesProduits/bbi-vet-014/blanc.jpeg',
+      'rose' : '/assets/imagesProduits/bbi-vet-014/rose.jpeg',
+    }
+  },
   // // Produit 15
-  // { 
-  //   id: 15, 
-  //   code: 'BBI-JOU-015', 
-  //   nom: 'Jouet musical', 
-  //   prix: 16.99, 
-  //   devise: 'USD',
-  //   region: 'Butembo',
-  //   classement: 'Jouets & Éveil',
-  //   categorie: 'Jouet',
-  //   type: 'Musical',
-  //   taille: ['Taille unique'],
-  //   couleur: ['Bois', 'Métal'],
-  //   description: 'Petit xylophone en bois pour débuter la musique.', 
-  //   imageUrl: ['/assets/imagesProduits/015.jpeg']
-  // },
+  { 
+    id: 15, 
+    code: 'BBI-JOU-015', 
+    nom: 'Jouet musical', 
+    prix: 16.99, 
+    devise: 'USD',
+    region: 'Butembo',
+    classement: 'Jouets & Éveil',
+    categorie: 'Jouet',
+    type: 'Musical',
+    taille: ['Taille unique'],
+    couleur: ['multicolor bois', 'rose'],
+    description: 'Petit xylophone en bois pour débuter la musique.', 
+    imagesParCouleur: {
+      'multicolor bois' : '/assets/imagesProduits/bbi-jou-015/multicolor.jpeg',
+      'rose' : '/assets/imagesProduits/bbi-jou-015/rose.jpeg'
+    }
+  },
   // // Produit 16
-  // { 
-  //   id: 16, 
-  //   code: 'BBI-JOU-016', 
-  //   nom: 'Doudou', 
-  //   prix: 12.99,
-  //   devise: 'USD',
-  //   region: 'Goma',
-  //   classement: 'Jouets & Éveil',
-  //   categorie: 'Jouet',
-  //   type: 'Doudou',
-  //   taille: ['25x25cm'],
-  //   couleur: ['Crème'],
-  //   description: 'Doudou plat en forme de lapin, très doux.', 
-  //   imageUrl: ['/assets/imagesProduits/016.jpeg']
-  // },
+  { 
+    id: 16, 
+    code: 'BBI-JOU-016', 
+    nom: 'Doudou', 
+    prix: 12.99,
+    devise: 'USD',
+    region: 'Goma',
+    classement: 'Jouets & Éveil',
+    categorie: 'Jouet',
+    type: 'Doudou',
+    taille: ['25x25cm'],
+    couleur: ['lin','rose', 'bleu'],
+    description: 'Doudou plat en forme de lapin, très doux.', 
+    imagesParCouleur: {
+      'lin' : '/assets/imagesProduits/bbi-jou-016/lin.jpeg',
+      'rose' : '/assets/imagesProduits/bbi-jou-016/rose.jpeg',
+      'bleu' : '/assets/imagesProduits/bbi-jou-016/bleu.jpeg'
+    }
+  },
   // // Produit 17
-  // { 
-  //   id: 17, 
-  //   code: 'BBI-JOU-017', 
-  //   nom: 'Balle sensorielle', 
-  //   prix: 8.99,
-  //   devise: 'USD',
-  //   region: 'Beni',
-  //   classement: 'Jouets & Éveil',
-  //   categorie: 'Jouet',
-  //   type: 'Éveil',
-  //   taille: ['10 cm', '15 cm'],
-  //   couleur: ['Orange' ,'Bleu'],
-  //   description: 'Balle colorée avec différentes textures pour la préhension.', 
-  //   imageUrl: ['/assets/imagesProduits/017.jpeg']
-  // },
+  { 
+    id: 17, 
+    code: 'BBI-JOU-017', 
+    nom: 'Balle sensorielle', 
+    prix: 8.99,
+    devise: 'USD',
+    region: 'Beni',
+    classement: 'Jouets & Éveil',
+    categorie: 'Jouet',
+    type: 'Éveil',
+    taille: ['10 cm', '15 cm'],
+    couleur: ['multicolor', 'orange' ,'bleu'],
+    description: 'Balle colorée avec différentes textures pour la préhension.', 
+    imagesParCouleur: {
+      'multicolor' : '/assets/imagesProduits/bbi-jou-017/multicolor.jpeg',
+      'orange' : '/assets/imagesProduits/bbi-jou-017/orange.jpeg',
+      'bleu' : '/assets/imagesProduits/bbi-jou-017/bleu.jpeg'
+    }
+  },
   // // Produit 18
-  // { 
-  //   id: 18, 
-  //   code: 'BBI-EQP-018', // Bébé-Équipement-018
-  //   nom: 'Tapis d’éveil', 
-  //   prix: 24.99,
-  //   devise: 'USD',
-  //   region: 'Butembo',
-  //   classement: 'Chambre & Déco',
-  //   categorie: 'Équipement',
-  //   type: 'Tapis',
-  //   taille: ['80x80cm'],
-  //   couleur: ['Motifs jungle'],
-  //   description: 'Tapis d\'éveil rembourré avec arches et jouets amovibles.', 
-  //   imageUrl: ['/assets/imagesProduits/018.jpeg']
-  // }
+  { 
+    id: 18, 
+    code: 'BBI-EQP-018', // Bébé-Équipement-018
+    nom: 'Tapis d’éveil', 
+    prix: 24.99,
+    devise: 'USD',
+    region: 'Butembo',
+    classement: 'Chambre & Déco',
+    categorie: 'Équipement',
+    type: 'Tapis',
+    taille: ['80x80cm'],
+    couleur: ['motifs jungle', 'rose'],
+    description: 'Tapis d\'éveil rembourré avec arches et jouets amovibles.', 
+    imagesParCouleur: {
+      'motifs jungle' : '/assets/imagesProduits/bbi-eqp-018/motifs-jungle.jpeg',
+      'rose' : '/assets/imagesProduits/bbi-eqp-018/rose.jpeg'
+    }
+  }
 ];

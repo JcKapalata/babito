@@ -96,9 +96,8 @@ export class AchatForm implements OnInit, OnChanges {
     this.isAchatDirect = this.router.url.includes('achat-direct');
 
     this.produitForm.get('couleur')?.valueChanges.subscribe(selectedCouleur => {
-        
-        // 1. Mise à jour de l'image (Votre logique de dictionnaire)
-        this.updateImageFromColor(selectedCouleur);
+      // 1. Mise à jour de l'image (Votre logique de dictionnaire)
+      this.updateImageFromColor(selectedCouleur);
     });
   }
 
@@ -113,8 +112,6 @@ export class AchatForm implements OnInit, OnChanges {
         this.currentImageUrl = nouveauChemin; 
         console.log('Image mise à jour via FormGroup:', this.currentImageUrl);
     } else {
-        // Revenir à l'image par défaut si la couleur n'a pas d'image spécifique
-        this.currentImageUrl = (this.produit as any)?.imageUrl || ''; 
         console.warn('Chemin d\'image non défini pour la couleur:', selectedCouleur);
     }
   }

@@ -33,7 +33,7 @@ export class ProduitsList implements OnInit, OnDestroy{
   filtreActif: string = 'Tous';
   showAllProduits: Map<string, boolean> = new Map();
 
-  // NOUVEAU: Gérer l'abonnement pour éviter les fuites de mémoire (très important!)
+  // Gérer l'abonnement pour éviter les fuites de mémoire (très important!)
   private searchSubscription: Subscription;
   
   constructor(
@@ -69,15 +69,15 @@ export class ProduitsList implements OnInit, OnDestroy{
 
     // 4. ABONNEMENT CRUCIAL : Exécution du flux RxJS
     this.searchSubscription = this.produits$.subscribe({
-        next: (resultatsFiltres: Produit[]) => {
-          // Regrouper les résultats plats (Produit[]) avant l'assignation
-          this.produitsAffiches = this.regrouperParClassement(resultatsFiltres);
-          console.log( this.produitsAffiches)
-        },
-        error: (err) => {
-          console.error("Erreur lors de la recherche RxJS :", err);
-          this.produitsAffiches = {};
-        }
+      next: (resultatsFiltres: Produit[]) => {
+        // Regrouper les résultats plats (Produit[]) avant l'assignation
+        this.produitsAffiches = this.regrouperParClassement(resultatsFiltres);
+        console.log( this.produitsAffiches)
+      },
+      error: (err) => {
+        console.error("Erreur lors de la recherche ... :", err);
+        this.produitsAffiches = {};
+      }
     });
   }
 
@@ -86,7 +86,7 @@ export class ProduitsList implements OnInit, OnDestroy{
     // (Insérer ici la fonction de regroupement montrée précédemment)
     // Cette fonction prend un Produit[] et retourne un { [key: string]: Produit[] }
     return produits.reduce((acc, produit) => {
-      const cle = produit.classement || 'Non Classé'; 
+      const cle = produit.classement; 
       if (!acc[cle]) {
         acc[cle] = [];
       }
@@ -97,10 +97,10 @@ export class ProduitsList implements OnInit, OnDestroy{
 
   // Nettoyage à la destruction du composant
   ngOnDestroy(): void {
-      // Nettoie l'abonnement du Subject pour éviter les fuites de mémoire.
-      this.searchSubscription?.unsubscribe();
-      // // On peut aussi compléter le subject même si l'unsubscribe suffit souvent pour l'abonnement
-      this.searchTerms.complete(); 
+    // Nettoie l'abonnement du Subject pour éviter les fuites de mémoire.
+    this.searchSubscription?.unsubscribe();
+    // On peut aussi compléter le subject même si l'unsubscribe suffit souvent pour l'abonnement
+    this.searchTerms.complete(); 
   }
 
   // filtre le classement

@@ -41,6 +41,7 @@ export class FiltreProduit implements OnInit{
   onSearchChange(term: string) {
     if (term.trim().length < 2) {
       this.searchTermChanged.emit('');
+      return;
     }
     this.searchTermChanged.emit(term.trim()); 
   }

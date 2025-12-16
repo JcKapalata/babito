@@ -1,7 +1,7 @@
 .mat-toolbar {
   background-color: var(--primary-color); /* Vert moyen */
   color: white;
-  min-height: 8vh;
+  min-height: 9vh;
   position: fixed;
   top: 0;
   left: 0;
@@ -163,18 +163,57 @@
   }
 }
 
-@media (max-width: 350px) {
-  /* On cache le menu complet */
-  .menu-pcp {
+@media (350px <= width < 400px) {
+  .mat-toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch
+  }
+
+  .logo {
+    font-size: 1.6rem;
+  }
+
+  .menu-pcp{
+    height: 35%;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .menu-first{
+    height: 100%;
+    display: flex;
+  }
+
+  .menu-second{
     display: none;
   }
 
-  /* On affiche le bouton hamburger */
+  .boutton {     
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    border-radius: 5px 5px 0 0;
+    height: 100%;
+  }
+
   .btn-mobile {
     display: block;
+    color: white !important;
   }
-  
+}
+
+@media (max-width: 350px) {
+   
   .logo {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
+  }
+
+  .menu-first, .menu-second {
+    display: none;
+  }
+
+  .btn-mobile {
+    display: block;
+    color: white !important;
   }
 }

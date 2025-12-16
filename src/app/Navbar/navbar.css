@@ -14,6 +14,7 @@
 .logo {
   font-size: 1.8rem;
   font-weight: 500;
+  margin: 5px 0;
 }
 
 
@@ -86,19 +87,67 @@
   
 }
 
-@media (495px <= width < 600px) {
+@media (420px <= width < 600px) {
   .mat-toolbar {
     display: flex;
     flex-direction: column;
     align-items: stretch
   }
 
-  .menu-pcp{
-    height: 40%;
+  .logo {
+    font-size: 1.7rem;
   }
 
-  .menu-first, .menu-second{
+  .menu-pcp{
+    height: 45%;
+    justify-content: flex-end;
+  }
+
+  .menu-first{
     height: 100%;
+  }
+
+  .menu-second{
+    display: none;
+  }
+
+  .boutton {     
+    padding: 2px 8px;
+    font-size: 0.9rem;
+    border-radius: 5px 5px 0 0;
+    height:100%;
+  }
+
+  .btn-mobile {
+    display: block;
+    color: white !important;
+  }
+}
+
+@media (400px <= width < 420px) {
+  .mat-toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch
+  }
+
+  .logo {
+    font-size: 1.7rem;
+  }
+
+  .menu-pcp{
+    height: 40%;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .menu-first{
+    height: 100%;
+    display: flex;
+  }
+
+  .menu-second{
+    display: none;
   }
 
   .boutton {     
@@ -107,9 +156,10 @@
     border-radius: 5px 5px 0 0;
     height: 100%;
   }
-  
-  .logo {
-    font-size: 1.7rem;
+
+  .btn-mobile {
+    display: block;
+    color: white !important;
   }
 }
 

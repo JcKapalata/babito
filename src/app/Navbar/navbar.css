@@ -1,7 +1,7 @@
 .mat-toolbar {
   background-color: var(--primary-color); /* Vert moyen */
   color: white;
-  min-height: 8.5vh;
+  min-height: 9vh;
   position: fixed;
   top: 0;
   left: 0;

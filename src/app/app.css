@@ -1,6 +1,6 @@
 .main-container{
   position: relative;
-  min-height: 70vh;
+  min-height: calc(100vh - 150px);
   padding-top: 8vh;
   }
 
@@ -18,7 +18,6 @@
     cursor: pointer;
 }
 
-/* Optionnel: Ajuster la taille de l'icône Font Awesome */
 .boutton fa-icon {
     font-size: 28px; 
     display: flex;

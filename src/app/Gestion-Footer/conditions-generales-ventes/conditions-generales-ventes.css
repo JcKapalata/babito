@@ -81,29 +81,6 @@
   margin-bottom: 0.4rem;
 }
 
-/* ----- Animations d'entrée ----- */
-.animate-fade {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fade-in-scroll 0.8s forwards;
-}
-
-.animate-slide {
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: slide-in-scroll 0.8s forwards;
-}
-
-@keyframes fade-in-scroll {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slide-in-scroll {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 /* ----- Responsive ----- */
 @media(max-width: 700px) {
   .card {

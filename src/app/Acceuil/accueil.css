@@ -24,7 +24,6 @@
   max-width: 1200px;
   margin: auto;
   padding: 50px 20px;
-  overflow-x: hidden;
 }
 
 /* SECTIONS */
@@ -81,19 +80,23 @@
 
 .slide-left.visible {
   opacity: 1;
+  overflow-x: visible;
   transform: translateX(0);
 }
 
 .slide-right.visible {
   opacity: 1;
+  overflow-x: visible;
   transform: translateX(0);
 }
 
 .slide-left {
+  overflow-x: visible;
   transform: translateX(-60px);
 }
 
 .slide-right {
+  overflow-x: visible;
   transform: translateX(60px);
 }
 

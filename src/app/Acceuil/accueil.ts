@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, HostListener } from '@angular/core';
+import { Component, AfterViewInit, HostListener, Renderer2, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-accueil',
@@ -7,29 +7,26 @@ import { Component, AfterViewInit, HostListener } from '@angular/core';
 })
 export class Accueil implements AfterViewInit {
 
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
+
   ngAfterViewInit(): void {
-    this.checkElementsInView(); // vérifie dès le chargement
-  }
+    const observerOptions = {
+      root: null,
+      threshold: 0.1, 
+      rootMargin: '0px 0px -50px 0px'
+    };
 
-  @HostListener('window:scroll', [])
-  onScroll() {
-    this.checkElementsInView(); // vérifie à chaque scroll
-  }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.renderer.addClass(entry.target, 'visible');
+        } else {
+          this.renderer.removeClass(entry.target, 'visible');
+        }
+      });
+    }, observerOptions);
 
-  private checkElementsInView() {
-    const elements = document.querySelectorAll('.slide-left, .slide-right, .animate-fade');
-
-    elements.forEach(el => {
-      const position = el.getBoundingClientRect().top;
-      const windowHeight = window.innerHeight;
-
-      if (position < windowHeight - 150 && position > 0) {
-        // élément visible → ajoute la classe
-        el.classList.add('visible');
-      } else {
-        // élément hors de la vue → retire la classe
-        el.classList.remove('visible');
-      }
-    });
+    const elements = this.el.nativeElement.querySelectorAll('.slide-left, .slide-right, .animate-fade');
+    elements.forEach((el: HTMLElement) => observer.observe(el));
   }
 }

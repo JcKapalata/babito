@@ -19,6 +19,12 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
+.container {
+  padding: 0 1rem;
+  height: 50vh;
+  overflow-y: scroll;
+}
+
 .back-button {
   position: absolute;
   top: 10px;
@@ -75,19 +81,6 @@
 
 .box ul li {
   margin-bottom: 0.4rem;
-}
-
-/* ----- Animations d'entrée ----- */
-.animate-fade {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fade-in-scroll 0.8s forwards;
-}
-
-.animate-slide {
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: slide-in-scroll 0.8s forwards;
 }
 
 @keyframes fade-in-scroll {

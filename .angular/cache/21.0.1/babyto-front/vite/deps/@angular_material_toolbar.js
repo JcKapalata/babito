@@ -4,11 +4,11 @@ import "./chunk-XA6252L2.js";
 import {
   Platform
 } from "./chunk-BC3ST3GM.js";
+import "./chunk-SOXOVYQB.js";
+import "./chunk-OQP7OUDA.js";
 import {
   BidiModule
 } from "./chunk-XOOIT6O6.js";
-import "./chunk-SOXOVYQB.js";
-import "./chunk-OQP7OUDA.js";
 import {
   ChangeDetectionStrategy,
   Component,

@@ -4,8 +4,10 @@ import { PageNotFound } from './page-not-found/page-not-found';
 import { Achats } from './Achat/achat';
 import { Accueil } from './Acceuil/accueil';
 import { GestionFooter } from './Gestion-Footer/GestionFooter';
+import { Login } from './authentification/login/login';
 
 export const routes: Routes = [
+    { path: 'login', component: Login},
     ...Boutique,
     ...Achats,
     ...GestionFooter,

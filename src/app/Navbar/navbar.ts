@@ -48,7 +48,7 @@ export class Navbar {
 
   goToConnexion(){
     this.pageActive = 'connexion';
-    this.route.navigate(['auth/connexion']);
+    this.route.navigate(['login']);
   }
 
   goToPannier(){

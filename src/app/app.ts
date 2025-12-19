@@ -5,6 +5,7 @@ import { Footer } from "./footer/footer";
 import { MatCardActions } from "@angular/material/card";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { AuthService } from './authentification/auth-service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,16 @@ import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
-export class App {
+export class App implements OnInit{
+
+  constructor(private authService: AuthService) {
+  }
+
+  ngOnInit(): void {
+    this.authService.validateSession().subscribe(
+      () => console.log('refrechissement ...')
+    )
+  }
 
   // Déclarez l'icône comme propriété pour le template
   public faWhatsapp = faWhatsapp;

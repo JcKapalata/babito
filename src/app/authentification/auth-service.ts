@@ -13,33 +13,52 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  // Token et état login
   private _token: string | null = localStorage.getItem(this.AUTH_KEY);
-  private _isLoggedIn = new BehaviorSubject<boolean>(!!this._token);
-
-  // Observable pour composants et Guard
+  private _isLoggedIn = new BehaviorSubject<boolean | null>(null); // null = session non validée
   public isLoggedIn$ = this._isLoggedIn.asObservable();
 
-  // Récupérer le token courant
+  constructor() {
+    console.log('[AuthService] Initialisation, token existant:', this._token);
+    this.initSession();
+  }
+
+  private initSession() {
+    const token = localStorage.getItem(this.AUTH_KEY);
+    if (!token) {
+      console.log('[AuthService] Aucun token trouvé, session non connectée');
+      this._isLoggedIn.next(false);
+      return;
+    }
+
+    console.log('[AuthService] Token trouvé, validation session...');
+    this.validateSession(token).subscribe(valid => {
+      console.log('[AuthService] Résultat validation session:', valid);
+    });
+  }
+
   getToken(): string | null {
     return this._token;
   }
 
-  // Login
   login(credentials: { email: string; password: string }): Observable<boolean> {
+    console.log('[AuthService] Tentative login avec', credentials.email);
     return this.http.get<UserClient[]>('api/clients').pipe(
       switchMap(users => {
         const user = users.find(u => u.email === credentials.email && u.password === credentials.password);
-        if (!user) return of(false);
+        if (!user) {
+          console.log('[AuthService] Identifiants incorrects');
+          return of(false);
+        }
 
-        const sessionTag = Date.now().toString();
+        const sessionTag = crypto.randomUUID();
         const updatedUser = { ...user, lastSessionTag: sessionTag };
 
+        console.log('[AuthService] Login réussi, mise à jour sessionTag et token');
         return this.http.put(`api/clients/${user.id}`, updatedUser).pipe(
           map(() => {
-            // Sauvegarde du token et mise à jour de l'état login
             this._token = `${user.id}.${sessionTag}`;
             localStorage.setItem(this.AUTH_KEY, this._token);
+            console.log('[AuthService] Token enregistré:', this._token);
             this._isLoggedIn.next(true);
             return true;
           })
@@ -48,22 +67,38 @@ export class AuthService {
     );
   }
 
-  // Logout
   logout(): void {
+    console.log('[AuthService] Logout exécuté');
     this._token = null;
     localStorage.removeItem(this.AUTH_KEY);
     this._isLoggedIn.next(false);
     this.router.navigate(['/login']);
   }
 
-  // Vérifier expiration du token (optionnel)
-  private isTokenExpired(token: string): boolean {
-    try {
-      const decoded: any = jwtDecode(token);
-      const currentTime = Math.floor(Date.now() / 1000);
-      return decoded.exp < currentTime;
-    } catch {
-      return true; // Malformé = expiré
+  validateSession(token?: string): Observable<boolean> {
+    const currentToken = token || this.getToken();
+    if (!currentToken) {
+      console.log('[AuthService] validateSession: pas de token');
+      this._isLoggedIn.next(false);
+      return of(false);
     }
+
+    const [userId, localTag] = currentToken.split('.');
+    console.log('[AuthService] validateSession: vérification token', currentToken);
+
+    return this.http.get<UserClient>(`api/clients/${userId}`).pipe(
+      map(user => {
+        const valid = user.lastSessionTag === localTag;
+        console.log('[AuthService] validateSession: lastSessionTag serveur:', user.lastSessionTag, ' vs token:', localTag, ' => valid=', valid);
+        if (!valid) this.logout();
+        else this._isLoggedIn.next(true);
+        return valid;
+      }),
+      catchError(err => {
+        console.error('[AuthService] Erreur validateSession:', err);
+        this.logout();
+        return of(false);
+      })
+    );
   }
 }

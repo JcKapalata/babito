@@ -40,7 +40,7 @@
     <!-- menu second -->
     <div class="menu-second">
       @if (authService.isLoggedIn$ | async) {
-        <button (click)="onLogout()" class="boutton">Déconnexion</button>
+        <button (click)="goToProfile()" class="boutton">Profile</button>
       } @else {
         <button mat-button 
           (click)="goToConnexion()" 
@@ -72,9 +72,9 @@
     <mat-divider></mat-divider>
 
     @if (authService.isLoggedIn$ | async) {
-      <button mat-menu-item (click)="onLogout()">
-      <mat-icon>account_circle</mat-icon> Deconnexion
-    </button>
+      <button mat-menu-item (click)="goToProfile()">
+        <mat-icon>account_circle</mat-icon> Profile
+      </button>
     } @else {
       <button mat-menu-item (click)="goToConnexion()">
       <mat-icon>account_circle</mat-icon> Connexion

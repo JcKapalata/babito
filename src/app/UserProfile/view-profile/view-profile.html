@@ -1,0 +1,38 @@
+<div class="profile-container">
+  @if (user$ | async; as user) {
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="avatar-circle">
+          {{ user.prenom }}{{ user.nom }}
+        </div>
+      </div>
+
+      <div class="profile-body">
+        <div class="info-row">
+          <span class="label">Utilisateur</span>
+          <p class="value">{{ user.prenom }} {{ user.nom }}</p>
+        </div>
+
+        <div class="info-row">
+          <span class="label">Email sécurisé</span>
+          <p class="value">{{ user.email }}</p>
+        </div>
+
+        <div class="info-row">
+          <span class="label">Session ID</span>
+          <span class="token-badge">{{ user.lastSessionTag }}</span>
+        </div>
+      </div>
+
+      <div class="profile-footer">
+        <button (click)="onLogout()" class="btn-logout">
+          Quitter la session
+        </button>
+      </div>
+    </div>
+  } @else {
+    <div class="loading-state">
+    <p>Chargement des données sécurisées...</p>
+  </div>
+  }
+</div>

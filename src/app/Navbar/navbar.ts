@@ -64,4 +64,9 @@ export class Navbar {
     this.pageActive = 'panier';
     this.route.navigate(['achat/panier']);
   }
+
+  goToProfile(){
+    this.pageActive = 'profile';
+    this.route.navigate(['mon-compte/profil'])
+  }
 }

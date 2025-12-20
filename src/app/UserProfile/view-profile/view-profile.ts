@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { UserService } from '../user-service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../authentification/auth-service';
+import { Loading } from "../../loading/loading";
 
 @Component({
   selector: 'app-view-profile',
-  imports: [CommonModule],
+  imports: [CommonModule, Loading],
   templateUrl: './view-profile.html',
   styleUrl: './view-profile.css',
 })

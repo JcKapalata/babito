@@ -7,12 +7,13 @@ export const USERS: UserClient[] = [
     nom: 'Super Admin',
     password: 'admin123password',
     token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...', // Token simulé
-    lastSessionTag: ''
+    // lastSessionTag: ''
   },
   {
     id: 2,
     email: 'sophie.dev@gmail.com',
-    nom: 'Sophie Martin',
+    nom: 'Sophie',
+    prenom: 'Martin',
     password: 'password456',
     token: 'abc123def456',
     lastSessionTag: ''

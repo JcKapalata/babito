@@ -4,7 +4,6 @@
   align-items: flex-start;
   min-height: 80vh;
   padding: 20px;
-  background-color: #f3f4f6; /* Couleur de fond */
 }
 
 .profile-card {
@@ -18,7 +17,7 @@
 }
 
 .profile-header {
-  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
   height: 120px;
   display: flex;
   align-items: center;
@@ -73,7 +72,7 @@
 .token-badge {
   display: inline-block;
   background: #fef2f2;
-  color: #991b1b;
+  color: var(--warn-color);
   font-family: monospace;
   font-size: 0.8rem;
   padding: 6px 12px;
@@ -88,8 +87,19 @@
   flex-direction: column;
 }
 
+.btn-logout {
+  padding: 16px;
+  cursor: pointer;
+  background: var(--warn-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
 .btn-logout:hover {
-  background-color: #b91c1c; /* Rouge plus foncé */
+  background: var(--dorail-doux);
+  color: var(--warn-color);
+  border: 1.5px solid var(--warn-color);
 }
 
 .btn-logout:active {
@@ -100,13 +110,15 @@
 
 @media (max-width: 640px) {
   .profile-container {
-    padding: 0; /* Prend tout l'espace sur mobile */
+    width: 80%;
+    margin: 20px auto;
+    padding: 0; 
   }
   
-  .profile-card {
+  /* .profile-card {
     border-radius: 0;
     box-shadow: none;
-  }
+  } */
 
   .profile-header {
     height: 100px;

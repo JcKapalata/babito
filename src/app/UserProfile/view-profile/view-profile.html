@@ -3,7 +3,7 @@
     <div class="profile-card">
       <div class="profile-header">
         <div class="avatar-circle">
-          {{ user.prenom }}{{ user.nom }}
+          {{ user.prenom?.[0] }}{{ user.nom?.[0] }}
         </div>
       </div>
 
@@ -26,13 +26,11 @@
 
       <div class="profile-footer">
         <button (click)="onLogout()" class="btn-logout">
-          Quitter la session
+          Se deconnecter
         </button>
       </div>
     </div>
   } @else {
-    <div class="loading-state">
-    <p>Chargement des données sécurisées...</p>
-  </div>
+    <app-loading></app-loading>
   }
 </div>

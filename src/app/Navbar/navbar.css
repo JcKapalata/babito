@@ -37,11 +37,15 @@
   margin: 0 5px;
 }
 
+.btn-seconde{
+  display: flex;
+  align-items: center;
+}
+
 /* L'état actif permanent */
 .boutton.active-link {
   background-color: white !important; /* Inversion des couleurs */
   color: var(--accent-color) !important;
-  /* border-bottom: 2px solid white;  */
 }
 
 /* S'assurer que l'icône change aussi de couleur dans l'état actif */

@@ -40,14 +40,22 @@
     <!-- menu second -->
     <div class="menu-second">
       @if (authService.isLoggedIn$ | async) {
-        <button (click)="goToProfile()" class="boutton">Profile</button>
+        <button 
+          (click)="goToProfile()"  
+          class="boutton btn-seconde"
+          [class.active-link]="pageActive === 'profile'"
+          >
+            <mat-icon>account_circle</mat-icon>
+            <span>Mon Profil</span>
+        </button>
       } @else {
         <button mat-button 
           (click)="goToConnexion()" 
-          class="boutton"
+          class="boutton btn-seconde"
           [class.active-link]="pageActive === 'connexion'"
           >
-            <mat-icon>account_circle</mat-icon> Connexion
+            <mat-icon>login</mat-icon>
+            <span>Connexion</span>
         </button>
       }
     </div>

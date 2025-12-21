@@ -52,18 +52,28 @@ export class AuthService {
     );
   }
 
-  getUsers(): Observable<UserClientApi| null | undefined>{
-    return this.http.get(this.BASE_URL).pipe(
-      map( (result: any) => {
-        const userInstance: UserClientApi = {
-          ...result
+  getUsers(): Observable<UserClientApi | null> {
+    return this.http.get<UserClientApi>(this.BASE_URL).pipe(
+      map((result: any) => {
+        // Vérification : l'objet reçu a-t-il au moins un ID ou un email ?
+        if (result && (result.id || result.email)) {
+          const userInstance: UserClientApi = { ...result };
+          
+          // On met à jour le signal avec des données valides
+          this.user.set(userInstance);
+          return userInstance;
         }
 
-        this.user.set(userInstance);
-
-        return this.user();
+        // Si les données sont invalides (ex: {} ou null)
+        this.user.set(null); 
+        return null;
+      }),
+      catchError(err => {
+        console.error('Erreur lors de la récupération de l\'utilisateur', err);
+        this.user.set(null);
+        return of(null);
       })
-    )
+    );
   }
 
   logout(): Observable<null> {

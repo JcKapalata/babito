@@ -24,6 +24,7 @@ export class Login implements OnDestroy{
   private formBuilder = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   private loginSubscription: Subscription| null = null;
 
@@ -42,7 +43,8 @@ export class Login implements OnDestroy{
         next: (user: UserClientApi | null | undefined) => {
           if (user && user.id) {
             console.log('connexion reussie ...')
-            this.router.navigate(['/']);
+            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+            this.router.navigateByUrl(returnUrl);
           } else {
             // Cas où l'API répond 200 mais sans utilisateur (ex: null)
             console.log('impossible de se connecte ...')

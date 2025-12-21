@@ -3,14 +3,14 @@
     <div class="profile-card">
       <div class="profile-header">
         <div class="avatar-circle">
-          {{ profile()?.prenom?.[0] }}{{ profile()?.nom?.[0] }}
+          {{ profile()?.nom?.[0] }}{{ profile()?.prenom?.[0] }}
         </div>
       </div>
 
       <div class="profile-body">
         <div class="info-row">
           <span class="label">Utilisateur</span>
-          <p class="value">{{ profile()?.prenom }} {{ profile()?.nom }}</p>
+          <p class="value">{{ profile()?.nom }} {{ profile()?.prenom }}</p>
         </div>
 
         <div class="info-row">

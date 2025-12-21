@@ -30,9 +30,10 @@ export class Registre {
   };
 
   registerForm: FormGroup = this.fb.group({
-    username: ['', [Validators.required, Validators.minLength(3)]],
+    nom: ['', [Validators.required, Validators.minLength(4)]],
+    prenom: ['', [Validators.required, Validators.minLength(4)]],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
     confirmPassword: ['', [Validators.required]]
   }, this.formOptions); 
 

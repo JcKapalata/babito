@@ -99,9 +99,10 @@ button[mat-flat-button] {
   padding: 1.2rem;
   font-size: 1rem;
   border-radius: 6px;
-  margin-top: 1rem;
+  margin-top: 0.8 0rem;
   background: var(--primary-color) !important; /* On force votre bleu */
   color: white;
+  cursor: pointer;
 }
 button[mat-flat-button]:hover {
    background: var(--accent-color) !important;
@@ -109,6 +110,8 @@ button[mat-flat-button]:hover {
 
 button[mat-flat-button]:disabled {
   background-color: #bdc3c7 !important;
+  pointer-events: auto !important; 
+  cursor: not-allowed !important;
 }
 
 /* Style personnalisé pour le message d'erreur (hors mat-error) */

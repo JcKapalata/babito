@@ -13,7 +13,19 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Mot de passe</mat-label>
-      <input matInput formControlName="password" type="password">
+
+      <div class="input-wrapper">
+        <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'">
+        <button 
+          type="button" 
+          mat-icon-button 
+          matSuffix 
+          (click)="hidePassword = !hidePassword">
+            <mat-icon>
+              {{ hidePassword ? 'visibility_off' : 'visibility' }}
+            </mat-icon>
+        </button>
+      </div>
     </mat-form-field>
 
     <div>

@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { Subscription } from 'rxjs';
 import { UserClientApi } from '../../Models/clientUser';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ import { UserClientApi } from '../../Models/clientUser';
     ReactiveFormsModule, 
     MatFormFieldModule, 
     MatInputModule, 
-    MatButtonModule],
+    MatButtonModule,
+    MatIconModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -25,6 +27,8 @@ export class Login implements OnDestroy{
   private authService = inject(AuthService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+
+  hidePassword = true; // Par défaut, le mot de passe est masqué
 
   private loginSubscription: Subscription| null = null;
 

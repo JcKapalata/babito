@@ -16,9 +16,14 @@
       <input matInput formControlName="password" type="password">
     </mat-form-field>
 
-    <button mat-flat-button color="primary" [disabled]="loginFormGroup.invalid">
-      Se connecter
-    </button>
+    <div>
+      <button mat-flat-button color="primary" [disabled]="loginFormGroup.invalid">
+        Se connecter
+      </button>
+      <button mat-button type="button" (click)="goToRegister()">
+        S'inscrire
+      </button>
+    </div>
 
   </form>
 </div>

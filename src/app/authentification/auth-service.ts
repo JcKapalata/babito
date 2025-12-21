@@ -19,6 +19,7 @@ export class AuthService {
 
   user = signal<UserClientApi | null | undefined>(undefined);
 
+  // connecter un utilisateur
   login(credentials: Credentials): Observable<UserClientApi| null| undefined>{
     // 1. On cherche l'utilisateur qui a cet email et ce password
     return this.http.get<UserClientApi[]>(`${this.BASE_URL}`).pipe(
@@ -52,6 +53,7 @@ export class AuthService {
     );
   }
 
+  // récupérer les informations de l'utilisateur connecté
   getUsers(): Observable<UserClientApi | null> {
     return this.http.get<UserClientApi>(this.BASE_URL).pipe(
       map((result: any) => {
@@ -76,6 +78,7 @@ export class AuthService {
     );
   }
 
+  // déconnecter un utilisateur
   logout(): Observable<null> {
     return this.http.get(this.BASE_URL).pipe(
       tap( (result: any) => {
@@ -83,6 +86,22 @@ export class AuthService {
         this.user.set(null);
       })
     )
+  }
+
+  // Enregistrer un nouvel utilisateur
+  register(userData: UserClientApi): Observable<UserClientApi | null> {
+    // En production, le mot de passe serait haché côté serveur
+    return this.http.post<UserClientApi>(this.BASE_URL, userData).pipe(
+      tap((newUser) => {
+        console.log('Utilisateur créé avec succès', newUser);
+        // Optionnel : Connecter l'utilisateur automatiquement après inscription
+        // this.user.set(newUser); 
+      }),
+      catchError((err) => {
+        console.error('Erreur lors de la création du compte', err);
+        return of(null);
+      })
+    );
   }
 
 }

@@ -3,7 +3,7 @@ export interface UserClientApi {
   email: string;
   nom?: string;
   prenom?: string;   
-  password?: string;
+  password: string;
   token?: string; 
   lastSessionTag?: string;  
 }

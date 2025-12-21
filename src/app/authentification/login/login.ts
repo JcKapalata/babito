@@ -63,4 +63,8 @@ export class Login implements OnDestroy{
     this.loginSubscription?.unsubscribe()
   }
 
+  goToRegister(){
+    this.router.navigate(['/signup']);
+  }
+
 }

@@ -6,9 +6,11 @@ import { Accueil } from './Acceuil/accueil';
 import { GestionFooter } from './Gestion-Footer/GestionFooter';
 import { Login } from './authentification/login/login';
 import { UserRoutes } from './UserProfile/userRoutes';
+import { Registre } from './authentification/registre/registre';
 
 export const routes: Routes = [
     { path: 'login', component: Login},
+    { path: 'signup', component: Registre},
     ...UserRoutes,
     ...Boutique,
     ...Achats,

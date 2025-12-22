@@ -42,6 +42,52 @@
             <span class="label">Prix Unitaire</span>
             <span class="valeur">{{ achat.prixUnitaire }} {{ achat.paiement.devise }}</span>
           </div>
+          <div class="info-item">
+            <span class="label">Couleur</span>
+            <span class="valeur">{{ achat.couleurSelectionnee }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Taille</span>
+            <span class="valeur">{{ achat.tailleSelectionnee }}</span>
+          </div>
+        </div>
+
+        <div class="grille-details">
+          
+          <div class="info-item">
+            <span class="label">État du Paiement</span>
+            <span class="valeur badge-etat" [attr.data-etat]="achat.paiement.etat">
+              {{ achat.paiement.etat.split('_').join(' ') | titlecase }}
+            </span>
+          </div>
+
+          <div class="info-item">
+            <span class="label">Moyen de paiement</span>
+            <span class="valeur">
+              @if (achat.paiement.methode === 'mobile_money') {
+                Mobile Money ({{ achat.paiement.operateur | uppercase }})
+              } @else if (achat.paiement.methode === 'cash_delivery') {
+                Cash à la livraison
+              } @else {
+                {{ achat.paiement.methode | titlecase }}
+              }
+            </span>
+          </div>
+
+          <div class="info-item">
+            <span class="label">Détails de transaction</span>
+            <span class="valeur">
+              @if (achat.paiement.methode === 'mobile_money') {
+                N°: {{ achat.paiement.numeroMobile }}
+              } @else if (achat.paiement.cardLast4) {
+                **** **** **** {{ achat.paiement.cardLast4 }}
+              } @else if (achat.paiement.transactionId) {
+                ID: {{ achat.paiement.transactionId }}
+              } @else {
+                Paiement à la réception
+              }
+            </span>
+          </div>
         </div>
 
         <div class="total-box">

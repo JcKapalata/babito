@@ -97,9 +97,9 @@
 
 h1 { 
   margin: 0; 
-  color: #2c3e50; 
+  color: var(--accent-color); 
   font-size: 1.5rem; 
-  border-bottom: 2px solid var(--primary-color); /* Ligne de rappel verte */
+  border-bottom: 2px solid var(--accent-color); /* Ligne de rappel verte */
   padding-bottom: 5px;
   display: inline-block;
 }
@@ -125,11 +125,29 @@ h1 {
 
 .valeur { font-weight: 600; color: #34495e; }
 
+/* Utilisation de split('_').join(' ') dans le HTML + ce CSS */
+.badge-etat {
+  font-weight: 700;
+}
+
+.badge-etat[data-etat="succès"] { color: var(--primary-color); }
+.badge-etat[data-etat="en_attente"] { color: var(--warning-orange); }
+.badge-etat[data-etat="échec"] { color: var(--warn-color); }
+.badge-etat[data-etat="remboursé"] { color: var(--warn-color); opacity: 0.8; }
+.badge-etat[data-etat="à_collecter"] { color: var(--accent-color); }
+
+.info-item .valeur {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.95rem;
+}
+
 /* Boîte de total avec ton Bleu Moyen */
 .total-box {
   background: var(--accent-color);
   color: white;
-  padding: 20px;
+  padding: 15px;
   border-radius: 12px;
   display: flex;
   justify-content: space-between;

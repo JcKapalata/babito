@@ -10,16 +10,22 @@
   margin: 0 auto;
 }
 
+/* --- Bouton Retour avec ta couleur Warn --- */
 .btn-retour {
   display: flex;
   align-items: center;
   gap: 8px;
   border: none;
   background: none;
-  color: #2c3e50;
+  color: var(--warn-color);
   cursor: pointer;
   margin-bottom: 20px;
   font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.btn-retour:hover {
+  opacity: 0.8;
 }
 
 .carte-detail {
@@ -28,13 +34,13 @@
   box-shadow: 0 10px 25px rgba(0,0,0,0.05);
   overflow: hidden;
   display: flex;
-  flex-direction: column; /* Mobile first : vertical */
+  flex-direction: column; /* Mobile first */
 }
 
-/* --- Section Image --- */
+/* --- Section Image avec ton Corail Doux --- */
 .section-image {
   position: relative;
-  background: #f0f2f5;
+  background: var(--dorail-doux);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,6 +55,7 @@
   object-fit: contain;
 }
 
+/* --- Badges de Statut avec tes Couleurs --- */
 .statut-badge {
   position: absolute;
   top: 15px;
@@ -61,33 +68,66 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* Couleurs des badges (réutilisées) */
-.statut-badge.livré { background: #d4edda; color: #27ae60; }
-.statut-badge.en-cours { background: #fff3cd; color: #f39c12; }
-.statut-badge.annulé { background: #f8d7da; color: #e74c3c; }
-.statut-badge.en-attente-paiement { background: #d1ecf1; color: #0c5460; }
+/* Couleurs fixes pour les statuts */
+.statut-badge.livré { 
+  color: white; 
+  background: var(--primary-color); 
+}
+
+.statut-badge.en-cours { 
+  color: white; 
+  background: var(--warning-orange); 
+}
+
+.statut-badge.annulé { 
+  color: white; 
+  background: var(--warn-color); 
+}
+
+.statut-badge.en-attente-paiement {
+  color: white; /* Bleu clair type info */
+  background: var(--accent-color); 
+}
+
 
 /* --- Section Infos --- */
 .section-infos {
   padding: 30px;
 }
 
-h1 { margin: 0; color: #2c3e50; font-size: 1.5rem; }
+h1 { 
+  margin: 0; 
+  color: #2c3e50; 
+  font-size: 1.5rem; 
+  border-bottom: 2px solid var(--primary-color); /* Ligne de rappel verte */
+  padding-bottom: 5px;
+  display: inline-block;
+}
+
 .reference { color: #95a5a6; font-size: 0.9rem; margin-top: 5px; }
 
 .grille-details {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 2 colonnes même sur mobile */
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin: 25px 0;
 }
 
 .info-item { display: flex; flex-direction: column; }
-.label { font-size: 0.8rem; color: #7f8c8d; text-transform: uppercase; }
+
+/* Labels avec ton Bleu Moyen (Accent) */
+.label { 
+  font-size: 0.8rem; 
+  color: var(--accent-color); 
+  text-transform: uppercase; 
+  font-weight: 700;
+}
+
 .valeur { font-weight: 600; color: #34495e; }
 
+/* Boîte de total avec ton Bleu Moyen */
 .total-box {
-  background: #2c3e50;
+  background: var(--accent-color);
   color: white;
   padding: 20px;
   border-radius: 12px;
@@ -99,13 +139,14 @@ h1 { margin: 0; color: #2c3e50; font-size: 1.5rem; }
 
 .prix-total { font-size: 1.5rem; font-weight: 800; }
 
-.adresse h3 { font-size: 1rem; color: #2c3e50; margin-bottom: 8px; }
+/* Adresse avec couleur Accent */
+.adresse h3 { font-size: 1rem; color: var(--accent-color); margin-bottom: 8px; }
 .adresse p { color: #7f8c8d; margin: 0; line-height: 1.5; }
 
 /* --- RESPONSIVE : Tablettes et PC --- */
 @media (min-width: 768px) {
   .carte-detail {
-    flex-direction: row; /* Image à gauche, infos à droite */
+    flex-direction: row;
     min-height: 500px;
   }
 

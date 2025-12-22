@@ -1,21 +1,21 @@
 import { Component, inject, signal } from '@angular/core';
 import { AchatService } from '../achat-service';
 import { ProduitAchete } from '../../Models/produitAchete';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { Location } from '@angular/common';
+import { Loading } from "../../loading/loading";
 
 @Component({
   selector: 'app-historique-detail-achat',
-  imports: [MatIconModule, CommonModule],
+  imports: [MatIconModule, CommonModule, Loading],
   templateUrl: './historique-detail-achat.html',
   styleUrl: './historique-detail-achat.css',
 })
 export class HistoriqueDetailAchat {
   // Services
   private route = inject(ActivatedRoute);
-  private location = inject(Location);
+  private router= inject(Router);
   private achatsService = inject(AchatService);
 
   // Etat (Signals)
@@ -47,7 +47,7 @@ export class HistoriqueDetailAchat {
   }
 
   retour(){
-    this.location.back();
+    this.router.navigate(['achat/historique-achats']);
   }
 }
 

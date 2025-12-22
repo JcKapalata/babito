@@ -106,24 +106,23 @@ h2 {
 
 /* Couleurs fixes pour les statuts */
 .statut-badge.livré { 
-  background-color: #d4edda; 
-  color: #27ae60; 
+  color: white; 
+  background: var(--primary-color); 
 }
 
 .statut-badge.en-cours { 
-  background-color: #fff3cd; 
-  color: #f39c12; 
+  color: white; 
+  background: var(--warning-orange); 
 }
 
 .statut-badge.annulé { 
-  background-color: #f8d7da; 
-  color: #e74c3c; 
+  color: white; 
+  background: var(--warn-color); 
 }
 
 .statut-badge.en-attente-paiement {
-  background-color: #d1ecf1; /* Bleu clair type info */
-  color: #0c5460;           /* Bleu foncé pour le texte */
-  border: 1px solid #bee5eb;
+  color: white; /* Bleu clair type info */
+  background: var(--accent-color); 
 }
 
 /* --- RESPONSIVE : Tablettes et PC (600px et plus) --- */

@@ -83,4 +83,9 @@ export class Navbar implements OnDestroy{
     this.pageActive = 'profile';
     this.router.navigate(['mon-compte/profil'])
   }
+  
+  goToHistorique() {
+    this.pageActive = 'historique';
+    this.router.navigate(['achat/historique-achats']);
+  }
 }

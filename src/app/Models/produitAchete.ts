@@ -1,9 +1,9 @@
 import { DetailPaiement } from "./detailPaiement";
 
-export type StatutProduit = 'livré' | 'en cours' | 'annulé' | 'en_attente_paiement';
+export type StatutProduit = 'livré' | 'en cours' | 'annulé' | 'en attente paiement';
 
 export interface ProduitAchete {
-    readonly AchatId: number;
+    readonly achatId: number;
     readonly codeProduit: string;
     readonly reference: string;
     readonly nom: string;

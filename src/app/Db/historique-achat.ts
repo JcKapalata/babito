@@ -2,7 +2,7 @@ import { ProduitAchete } from "../Models/produitAchete";
 
 export const HISTORIQUE_ACHATS: ProduitAchete[] = [
   {
-    AchatId: 2025001,
+    achatId: 2025001,
     codeProduit: 'BBI-VET-001',
     reference: 'REF-BBI-VET-001-ROSE',
     nom: 'Body bébé coton',
@@ -28,7 +28,7 @@ export const HISTORIQUE_ACHATS: ProduitAchete[] = [
     status: 'en cours'
   },
   {
-    AchatId: 2025002,
+    achatId: 2025002,
     codeProduit: 'BBI-VET-002',
     reference: 'REF-BBI-VET-002-CHOC',
     nom: 'Pyjama bébé',
@@ -47,10 +47,10 @@ export const HISTORIQUE_ACHATS: ProduitAchete[] = [
     regionProduit: 'Beni',
     addresseLivraison: 'Q. Résidentiel, Beni Centre',
     dateAchat: new Date(),
-    status: 'en_attente_paiement'
+    status: 'en attente paiement'
   },
   {
-    AchatId: 2025003,
+    achatId: 2025003,
     codeProduit: 'BBI-ACC-003',
     reference: 'REF-BBI-ACC-MULTI',
     nom: 'Chaussettes',
@@ -76,7 +76,7 @@ export const HISTORIQUE_ACHATS: ProduitAchete[] = [
     status: 'livré'
   },
   {
-    AchatId: 2025004,
+    achatId: 2025004,
     codeProduit: 'BBI-JOU-004',
     reference: 'REF-BBI-JOU-OURS-LIN',
     nom: 'Jouet en peluche',
@@ -98,10 +98,10 @@ export const HISTORIQUE_ACHATS: ProduitAchete[] = [
     regionProduit: 'Goma',
     addresseLivraison: 'Q. Volcans, Avenue du Port, Goma',
     dateAchat: new Date(),
-    status: 'en cours'
+    status: 'annulé'
   },
   {
-    AchatId: 2025005,
+    achatId: 2025005,
     codeProduit: 'BBI-JOU-005',
     reference: 'REF-BBI-JOU-EVEIL-BOIS',
     nom: 'Cube d’éveil',
@@ -120,10 +120,10 @@ export const HISTORIQUE_ACHATS: ProduitAchete[] = [
     regionProduit: 'Beni',
     addresseLivraison: 'Avenue des Martyrs, Beni',
     dateAchat: new Date(),
-    status: 'en_attente_paiement'
+    status: 'en attente paiement'
   },
   {
-    AchatId: 2025006,
+    achatId: 2025006,
     codeProduit: 'BBI-JOU-006',
     reference: 'REF-BBI-JOU-HOC-BISQUE',
     nom: 'Hochet',

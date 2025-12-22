@@ -1,0 +1,152 @@
+:host {
+  display: block;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.historique-container {
+  padding: 15px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+h2 {
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Loader */
+.loader {
+  text-align: center;
+  padding: 30px;
+  font-style: italic;
+  color: #666666;
+}
+
+/* Liste des commandes */
+.liste-commandes {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Carte d'achat - Design Mobile First */
+.carte-achat {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 15px;
+  display: grid;
+  /* Grille mobile : Image à gauche, Texte à droite, Badge en bas */
+  grid-template-columns: 80px 1fr;
+  grid-template-areas: 
+    "img info"
+    "badge badge"; 
+  gap: 15px;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.carte-achat:hover {
+  transform: scale(1.01);
+}
+
+.image-produit {
+  grid-area: img;
+}
+
+.image-produit img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: #eeeeee;
+}
+
+.infos-achat {
+  grid-area: info;
+}
+
+.infos-achat h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #333333;
+}
+
+.info-short {
+  margin: 4px 0;
+  font-size: 0.85rem;
+  color: #7f8c8d;
+}
+
+.prix {
+  margin: 0;
+  font-weight: bold;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+/* Badges de Statut */
+.statut-badge {
+  grid-area: badge;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* Couleurs fixes pour les statuts */
+.statut-badge.livré { 
+  background-color: #d4edda; 
+  color: #27ae60; 
+}
+
+.statut-badge.en-cours { 
+  background-color: #fff3cd; 
+  color: #f39c12; 
+}
+
+.statut-badge.annulé { 
+  background-color: #f8d7da; 
+  color: #e74c3c; 
+}
+
+.statut-badge.en-attente-paiement {
+  background-color: #d1ecf1; /* Bleu clair type info */
+  color: #0c5460;           /* Bleu foncé pour le texte */
+  border: 1px solid #bee5eb;
+}
+
+/* --- RESPONSIVE : Tablettes et PC (600px et plus) --- */
+@media (min-width: 600px) {
+  .carte-achat {
+    /* Tout sur une seule ligne sur grand écran */
+    grid-template-columns: 100px 1fr 140px;
+    grid-template-areas: "img info badge";
+    padding: 20px;
+  }
+
+  .image-produit img {
+    width: 100px;
+    height: 100px;
+  }
+
+  h2 {
+    text-align: left;
+    font-size: 1.8rem;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 50px;
+  background: #ffffff;
+  border-radius: 12px;
+  color: #95a5a6;
+  border: 1px dashed #cccccc;
+}

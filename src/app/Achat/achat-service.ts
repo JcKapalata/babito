@@ -1,13 +1,16 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, catchError, delay, map, Observable, throwError } from 'rxjs';
 import { CommandeItem } from '../Models/commande'; // Assurez-vous du bon chemin
-import { Produit } from '../Models/produits'; // Assurez-vous d'importer la classe/interface Produit
 import { BoutiqueService } from '../Boutique/boutique-service'; 
+import { ProduitAchete } from '../Models/produitAchete';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AchatService {
+
+  private http = inject(HttpClient);
 
   // BehaviorSubject est initialisé avec la fonction qui charge le panier depuis le local storage
   private itemsSubject = new BehaviorSubject<CommandeItem[]>([]);
@@ -70,46 +73,7 @@ export class AchatService {
     });
 
     this.itemsSubject.next(newItems);
-}
-
-  // LOGIQUE : Mise a jour de produit
-  // updateProduitDetails(updatedItemData: CommandeItem): void {
-  //   const itemId = updatedItemData.id;
-
-  //   // 1. Récupérer l'état actuel du panier
-  //   const currentItems = this.itemsSubject.getValue();
-    
-  //   // 2. Créer le nouveau tableau (immutabilité)
-  //   const newItems = currentItems.map(item => {
-
-  //     const { quantity, ...productDetails } = item;
-
-  //     if (item.id === itemId) { 
-  //       // 1. SAUVEGARDE : Récupérer les options complètes de l'article existant
-  //       const originalTailleOptions = item.taille;
-  //       const originalCouleurOptions = item.couleur;
-
-  //       const updatedProductDetails = {
-  //         ...productDetails, 
-  //         couleur: Array.isArray(updatedItemData.couleur) ? updatedItemData.couleur : [updatedItemData.couleur],
-  //         taille: Array.isArray(updatedItemData.taille) ? updatedItemData.taille : [updatedItemData.taille],
-  //       } as Produit; 
-
-  //       // 4. CRÉATION DU NOUVEL ARTICLE : Création de la nouvelle instance de CommandeItem
-  //       const newItem = new CommandeItem(updatedProductDetails, updatedItemData.quantity);
-            
-  //       // 5. RÉINJECTION : Réinjecter les options complètes sauvegardées (étape 1)
-  //       newItem.taille = originalTailleOptions;
-  //       newItem.couleur = originalCouleurOptions;
-
-  //       return newItem
-  //     }
-  //     return item;
-  //   });
-
-  //   // 3. Publier le nouveau tableau
-  //   this.updateItems(newItems);
-  // }
+  }
 
 
   // mise en jour du panier (utilisé dans la vue panier pour changer la quantité directement)
@@ -118,10 +82,30 @@ export class AchatService {
     this.itemsSubject.next([...items]);
   }
 
+  /**
+   * Récupère l'historique d'un utilisateur spécifique
+   * @param userId L'identifiant unique du client
+   */
+  getUserHistory(userId: number): Observable<ProduitAchete[]> {
+    // Utilisation des Query Parameters pour filtrer (api/achats?userId=1)
+    // L'In-Memory Web API filtre automatiquement les résultats
+    const params = new HttpParams().set('userId', userId.toString());
+    //, { params }
+
+    return this.http.get<ProduitAchete[]>('api/achats').pipe(
+      delay(500), // On simule un petit délai réseau (utile pour voir le loader)
+      catchError(error => {
+        console.error('Erreur lors de la récupération des achats:', error);
+        return throwError(() => new Error('Impossible de charger votre historique.'));
+      })
+    );
+  }
+
   // recupere le nombre de produit
   nombreProduits$ = this.items$.pipe(
     map(items => items.length)
   );
+
 
   // Observable pour le total du panier (optionnel mais utile)
   totalPanier$ = this.items$.pipe(

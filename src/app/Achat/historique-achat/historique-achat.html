@@ -1,1 +1,35 @@
-<p>historique-achat works!</p>
+<div class="historique-container">
+    <h2>Mon Historique d'Achats</h2>
+
+    @if (chargement()) {
+        <div class="loader">Chargement de vos transactions...</div>
+        <app-loading></app-loading>
+    }
+
+    <div class="liste-commandes">
+        @for (achat of commandes(); track achat.achatId) {
+            <div class="carte-achat">
+                <div class="image-produit">
+                    <img [src]="achat.image" [alt]="achat.nom">
+                </div>
+                
+                <div class="infos-achat">
+                    <h3>{{ achat.nom }}</h3>
+                    <p class=".info-short">Région : {{ achat.regionProduit }}</p>
+                    <p class=".info-short">Adresse livraison : {{ achat.addresseLivraison }}</p>
+                    <p class="prix">{{ achat.prixTotal }} {{ achat.paiement.devise }}</p>
+                </div>
+
+                <div [class]="'statut-badge '+ achat.status.replaceAll(' ', '-').toLowerCase()">
+                    {{ achat.status }}
+                </div>
+            </div>
+        } @empty {
+            @if (!chargement()) {
+                <div class="empty-state">
+                    <p>Aucun achat trouvé pour votre compte.</p>
+                </div>
+            }
+        }
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ProduitAchete } from '../../Models/produitAchete';
 import { CommonModule } from '@angular/common';
 import { AchatService } from '../achat-service';
@@ -19,6 +19,16 @@ export class HistoriqueAchat {
   // Etat (Signals)
   commandes = signal<ProduitAchete[]>([]);
   chargement = signal<boolean>(false);
+
+  // Création du signal trié
+  commandesTriees = computed(() => {
+    return [...this.commandes()].sort((a, b) => {
+      // On transforme les dates en timestamp pour la comparaison
+      const dateA = new Date(a.dateAchat).getTime();
+      const dateB = new Date(b.dateAchat).getTime();
+      return dateB - dateA; // Ordre décroissant (plus récent en premier)
+    });
+  });
 
   ngOnInit(): void {
     this.chargerDonnees();

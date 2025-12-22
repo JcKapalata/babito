@@ -2,12 +2,11 @@
     <h2>Mes Achats</h2>
 
     @if (chargement()) {
-        <div class="loader">Chargement de vos transactions...</div>
         <app-loading></app-loading>
     }
 
     <div class="liste-commandes">
-        @for (achat of commandes(); track achat.achatId) {
+        @for (achat of commandesTriees(); track achat.achatId) {
             <div class="carte-achat" (click)="goToDetailsAchat(achat.achatId)">
                 <div class="image-produit">
                     <img [src]="achat.image" [alt]="achat.nom">
@@ -15,6 +14,7 @@
                 
                 <div class="infos-achat">
                     <h3>{{ achat.nom }}</h3>
+                    <p class="info-date">{{ achat.dateAchat | date:'dd/MM/yyyy HH:mm' }}</p>
                     <p class=".info-short">Région : {{ achat.regionProduit }}</p>
                     <p class=".info-short">Adresse livraison : {{ achat.addresseLivraison }}</p>
                     <p class="prix">{{ achat.prixTotal }} {{ achat.paiement.devise }}</p>

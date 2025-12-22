@@ -83,6 +83,17 @@ h2 {
   margin: 4px 0;
   font-size: 0.85rem;
   color: #7f8c8d;
+  /* Tronquer le texte si l'adresse est trop longue */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+}
+
+.info-date {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-color); /* Ton bleu moyen */
 }
 
 .prix {
@@ -91,6 +102,7 @@ h2 {
   color: #2c3e50;
   font-size: 1.1rem;
 }
+
 
 /* Badges de Statut */
 .statut-badge {

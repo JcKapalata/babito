@@ -1,0 +1,64 @@
+<div class="detail-container">
+  <button class="btn-retour" (click)="retour()">
+    <mat-icon>arrow_back</mat-icon> Retour à l'historique
+  </button>
+
+  @if (chargement()) {
+    <div class="loader-container">
+      <div class="spinner"></div>
+      <p>Chargement des détails de votre achat...</p>
+    </div>
+  }
+
+  @if (commandes(); as achat) {
+    <div class="carte-detail">
+      <div class="section-image">
+        <img [src]="achat.image" [alt]="achat.nom">
+        <div [class]="'statut-badge ' + achat.status.replaceAll(' ', '-').toLowerCase()">
+          {{ achat.status }}
+        </div>
+      </div>
+
+      <div class="section-infos">
+        <h1>{{ achat.nom }}</h1>
+        <p class="reference">Réf : {{ achat.reference }}</p>
+        
+        <hr>
+
+        <div class="grille-details">
+          <div class="info-item">
+            <span class="label">Date d'achat</span>
+            <span class="valeur">{{ achat.dateAchat | date:'dd/MM/yyyy' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Région</span>
+            <span class="valeur">{{ achat.regionProduit }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Quantité</span>
+            <span class="valeur">{{ achat.quantite }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Prix Unitaire</span>
+            <span class="valeur">{{ achat.prixUnitaire }} {{ achat.paiement.devise }}</span>
+          </div>
+        </div>
+
+        <div class="total-box">
+          <span>Total payé</span>
+          <span class="prix-total">{{ achat.prixTotal }} {{ achat.paiement.devise }}</span>
+        </div>
+
+        <div class="adresse">
+          <h3>Adresse de livraison</h3>
+          <p>{{ achat.addresseLivraison }}</p>
+        </div>
+      </div>
+    </div>
+  } @else if (!chargement()) {
+    <div class="error-state">
+      <mat-icon>error_outline</mat-icon>
+      <p>Oups ! Cet achat est introuvable.</p>
+    </div>
+  }
+</div>

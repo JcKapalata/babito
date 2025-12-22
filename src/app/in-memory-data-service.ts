@@ -16,7 +16,10 @@ export class InMemoryDataService implements InMemoryDbService {
   createDb(){
     const produits: Produit[] = PRODUITS;
     const clients: UserClientApi[] = USERS;
-    const achats: ProduitAchete[] = HISTORIQUE_ACHATS;
+    const achats: ProduitAchete[] = HISTORIQUE_ACHATS.map(a => ({
+      ...a,
+      id: a.achatId // On duplique achatId vers id
+    }));
 
     return {produits, clients, achats};
   }

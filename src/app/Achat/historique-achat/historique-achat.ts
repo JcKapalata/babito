@@ -3,6 +3,7 @@ import { ProduitAchete } from '../../Models/produitAchete';
 import { CommonModule } from '@angular/common';
 import { AchatService } from '../achat-service';
 import { Loading } from "../../loading/loading";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-historique-achat',
@@ -13,6 +14,7 @@ import { Loading } from "../../loading/loading";
 export class HistoriqueAchat {
   // Services
   private achatsService = inject(AchatService);
+  private router = inject(Router);
 
   // Etat (Signals)
   commandes = signal<ProduitAchete[]>([]);
@@ -26,7 +28,7 @@ export class HistoriqueAchat {
     this.chargement.set(true);
     
     // On appelle le service pour récupérer l'historique des achats
-    this.achatsService.getUserHistory(1).subscribe({
+    this.achatsService.getUserHistoryAchat(1).subscribe({
       next: (data) => {
         this.commandes.set(data);
         this.chargement.set(false);
@@ -36,5 +38,11 @@ export class HistoriqueAchat {
         this.chargement.set(false);
       }
     });
+  }
+
+  goToDetailsAchat(achatId: number): void {
+    // Logique de navigation vers les détails de l'achat
+    console.log(`Naviguer vers les détails de l'achat avec l'ID: ${achatId}`);
+    this.router.navigate(['achat/historique-achat', achatId]);
   }
 }

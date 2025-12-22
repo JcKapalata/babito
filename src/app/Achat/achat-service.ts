@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, delay, map, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, delay, map, Observable, tap, throwError } from 'rxjs';
 import { CommandeItem } from '../Models/commande'; // Assurez-vous du bon chemin
 import { BoutiqueService } from '../Boutique/boutique-service'; 
 import { ProduitAchete } from '../Models/produitAchete';
@@ -86,7 +86,7 @@ export class AchatService {
    * Récupère l'historique d'un utilisateur spécifique
    * @param userId L'identifiant unique du client
    */
-  getUserHistory(userId: number): Observable<ProduitAchete[]> {
+  getUserHistoryAchat(userId: number): Observable<ProduitAchete[]> {
     // Utilisation des Query Parameters pour filtrer (api/achats?userId=1)
     // L'In-Memory Web API filtre automatiquement les résultats
     const params = new HttpParams().set('userId', userId.toString());
@@ -97,6 +97,21 @@ export class AchatService {
       catchError(error => {
         console.error('Erreur lors de la récupération des achats:', error);
         return throwError(() => new Error('Impossible de charger votre historique.'));
+      })
+    );
+  }
+
+  /**
+   * Récupère l'historique détaillé d'un produit achetés
+   */
+  getUserHistoryAchatById(achatId: number): Observable<ProduitAchete> {
+    return this.http.get<ProduitAchete>(`api/achats/${achatId}`).pipe(
+      // Simulation d'un délai réseau pour tester ton loader
+      delay(500), 
+      tap(data => console.log('Détails de l\'achat récupérés:', data)),
+      catchError(error => {
+        console.error('Erreur API Achats:', error);
+        return throwError(() => new Error('Impossible de récupérer l\'historique pour le moment.'));
       })
     );
   }

@@ -13,6 +13,11 @@ export const Achats: Routes = [
         loadComponent: () => import('./panier/panier').then(m => m.Panier), 
         canActivate:[authGuard] 
     },
+    {
+        path: 'achat/historique-achat/:achatId',
+        loadComponent: () => import('./historique-detail-achat/historique-detail-achat').then(m => m.HistoriqueDetailAchat),
+        canActivate:[authGuard]
+    },
     { 
         path: 'achat/historique-achats', 
         loadComponent: () => import('./historique-achat/historique-achat').then(m => m.HistoriqueAchat), 

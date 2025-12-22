@@ -186,3 +186,13 @@ h1 {
   padding: 50px;
   color: #7f8c8d;
 }
+
+@media (width < 700px) {
+  .statut-badge {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+}

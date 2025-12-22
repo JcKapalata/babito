@@ -32,6 +32,45 @@ h2 {
   gap: 15px;
 }
 
+.filtres-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  overflow-x: auto; /* Défilement horizontal sur mobile */
+  padding-bottom: 10px;
+  scrollbar-width: none; /* Cache la scrollbar sur Firefox */
+}
+
+.filtres-container::-webkit-scrollbar {
+  display: none; /* Cache la scrollbar sur Chrome/Safari */
+}
+
+.filtres-container button {
+  padding: 8px 20px;
+  border-radius: 25px;
+  border: 2px solid #eee;
+  background: white;
+  color: #7f8c8d;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+/* Style quand le bouton est sélectionné */
+.filtres-container button.actif {
+  background: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 10px rgba(102, 169, 189, 0.3);
+}
+
+/* Hover sur les boutons non-actifs */
+.filtres-container button:hover:not(.actif) {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
 /* Carte d'achat - Design Mobile First */
 .carte-achat {
   background: #ffffff;

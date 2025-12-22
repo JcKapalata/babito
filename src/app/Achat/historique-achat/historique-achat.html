@@ -6,7 +6,28 @@
     }
 
     <div class="liste-commandes">
-        @for (achat of commandesTriees(); track achat.achatId) {
+        @if (chargement() == false && commandesTrieesEtFiltrees().length > 0) {
+            <div class="filtres-container">
+                <button [class.actif]="filtreStatut() === 'tous'" (click)="changerFiltre('tous')">
+                    Tous
+                </button>
+                <button [class.actif]="filtreStatut() === 'livré'" (click)="changerFiltre('livré')">
+                    Livrés
+                </button>
+                <button [class.actif]="filtreStatut() === 'en cours'" (click)="changerFiltre('en cours')">
+                    En cours
+                </button>
+                <button [class.actif]="filtreStatut() === 'en attente paiement'" (click)="changerFiltre('en attente paiement')">
+                    En attente paiement
+                </button>
+                <button [class.actif]="filtreStatut() === 'annulé'" (click)="changerFiltre('annulé')">
+                    Annulés
+                </button>
+            </div>
+
+        }
+
+        @for (achat of commandesTrieesEtFiltrees(); track achat.achatId) {
             <div class="carte-achat" (click)="goToDetailsAchat(achat.achatId)">
                 <div class="image-produit">
                     <img [src]="achat.image" [alt]="achat.nom">

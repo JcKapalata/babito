@@ -2,7 +2,11 @@
 <div class="panier-container">
     
     <div class="panier-header">
-        <h2>Mon Panier ({{ items.length }})</h2>
+        <div class="titre-panier">
+            <h2>Mon Panier</h2>
+            <h3>nombre de produits : {{ items.length }}</h3>
+        </div>
+        
         <div class="header-actions">
             @if (items.length > 0 && !showPaiement) {
                 <button mat-button color="warn" (click)="viderToutLePanier()" class="btn-vider-tout">

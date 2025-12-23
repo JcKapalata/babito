@@ -15,16 +15,35 @@
   margin-bottom: 20px;
 }
 
+.titre-panier{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  h2{
+    margin: 0;
+    color: var(--primary-color);
+  }
+  h3{
+    margin: 0;
+    font-weight: normal;
+    font-size: 1em;
+    color: #7f8c8d;
+  }
+}
+
 .btn-vider-tout {
   color: #e74c3c !important;
   font-size: 0.9em;
+  position: absolute;
+  top: 0px;
+  left: 10px;
 }
 
 .panier-vide {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 0;
+  padding: 30px 0;
   color: #bdc3c7;
 }
 
@@ -33,11 +52,6 @@
   width: 64px;
   height: 64px;
   margin-bottom: 10px;
-}
-
-.titre-panier {
-  text-align: center;
-  margin-bottom: 20px;
 }
 
 .back-button {

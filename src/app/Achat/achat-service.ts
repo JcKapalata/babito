@@ -2,8 +2,9 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, delay, map, Observable, tap, throwError } from 'rxjs';
 import { CommandeItem } from '../Models/commande'; // Assurez-vous du bon chemin
 import { BoutiqueService } from '../Boutique/boutique-service'; 
-import { ProduitAchete } from '../Models/produitAchete';
+import { DetailAchat, ProduitAchete } from '../Models/produitAchete';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { AuthService } from '../authentification/auth-service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class AchatService {
 
   private http = inject(HttpClient);
+  private authService = inject(AuthService);
 
   // BehaviorSubject est initialisé avec la fonction qui charge le panier depuis le local storage
   private itemsSubject = new BehaviorSubject<CommandeItem[]>([]);
@@ -83,35 +85,67 @@ export class AchatService {
   }
 
   /**
-   * Récupère l'historique d'un utilisateur spécifique
-   * @param userId L'identifiant unique du client
-   */
-  getUserHistoryAchat(userId: number): Observable<ProduitAchete[]> {
-    // Utilisation des Query Parameters pour filtrer (api/achats?userId=1)
-    // L'In-Memory Web API filtre automatiquement les résultats
-    const params = new HttpParams().set('userId', userId.toString());
-    //, { params }
+   * Récupère l'historique des achats pour l'utilisateur connecté.
+   * Cette structure est optimisée pour le partitionnement NoSQL.
+  */
+  getUserHistoryAchat(): Observable<DetailAchat[]> {
+    const userConnecte = this.authService.user();
 
-    return this.http.get<ProduitAchete[]>('api/achats').pipe(
-      delay(500), // On simule un petit délai réseau (utile pour voir le loader)
+    // 1. Sécurité : Vérification de l'utilisateur avant l'appel API
+    if (!userConnecte || !userConnecte.id) {
+      return throwError(() => new Error('Session expirée ou non connectée.'));
+    }
+
+    // 2. Performance : Utilisation de la Shard Key (clientId) pour filtrer côté serveur
+    const params = new HttpParams().set('clientId', userConnecte.id.toString());
+
+    return this.http.get<ProduitAchete[]>('api/achats', { params }).pipe(
+      delay(500),
+      map(achats => {
+        // 3. Robustesse : Filtrage de sécurité et extraction des données métier (data)
+        // On retourne un tableau de DetailAchat
+        return achats
+          .filter(a => a.clientId === userConnecte.id) 
+          .map(a => a.data);
+      }), 
       catchError(error => {
-        console.error('Erreur lors de la récupération des achats:', error);
+        console.error('Erreur API Historique:', error);
         return throwError(() => new Error('Impossible de charger votre historique.'));
       })
     );
   }
-
+ 
   /**
-   * Récupère l'historique détaillé d'un produit achetés
+   * Récupère les détails d'un achat spécifique par son identifiant métier.
+   * Sécurisé pour garantir que l'utilisateur ne consulte que ses propres données.
    */
-  getUserHistoryAchatById(achatId: number): Observable<ProduitAchete> {
+  getUserHistoryAchatById(achatId: number): Observable<DetailAchat> {
+    const userConnecte = this.authService.user();
+
+    // 1. Sécurité : Vérification de l'existence de la session
+    if (!userConnecte || !userConnecte.id) {
+      return throwError(() => new Error('Session expirée ou non connectée.'));
+    }
+
+    // 2. Appel API
+    // Note : En production avec Firebase, on utiliserait le 'id' technique (string)
+    // Mais ici on utilise l'identifiant métier 'achatId' pour la recherche.
     return this.http.get<ProduitAchete>(`api/achats/${achatId}`).pipe(
-      // Simulation d'un délai réseau pour tester ton loader
-      delay(500), 
-      tap(data => console.log('Détails de l\'achat récupérés:', data)),
+      delay(500),
+      map(achat => {
+        // 3. Vérification de sécurité stricte (Propriété des données)
+        // On compare le clientId du document avec l'ID de l'utilisateur connecté
+        if (achat.clientId !== userConnecte.id) {
+          throw new Error(`Accès refusé : Ce produit ne fait pas partie de votre historique.`);
+        }
+
+        // 4. Extraction des données métier pour le composant
+        return achat.data;
+      }),
       catchError(error => {
-        console.error('Erreur API Achats:', error);
-        return throwError(() => new Error('Impossible de récupérer l\'historique pour le moment.'));
+        console.error('Erreur lors de la récupération du détail:', error);
+        // On renvoie un message d'erreur clair pour l'interface utilisateur
+        return throwError(() => new Error(error.message || 'Impossible de charger les détails de cet achat.'));
       })
     );
   }

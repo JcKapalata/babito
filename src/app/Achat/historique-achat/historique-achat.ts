@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { ProduitAchete } from '../../Models/produitAchete';
+import { DetailAchat} from '../../Models/produitAchete';
 import { CommonModule } from '@angular/common';
 import { AchatService } from '../achat-service';
 import { Loading } from "../../loading/loading";
@@ -17,7 +17,7 @@ export class HistoriqueAchat {
   private router = inject(Router);
 
   // Etat (Signals)
-  commandes = signal<ProduitAchete[]>([]);
+  commandes = signal<DetailAchat[]>([]);
   chargement = signal<boolean>(false);
   filtreStatut = signal<string>('tous');
 
@@ -46,17 +46,22 @@ export class HistoriqueAchat {
   }
 
   private chargerDonnees(): void {
-    this.chargement.set(true);
-    
-    // On appelle le service pour récupérer l'historique des achats
-    this.achatsService.getUserHistoryAchat(1).subscribe({
+   this.chargement.set(true);
+
+    // Le service sait déjà quel utilisateur est connecté
+    this.achatsService.getUserHistoryAchat().subscribe({
       next: (data) => {
         this.commandes.set(data);
         this.chargement.set(false);
       },
       error: (err) => {
-        console.error("Erreur lors du chargement des achats", err);
         this.chargement.set(false);
+        console.error("Erreur lors du chargement :", err);
+        
+        // Si le service dit que l'utilisateur n'est pas connecté, on redirige
+        if (err.message.includes('non connecté')) {
+          this.router.navigate(['/login']);
+        }
       }
     });
   }

@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { AchatService } from '../achat-service';
-import { ProduitAchete } from '../../Models/produitAchete';
+import { DetailAchat } from '../../Models/produitAchete';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -19,7 +19,7 @@ export class HistoriqueDetailAchat {
   private achatsService = inject(AchatService);
 
   // Etat (Signals)
-  commandes = signal<ProduitAchete| undefined>(undefined);
+  commandes = signal<DetailAchat| undefined>(undefined);
   chargement = signal<boolean>(false);
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class HistoriqueDetailAchat {
     
     // On appelle le service pour récupérer l'historique des achats
     this.achatsService.getUserHistoryAchatById(AchatId).subscribe({
-      next: (data: ProduitAchete) => {
+      next: (data: DetailAchat) => {
         this.commandes.set(data);
         this.chargement.set(false);
       },

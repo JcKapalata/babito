@@ -18,7 +18,7 @@ export class InMemoryDataService implements InMemoryDbService {
     const clients: UserClientApi[] = USERS;
     const achats: ProduitAchete[] = HISTORIQUE_ACHATS.map(a => ({
       ...a,
-      id: a.achatId // On duplique achatId vers id
+      id: a.data.achatId.toString() // On duplique achatId vers id
     }));
 
     return {produits, clients, achats};

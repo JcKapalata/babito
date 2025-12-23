@@ -1,6 +1,11 @@
 import { DetailPaiement } from "./detailPaiement";
 
-export type StatutProduit = 'livré' | 'en cours' | 'annulé' | 'en attente paiement';
+// 1. LOGISTIQUE : Où est le colis ?
+export type StatutProduit = 
+  | 'en_preparation'  // Le vendeur prépare le colis
+  | 'en_route'        // Le livreur a le colis
+  | 'livré'           // Le client a le colis
+  | 'annulé';         // Commande stoppée
 
 export interface ProduitAchete {
     // --- MÉTADONNÉES DE PERFORMANCE (Root) ---

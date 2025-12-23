@@ -14,7 +14,7 @@ export const HISTORIQUE_ACHATS: ProduitAchete[] = [
       prixTotal: 29.97,
       paiement: {
         methode: 'mobile_money',
-        etat: 'succès',
+        etat: 'payé',
         montantPaye: 29.97,
         devise: 'USD',
         transactionId: 'MPESA-GOMA-9928',
@@ -28,7 +28,7 @@ export const HISTORIQUE_ACHATS: ProduitAchete[] = [
       regionProduit: 'Goma',
       addresseLivraison: 'Q. Himbi, Avenue de la Paix, Goma',
       dateAchat: new Date(),
-      status: 'en cours'
+      status: 'en_route'
     }
   },
   { 
@@ -44,7 +44,7 @@ export const HISTORIQUE_ACHATS: ProduitAchete[] = [
       prixTotal: 12.99,
       paiement: {
         methode: 'cash_delivery',
-        etat: 'à_collecter',
+        etat: 'en_attente',
         montantPaye: 12.99,
         devise: 'USD'
       },
@@ -54,7 +54,7 @@ export const HISTORIQUE_ACHATS: ProduitAchete[] = [
       regionProduit: 'Beni',
       addresseLivraison: 'Q. Résidentiel, Beni Centre',
       dateAchat: new Date(),
-      status: 'en attente paiement'
+      status: 'en_route'
     }
   },
   {
@@ -70,7 +70,7 @@ export const HISTORIQUE_ACHATS: ProduitAchete[] = [
       prixTotal: 10000,
       paiement: {
         methode: 'mobile_money',
-        etat: 'succès',
+        etat: 'payé',
         montantPaye: 10000,
         devise: 'CDF',
         transactionId: 'AIRTEL-BTM-771',
@@ -100,7 +100,7 @@ export const HISTORIQUE_ACHATS: ProduitAchete[] = [
       prixTotal: 15.99,
       paiement: {
         methode: 'visa',
-        etat: 'succès',
+        etat: 'remboursé',
         montantPaye: 15.99,
         devise: 'USD',
         transactionId: 'STRIPE-V-441',
@@ -129,7 +129,7 @@ export const HISTORIQUE_ACHATS: ProduitAchete[] = [
       prixTotal: 18.99,
       paiement: {
         methode: 'cash_delivery',
-        etat: 'à_collecter',
+        etat: 'en_attente',
         montantPaye: 18.99,
         devise: 'USD'
       },
@@ -139,7 +139,7 @@ export const HISTORIQUE_ACHATS: ProduitAchete[] = [
       regionProduit: 'Beni',
       addresseLivraison: 'Avenue des Martyrs, Beni',
       dateAchat: new Date(),
-      status: 'en attente paiement'
+      status: 'en_route'
     },
   },
   {
@@ -155,7 +155,7 @@ export const HISTORIQUE_ACHATS: ProduitAchete[] = [
       prixTotal: 7.99,
       paiement: {
         methode: 'mobile_money',
-        etat: 'succès',
+        etat: 'payé',
         montantPaye: 7.99,
         devise: 'USD',
         transactionId: 'OM-BTM-112',
@@ -169,7 +169,7 @@ export const HISTORIQUE_ACHATS: ProduitAchete[] = [
       regionProduit: 'Butembo',
       addresseLivraison: 'Q. Vungi, Butembo',
       dateAchat: new Date(),
-      status: 'en cours'
+      status: 'en_preparation'
       }
   }
 ];

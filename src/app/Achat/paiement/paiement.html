@@ -77,6 +77,17 @@
       </div>
     }
 
+    @if (paymentForm.get('method')?.value === 'Payer à la livraison') {
+      <div class="delivery-info">
+          <p>
+          <strong>Paiement à la réception :</strong><br>
+          Veuillez préparer la somme exacte de : 
+          <span class="highlight-price">{{ recapitulatifMontants }}</span> 
+          lors du passage du livreur.
+        </p>
+      </div>
+    }
+
     <button type="submit" [disabled]="!disableButtonPayer()" class="btn-submit">
       <span class="material-icons">payment</span>
       {{ isSubmitting ? 'Traitement...' : 'Payer' }}

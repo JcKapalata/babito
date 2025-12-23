@@ -1,5 +1,11 @@
 export type MethodePaiement = 'visa' | 'mastercard' | 'mobile_money' | 'cash_delivery';
-export type EtatTransaction = 'succès' | 'échec' | 'en_attente' | 'remboursé' | 'à_collecter';
+
+// 2. FINANCE : Où est l'argent ?
+export type EtatTransaction = 
+  | 'en_attente'      // Argent non reçu (cas du Paiement à la livraison)
+  | 'payé'            // Argent reçu (Visa / Mobile Money)
+  | 'échec'           // La transaction a foiré
+  | 'remboursé';      // L'argent a été rendu
 
 export interface DetailPaiement {
     readonly methode: MethodePaiement;
@@ -13,7 +19,7 @@ export interface DetailPaiement {
 
     // Spécifique Mobile Money (ex: numéro de téléphone utilisé)
     readonly numeroMobile?: string; 
-    readonly operateur?: 'orange' | 'airtel' | 'mpesa' | 'mtn';
+    readonly operateur?: 'orange' | 'airtel' | 'mpesa' | 'cash';
 
     // Spécifique Carte
     readonly cardLast4?: string;

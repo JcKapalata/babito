@@ -7,13 +7,14 @@ import { catchError, finalize, of } from 'rxjs';
 import { CommandeItem } from '../../Models/commande';
 import { ProduitAchete } from '../../Models/produitAchete';
 import { AuthService } from '../../authentification/auth-service';
-import { AchatService } from '../achat-service'; 
+import { AchatService } from '../achat-service';
 
 // Configuration des opérateurs pour éviter les erreurs de typage
-const OPERATEUR_MAP: Record<string, 'orange' | 'airtel' | 'mpesa' | 'mtn'> = {
+const OPERATEUR_MAP: Record<string, 'orange' | 'airtel' | 'mpesa' | 'cash'> = {
   'Airtel Money': 'airtel',
   'M-pesa': 'mpesa',
-  'Orange money': 'orange'
+  'Orange money': 'orange',
+  'Payer à la livraison': 'cash'
 };
 
 @Component({
@@ -77,7 +78,13 @@ export class Paiement implements OnInit {
       this.setFieldsValidators(visaFields, [Validators.required]);
       // 2. Supprimer les validateurs Mobile Money
       this.clearFieldsValidators(mobileFields);
-    } else if (this.operatorSelect.includes(method)) {
+    } 
+    else if (method === 'Payer à la livraison') {
+      // On nettoie tout : pas besoin de carte ni de téléphone
+      this.clearFieldsValidators(visaFields);
+      this.clearFieldsValidators(mobileFields);
+    } 
+    else if (this.operatorSelect.includes(method)) {
       // 1. Définir les validateurs Mobile Money
       this.setFieldsValidators(mobileFields, [Validators.required, Validators.pattern('^[0-9]{10}$')]);
       // 2. Supprimer les validateurs Visa
@@ -109,14 +116,35 @@ export class Paiement implements OnInit {
   // L'opérateur "method" est-il un opérateur Mobile Money valide?
   isMobileMoneySelected(): boolean {
     const method = this.paymentForm.get('method')?.value;
-    // Vérifie si la méthode sélectionnée est présente dans la liste operatorSelect
-    return !!method && this.operatorSelect.includes(method); 
+    // On affiche le champ numéro seulement si c'est un opérateur mobile ET PAS la livraison
+    return !!method && 
+          this.operatorSelect.includes(method) && 
+          method !== 'Payer à la livraison'; 
   }
 
   // desactive le button payer
   disableButtonPayer(): boolean {
     // On vérifie que le formulaire est valide et qu'il y a un article
     return this.paymentForm.valid && !!this.articleAchete && !this.isSubmitting;
+  }
+
+  //lecture de devise 
+  get recapitulatifMontants(): string {
+    if (!this.articleAchete) return '';
+
+    const articles = Array.isArray(this.articleAchete) ? this.articleAchete : [this.articleAchete];
+    
+    // On regroupe les totaux par devise
+    const totaux = articles.reduce((acc, item) => {
+      const devise = item.devise || 'USD';
+      acc[devise] = (acc[devise] || 0) + item.prixTotal;
+      return acc;
+    }, {} as Record<string, number>);
+
+    // On transforme l'objet en texte lisible : "100 USD, 5000 CDF"
+    return Object.entries(totaux)
+      .map(([devise, montant]) => `${montant} ${devise}`)
+      .join(' et ');
   }
 
   // --- MAPPING ET SOUCOISSION ---
@@ -161,15 +189,23 @@ export class Paiement implements OnInit {
         regionProduit: item.region,
         addresseLivraison: address,
         dateAchat: date,
-        status: 'en cours',
+        status: 'en_preparation',
         paiement: {
-          methode: this.operatorSelect.includes(method) ? 'mobile_money' : 'visa',
-          etat: 'succès',
+          // 1. On définit la méthode globale (doit correspondre à ton type MethodePaiement)
+          methode: method === 'Payer à la livraison' ? 'cash_delivery' : 
+                  (method === 'visa' ? 'visa' : 'mobile_money'),
+
+          // 2. L'état financier : 'en_attente' pour la livraison, sinon 'payé'
+          // Note : Vérifie si ton type EtatTransaction utilise 'payé' ou 'paye' (sans accent)
+          etat: method === 'Payer à la livraison' ? 'en_attente' : 'payé',
+          
           montantPaye: item.prixTotal,
           devise: item.devise as 'USD' | 'CDF',
           transactionId: `TXN-${Math.random().toString(36).toUpperCase().substring(2, 10)}`,
           dateTransaction: date,
-          ...(this.operatorSelect.includes(method) && {
+
+          // 3. On ajoute les infos mobile money seulement si nécessaire
+          ...(this.operatorSelect.includes(method) && method !== 'Payer à la livraison' && {
             operateur: OPERATEUR_MAP[method],
             numeroMobile: this.paymentForm.get('mobileNumber')?.value
           })

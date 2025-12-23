@@ -94,6 +94,21 @@ button:disabled {
   margin-top: 2px;
 }
 
+/*  */
+.highlight-price {
+  font-weight: bold;
+  color: var(--warn-color); /* Un rouge foncé ou la couleur de votre thème */
+  font-size: 1.1em;
+}
+
+.delivery-info {
+  background-color: #fff4e5;
+  border-left: 5px solid var(--warn-color);
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
 /* Bordure rouge si erreur */
 input.ng-touched.ng-invalid,
 select.ng-touched.ng-invalid {

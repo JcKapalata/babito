@@ -160,17 +160,23 @@ export class Paiement implements OnInit {
     // Génération d'un ID unique pour éviter l'erreur 422
     const uniqueId = Date.now() + Math.floor(Math.random() * 1000);
     
-    // 1. On récupère la couleur sélectionnée (qui peut être string ou string[])
+    // 1. On récupère la couleur
     const selection = item.couleurSelectionnee;
-
-    // 2. On s'assure d'avoir une string simple
-    // Si c'est un tableau, on prend le premier élément, sinon on prend la valeur telle quelle
     const couleurCle = Array.isArray(selection) ? selection[0] : selection;
 
-    // 3. Maintenant TypeScript accepte l'indexation car couleurCle est forcément une string
-    const imageAchat = (item.imagesParCouleur && couleurCle && item.imagesParCouleur[couleurCle]) 
-                      ? item.imagesParCouleur[couleurCle] 
-                      : '';
+    // 2. On cherche l'image
+    let imageAchat = '';
+
+    if (item.imagesParCouleur) {
+        if (couleurCle && item.imagesParCouleur[couleurCle]) {
+            // Image de la couleur choisie
+            imageAchat = item.imagesParCouleur[couleurCle];
+        } else {
+            // Fallback : On prend la toute première image disponible dans le dictionnaire
+            const toutesLesImages = Object.values(item.imagesParCouleur);
+            imageAchat = toutesLesImages.length > 0 ? toutesLesImages[0] : '';
+        }
+    }
 
     return {
       id: uniqueId.toString(),

@@ -133,43 +133,21 @@ export class AchatForm implements OnInit, OnChanges {
 
   // Récupère les informations de l'article acheté
   articleAchete(): CommandeItem | undefined {
-    if (this.produitForm.valid) {
-        
-        const formValues = this.produitForm.value;
-        const produitItem = this.produit as CommandeItem; 
+   if (this.produitForm.valid) {
+    const formValues = this.produitForm.value;
+    const p = this.produit as Produit; 
 
-        // Déterminez les options à injecter dans les champs dédiés de la CommandeItem
-        const selectedTaille = formValues.taille;
-        const selectedCouleur = formValues.couleur;
+    // Créez l'instance via le constructeur pour être propre
+    const newItem = new CommandeItem(p, formValues.quantity);
+    
+    // Injectez les sélections du formulaire
+    newItem.tailleSelectionnee = formValues.taille;
+    newItem.couleurSelectionnee = formValues.couleur;
+    newItem.prixTotal = this.prixTotal;
 
-        // Assurez-vous d'avoir accès au prix total calculé
-        const prixTotalCalcul = this.prixTotal;
-
-        return {
-            // 1. Récupère les valeurs du formulaire (quantity, taille, couleur)
-            ...formValues,
-            
-            // 2. Champs dédiés à la SÉLECTION UNIQUE (essentiel pour la mise à jour)
-            tailleSelectionnee: selectedTaille,
-            couleurSelectionnee: selectedCouleur,
-            
-            // 3. Champs du Produit non modifiés par le formulaire
-            id: produitItem.id,
-            nom: produitItem.nom,
-            prix: produitItem.prix,
-            devise: produitItem.devise,
-            
-            // 4. Les OPTIONS complètes (si elles existent sur l'input) doivent être transmises
-            taille: produitItem.taille,
-            couleur: produitItem.couleur,
-            
-            // 5. Total
-            prixTotal: prixTotalCalcul
-            
-        } as CommandeItem; // Castez l'objet retourné vers le type CommandeItem pour la sécurité
-    } else {
-        return undefined;
-    }
+    return newItem;
+  }
+  return undefined;
 }
 
   // Gestion du submit pour valider mise a jour

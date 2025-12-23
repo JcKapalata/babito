@@ -163,22 +163,22 @@ export class AchatService {
    * Enregistre une liste d'achats de manière atomique.
    * Pour chaque produit du panier, un POST est envoyé au serveur.
    */
-  saveAchats(achats: ProduitAchete[]): Observable<any> {
-    // 1. On crée un tableau de requêtes HTTP POST
+  saveAchats(achats: ProduitAchete[], viderApresSucces: boolean = true): Observable<any> {
     const requetes = achats.map(achat => this.http.post<ProduitAchete>(this.API_URL_MES_ACHATS, achat));
 
-    // 2. forkJoin attend que TOUTES les requêtes réussissent
-    // C'est crucial pour garantir que le client ne perd aucun article de son panier
     return forkJoin(requetes).pipe(
-      // tap s'exécute uniquement en cas de SUCCÈS du forkJoin
-      tap(() => this.viderPanier()), 
+      tap(() => {
+        // ON VIDE LE PANIER UNIQUEMENT SI C'EST UN ACHAT VIA PANIER
+        if (viderApresSucces) {
+          this.viderPanier();
+        }
+      }), 
       map(resultats => {
         console.log(`${resultats.length} achats enregistrés.`);
         return resultats;
       }),
       catchError(err => {
-        // En cas d'erreur, le panier n'est PAS vidé (l'utilisateur peut réessayer)
-        console.error("Échec de l'enregistrement, le panier est conservé.");
+        console.error("Échec de l'enregistrement.");
         return throwError(() => err);
       })
     );

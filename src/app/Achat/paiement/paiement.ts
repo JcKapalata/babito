@@ -26,10 +26,12 @@ const OPERATEUR_MAP: Record<string, 'orange' | 'airtel' | 'mpesa' | 'cash'> = {
 })
 export class Paiement implements OnInit {
   // --- INJECTIONS ---
-  private fb = inject(FormBuilder);
-  private authService = inject(AuthService);
-  private achatService = inject(AchatService);
-  private router = inject(Router);
+  private readonly fb = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly achatService = inject(AchatService);
+  private readonly router = inject(Router);
+
+  readonly isAchatDirect = this.router.url.includes('achat-direct');
 
   // --- INPUTS & PROPRIÉTÉS ---
   @Input() articleAchete: CommandeItem | CommandeItem[] | undefined;
@@ -241,7 +243,7 @@ export class Paiement implements OnInit {
     const payloads = items.map(item => this.createAchatPayload(item, method, address));
 
     // Envoi au service d'achat
-    this.achatService.saveAchats(payloads)
+    this.achatService.saveAchats(payloads, !this.isAchatDirect)
       .pipe(
         finalize(() => this.isSubmitting = false),
         catchError(err => {

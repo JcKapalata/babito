@@ -1,25 +1,25 @@
 import {
+  coerceArray
+} from "./chunk-N4DOILP3.js";
+import {
+  _VisuallyHiddenLoader
+} from "./chunk-X757NHUP.js";
+import {
   _getEventTarget,
   _getFocusedElementPierceShadowDom,
   _getShadowRoot,
   normalizePassiveListenerOptions
 } from "./chunk-XA6252L2.js";
 import {
-  _VisuallyHiddenLoader
-} from "./chunk-X757NHUP.js";
-import {
   _CdkPrivateStyleLoader
 } from "./chunk-3BBV4J32.js";
-import {
-  Platform
-} from "./chunk-BC3ST3GM.js";
-import {
-  coerceArray
-} from "./chunk-N4DOILP3.js";
 import {
   coerceElement,
   coerceNumberProperty
 } from "./chunk-7TQBFHZW.js";
+import {
+  Platform
+} from "./chunk-BC3ST3GM.js";
 import {
   ANIMATION_MODULE_TYPE,
   APP_ID,
@@ -2624,4 +2624,4 @@ export {
   Breakpoints,
   _animationsDisabled
 };
-//# sourceMappingURL=chunk-LRZ2HMP7.js.map
+//# sourceMappingURL=chunk-PCKLH3N2.js.map

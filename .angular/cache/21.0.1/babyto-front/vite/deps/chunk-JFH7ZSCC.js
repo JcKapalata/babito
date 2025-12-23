@@ -1,11 +1,14 @@
 import {
+  coerceCssPixelValue
+} from "./chunk-42QFQP6S.js";
+import {
   _isTestEnvironment
 } from "./chunk-NH2CZXGR.js";
 import {
   ScrollDispatcher,
   ScrollingModule,
   ViewportRuler
-} from "./chunk-S54MHJTA.js";
+} from "./chunk-WSALU3AV.js";
 import {
   supportsScrollBehavior
 } from "./chunk-GUGIMSVJ.js";
@@ -13,7 +16,10 @@ import {
   ESCAPE,
   _IdGenerator,
   hasModifierKey
-} from "./chunk-LRZ2HMP7.js";
+} from "./chunk-PCKLH3N2.js";
+import {
+  coerceArray
+} from "./chunk-N4DOILP3.js";
 import {
   _getEventTarget
 } from "./chunk-XA6252L2.js";
@@ -26,12 +32,6 @@ import {
 import {
   Location
 } from "./chunk-SOXOVYQB.js";
-import {
-  coerceCssPixelValue
-} from "./chunk-42QFQP6S.js";
-import {
-  coerceArray
-} from "./chunk-N4DOILP3.js";
 import {
   BidiModule,
   Directionality
@@ -3027,4 +3027,4 @@ export {
   createOverlayRef,
   OverlayModule
 };
-//# sourceMappingURL=chunk-43C7SUXL.js.map
+//# sourceMappingURL=chunk-JFH7ZSCC.js.map

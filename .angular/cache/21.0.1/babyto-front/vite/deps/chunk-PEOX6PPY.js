@@ -2,7 +2,7 @@ import {
   _animationsDisabled,
   isFakeMousedownFromScreenReader,
   isFakeTouchstartFromScreenReader
-} from "./chunk-LRZ2HMP7.js";
+} from "./chunk-PCKLH3N2.js";
 import {
   _getEventTarget,
   normalizePassiveListenerOptions
@@ -11,11 +11,11 @@ import {
   _CdkPrivateStyleLoader
 } from "./chunk-3BBV4J32.js";
 import {
-  Platform
-} from "./chunk-BC3ST3GM.js";
-import {
   coerceElement
 } from "./chunk-7TQBFHZW.js";
+import {
+  Platform
+} from "./chunk-BC3ST3GM.js";
 import {
   BidiModule
 } from "./chunk-XOOIT6O6.js";
@@ -591,4 +591,4 @@ export {
   _StructuralStylesLoader,
   MatRippleModule
 };
-//# sourceMappingURL=chunk-H7YHN727.js.map
+//# sourceMappingURL=chunk-PEOX6PPY.js.map

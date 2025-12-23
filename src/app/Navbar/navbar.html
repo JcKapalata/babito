@@ -31,6 +31,7 @@
           class="boutton"  
           [matBadge]="nombreProduits$ | async"
           matBadgeColor="accent"
+          aria-hidden="false"
           [class.active-link]="pageActive === 'panier'"
           >
             <mat-icon class="btn-icon">shopping_cart</mat-icon> Panier
@@ -91,7 +92,7 @@
       <mat-icon>store</mat-icon> Boutique
     </button>
     <button mat-menu-item (click)="goToPannier()">
-      <mat-icon [matBadge]="nombreProduits$ | async" matBadgeColor="accent">shopping_cart</mat-icon> Panier
+      <mat-icon [matBadge]="nombreProduits$ | async" matBadgeColor="accent" aria-hidden="false">shopping_cart</mat-icon> Panier
     </button>
     <mat-divider></mat-divider>
 

@@ -71,4 +71,8 @@ export class HistoriqueAchat {
     console.log(`Naviguer vers les détails de l'achat avec l'ID: ${achatId}`);
     this.router.navigate(['achat/historique-achat', achatId]);
   }
+
+  goBack(): void {
+    this.router.navigate(['/profil']);
+  }
 }
